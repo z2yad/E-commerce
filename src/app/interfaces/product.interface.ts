@@ -1,4 +1,4 @@
-export interface ProductResponse {
+export interface Product {
     id: number;
     title: string;
     description: string;
@@ -12,9 +12,10 @@ export interface ProductResponse {
     images: string[];
 }
 
-export interface ProductsResponse {
-    products: ProductResponse[];
+export interface ProductResponse {
+    products: Product[];
     total: number;
     skip: number;
     limit: number;
 }
+// we mae interface for products response and structure of products for display

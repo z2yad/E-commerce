@@ -1,23 +1,99 @@
-<!-- <header class="navbar bg-base-100/90 backdrop-blur-md shadow-md sticky top-0 z-50 px-6 lg:px-12">
+<!-- header.component.html -->
+<header class="sticky top-0 z-50 w-full border-b border-border bg-background/80 backdrop-filter-blur(10)">
+  <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 lg:px-8">
 
-  <nav class="hidden md:flex items-center gap-3">
-
-    <a
-      routerLink="/"
-      routerLinkActive="bg-primary text-white"
-      class="btn btn-ghost rounded-lg px-5 font-medium hover:bg-base-200 transition-all duration-200 cursor-pointer"
-    >
-      Home
+    <!-- LOGO -->
+    <a routerLink="/" class="flex items-center gap-2 font-bold text-lg tracking-tight text-foreground">
+      <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary">
+        <svg class="h-4 w-4 text-primary-foreground" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+          stroke="currentColor" stroke-width="2.5">
+          <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z" />
+          <line x1="3" y1="6" x2="21" y2="6" />
+          <path d="M16 10a4 4 0 0 1-8 0" />
+        </svg>
+      </div>
+      E-comerce
     </a>
 
-    <a
-      routerLink="/products/productlist"
-      routerLinkActive="bg-primary text-white"
-      class="btn btn-ghost rounded-lg px-5 font-medium hover:bg-base-200 transition-all duration-200 cursor-pointer"
-    >
-      Products
-    </a>
+    <!-- SEARCH -->
+    <div class="hidden md:flex flex-1 max-w-sm mx-8">
+      <div class="relative w-full">
+        <svg class="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground"
+          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+        <input type="text" placeholder="Search products..." class="w-full rounded-lg border border-input bg-background py-2 pl-9 pr-4 text-sm 
+                 text-foreground placeholder:text-muted-foreground
+                 focus:outline-none focus:ring-2 focus:ring-ring focus:border-transparent
+                 transition-all duration-200" />
+      </div>
+    </div>
 
-  </nav>
+    <!-- ACTIONS -->
+    <div class="flex items-center gap-1">
 
-</header>-->
+      <!-- Search Mobile -->
+      <button class="md:hidden inline-flex h-9 w-9 items-center justify-center rounded-lg
+                     text-muted-foreground hover:bg-accent hover:text-accent-foreground
+                     transition-colors duration-200">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <circle cx="11" cy="11" r="8" />
+          <path d="m21 21-4.35-4.35" />
+        </svg>
+      </button>
+      <nav class="hidden md:flex items-center gap-1">
+
+        <a routerLink="/" routerLinkActive="bg-primary text-primary-foreground"
+          [routerLinkActiveOptions]="{exact: true}" class="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground
+            hover:bg-accent hover:text-accent-foreground
+            transition-colors duration-200">
+          Home
+        </a>
+
+        <a routerLink="/products/productlist" routerLinkActive="bg-primary text-primary-foreground" class="px-4 py-2 rounded-lg text-sm font-medium text-muted-foreground
+            hover:bg-accent hover:text-accent-foreground
+            transition-colors duration-200">
+          Products
+        </a>
+
+      </nav>
+      <!-- Cart -->
+      <a routerLink="/cart" class="relative inline-flex h-9 w-9 items-center justify-center rounded-lg
+               text-muted-foreground hover:bg-accent hover:text-accent-foreground
+               transition-colors duration-200">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+          <path fill="currentColor"
+            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z" />
+          <path fill="currentColor"
+            d="m222 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z" />
+          <path fill="currentColor"
+            d="m368.42 450a57.48 57.48 0 1 1 57.48-57.48 57.54 57.54 0 0 1 -57.48 57.48zm0-84.95a27.48 27.48 0 1 0 27.48 27.47 27.5 27.5 0 0 0 -27.48-27.47z" />
+          <path fill="currentColor"
+            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z" />
+        </svg>
+        <!-- Badge -->
+        <span class="absolute -top-0.5 -right-0.5 flex h-4 w-4 items-center justify-center
+                     rounded-full bg-primary text-primary-foreground text-[10px] font-bold">
+          2
+        </span>
+      </a>
+
+      <!-- Divider -->
+      <div class="mx-1 h-5 w-px bg-border"></div>
+
+      <!-- Profile -->
+      <button class="inline-flex h-9 w-9 items-center justify-center rounded-lg
+                     text-muted-foreground hover:bg-accent hover:text-accent-foreground
+                     transition-colors duration-200">
+        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+          stroke-width="2">
+          <circle cx="12" cy="8" r="4" />
+          <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+        </svg>
+      </button>
+
+    </div>
+  </div>
+</header>

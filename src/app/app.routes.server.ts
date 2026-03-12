@@ -14,15 +14,15 @@ export const serverRoutes: ServerRoute[] = [
     path: 'products/:id',
     renderMode: RenderMode.Prerender //ssg
     ,
-   async getPrerenderParams(): Promise<{ id: string; }[]> {
+    async getPrerenderParams(): Promise<{ id: string; }[]> {
       //call api to get products ids
-      const ids = Array.from({ length: 100 }, (_, i) => i + 1);
-      console.log(`[prerender]Generating  ${ids.length} products pages (ids 1-100)`);
+      const ids = Array.from({ length: 30 }, (_, i) => i + 1);
+      console.log(`[prerender]Generating  ${ids.length} products pages (ids 1-30)`);
       //prams is string
       return ids.map(id => ({ id: id.toString() }));
     },
-    //CRITICAL :FALLBACK TO SSR FOR PRODUCT OUTSIDE TOP 100
-    //this is ensure products 101+ are stil server-rendered (not found 404)
+    //CRITICAL :FALLBACK TO SSR FOR PRODUCT OUTSIDE TOP 30
+    //this is ensure products 31+ are stil server-rendered (not found 404)
     fallback: PrerenderFallback.Server //ssr
   }
 ];

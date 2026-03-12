@@ -1,0 +1,6 @@
+.hero-bg {
+  background-image: url('../asstes/background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
