@@ -121,10 +121,12 @@
 
             <!-- Product Details with enhanced typography -->
             <div class="flex flex-col flex-1 p-6">
-                <h3
-                    class="text-lg font-bold text-gray-900 line-clamp-1 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-pink-600 transition-all">
-                    {{ product.title }}
-                </h3>
+                <a [routerLink]="['/products', product.id]">
+                    <h3
+                        class="text-lg font-bold text-gray-900 line-clamp-1 mb-2 group-hover:text-transparent group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-pink-600 transition-all">
+                        {{ product.title }}
+                    </h3>
+                </a>
 
                 <p class="text-sm text-gray-500 line-clamp-2 mb-4 flex-1 leading-relaxed">
                     {{ product.description }}
@@ -153,7 +155,7 @@
                                 ${{ product.price }}
                             </span>
                             <span class="text-sm text-gray-400 line-through">
-                                ${{ product.price * 1.2 }}
+                                ${{ product.price * 1.2 |currency }}
                             </span>
                         </div>
                     </div>

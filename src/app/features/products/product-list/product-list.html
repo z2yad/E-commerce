@@ -71,11 +71,13 @@
             </div>
 
             <!-- Title with hover effect -->
-            <h3 class="text-base font-bold text-gray-800 line-clamp-1 group-hover:text-transparent 
+            <a [routerLink]="['/products',product.id]">
+                <h3 class="text-base font-bold text-gray-800 line-clamp-1 group-hover:text-transparent 
                        group-hover:bg-clip-text group-hover:bg-gradient-to-r group-hover:from-amber-600 group-hover:to-pink-600 
                        transition-all duration-300">
-                {{ product.title }}
-            </h3>
+                    {{ product.title }}
+                </h3>
+            </a>
 
             <!-- Description with better readability -->
             <p class="text-sm text-gray-500 line-clamp-2 leading-relaxed">
@@ -163,9 +165,14 @@
 
     }
 </div>
-
+@if(loading()){
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6 bg-gradient-to-br from-gray-50 to-white">
+    @for (i of [1,2,3,4,5,6,7,8]; track i) {
+    <app-loading></app-loading>
+    }
+</div>
+}@else if(products().length === 0){
 <!-- Empty state (appears when no products) -->
-@if (products().length === 0) {
 <div class="col-span-full text-center py-16 px-4">
     <div class="inline-flex items-center justify-center w-20 h-20 bg-gray-100 rounded-full mb-4">
         <svg class="w-10 h-10 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
