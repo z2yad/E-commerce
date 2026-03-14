@@ -32,20 +32,37 @@
             </span>
 
             <!-- Product Image -->
-            <img [src]="product.thumbnail" [alt]="product.title" class="w-full h-full object-contain drop-shadow-xl
-                        group-hover:scale-110 transition-transform duration-700 ease-out">
+            <img [src]="product.thumbnail" [alt]="product.title"
+                class="w-full h-full object-contain drop-shadow-xl group-hover:scale-110 transition-transform duration-700 ease-out">
 
             <!-- Quick view overlay (decorative) -->
             <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent 
-                        opacity-0 group-hover:opacity-100 transition-opacity duration-300
-                        flex items-end justify-center pb-4">
-                <span
-                    class="text-white text-sm font-medium bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full border border-white/30">
-                    Quick View
-                </span>
+            opacity-0 group-hover:opacity-100 transition-opacity duration-300
+            flex items-end justify-center pb-4">
+
+                <a [routerLink]="['/products', product.id]" class="group/btn overflow-hidden inline-flex items-center justify-start
+              text-white text-sm font-medium bg-white/20 backdrop-blur-sm 
+              rounded-full border border-white/30 
+              w-[45px] hover:w-[130px] h-[45px] 
+              transition-all duration-300 ease-in-out px-[12px]">
+
+                    <span class="flex items-center gap-3 w-full">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                        </svg>
+
+                        <span
+                            class="whitespace-nowrap opacity-0 translate-x-10 group-hover/btn:opacity-100 group-hover/btn:translate-x-0 transition-all duration-300">
+                            Quick View
+                        </span>
+                    </span>
+                </a>
             </div>
         </div>
-
         <!-- Content with enhanced typography -->
         <div class="flex flex-col flex-1 p-5 gap-3">
 
@@ -60,8 +77,8 @@
                 <div class="flex items-center gap-0.5">
                     @for (star of [1,2,3,4,5]; track star) {
                     <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5"
-                        [class]="star <= 4 ? 'text-amber-400' : 'text-gray-300'" viewBox="0 0 24 24"
-                        fill="currentColor">
+                        [class]="star <= Math.floor(product.rating) ? 'text-amber-400' : 'text-gray-300'"
+                        viewBox="0 0 24 24" fill="currentColor">
                         <path
                             d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z" />
                     </svg>
@@ -105,7 +122,7 @@
                             ${{ product.price }}
                         </span>
                         <span class="text-sm text-gray-400 line-through">
-                            ${{ product.price * 1.25 }}
+                            ${{ product.price * 1.25 | currency}}
                         </span>
                     </div>
                 </div>
@@ -166,7 +183,8 @@
     }
 </div>
 @if(loading()){
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6 bg-gradient-to-br from-gray-50 to-white">
+<div
+    class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 p-6 bg-gradient-to-br from-gray-50 to-white">
     @for (i of [1,2,3,4,5,6,7,8]; track i) {
     <app-loading></app-loading>
     }
