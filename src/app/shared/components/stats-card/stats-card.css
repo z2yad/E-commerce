@@ -1,0 +1,43 @@
+/* Custom CSS for 3D Stats Card */
+.rounded-inherit {
+  border-radius: inherit;
+}
+
+/* 3x5 Grid hover areas mapped to 3D rotation */
+/* Top row */
+.hover-area:nth-child(1):hover ~ div .card-container { transform: rotateX(15deg) rotateY(-15deg); }
+.hover-area:nth-child(2):hover ~ div .card-container { transform: rotateX(15deg) rotateY(-7.5deg); }
+.hover-area:nth-child(3):hover ~ div .card-container { transform: rotateX(15deg) rotateY(0deg); }
+.hover-area:nth-child(4):hover ~ div .card-container { transform: rotateX(15deg) rotateY(7.5deg); }
+.hover-area:nth-child(5):hover ~ div .card-container { transform: rotateX(15deg) rotateY(15deg); }
+
+/* Middle row */
+.hover-area:nth-child(6):hover ~ div .card-container { transform: rotateX(0deg) rotateY(-15deg); }
+.hover-area:nth-child(7):hover ~ div .card-container { transform: rotateX(0deg) rotateY(-7.5deg); }
+.hover-area:nth-child(8):hover ~ div .card-container { transform: rotateX(0deg) rotateY(0deg); }
+.hover-area:nth-child(9):hover ~ div .card-container { transform: rotateX(0deg) rotateY(7.5deg); }
+.hover-area:nth-child(10):hover ~ div .card-container { transform: rotateX(0deg) rotateY(15deg); }
+
+/* Bottom row */
+.hover-area:nth-child(11):hover ~ div .card-container { transform: rotateX(-15deg) rotateY(-15deg); }
+.hover-area:nth-child(12):hover ~ div .card-container { transform: rotateX(-15deg) rotateY(-7.5deg); }
+.hover-area:nth-child(13):hover ~ div .card-container { transform: rotateX(-15deg) rotateY(0deg); }
+.hover-area:nth-child(14):hover ~ div .card-container { transform: rotateX(-15deg) rotateY(7.5deg); }
+.hover-area:nth-child(15):hover ~ div .card-container { transform: rotateX(-15deg) rotateY(15deg); }
+
+/* Glowing effect logic */
+.glow-out1::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 180%;
+  height: 180%;
+  background: conic-gradient(#b52f2f 0%, transparent 10%, #cf8030 50%, transparent 90%, #b52f2f 100%);
+  transform: translate(-50%, -50%) rotate(45deg);
+  transition: transform 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.group\/main:hover .glow-out1::before {
+  transform: translate(-50%, -50%) rotate(410deg);
+}

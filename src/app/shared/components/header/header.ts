@@ -1,11 +1,63 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
+import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
+import { ProductService } from '@/services/product.service';
+import { FormsModule } from '@angular/forms';
+import { Category } from '@/interfaces/product.interface';
+
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, RouterLinkActive],
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, FormsModule, CommonModule],
   templateUrl: './header.html',
+  styleUrls: ['./header.css']
 })
-export class Header {
+export class Header implements OnInit {
+  searchParams = signal<string>('');
+  categorySearch = signal<string>('');
+  isMobileMenuOpen = signal<boolean>(false);
+  categories = signal<Category[]>([]);
+  
+  // Searchable categories logic
+  filteredCategories = computed(() => {
+    const search = this.categorySearch().toLowerCase();
+    return this.categories().filter(cat => 
+      cat.name.toLowerCase().includes(search) || 
+      cat.slug.toLowerCase().includes(search)
+    );
+  });
 
+  router = inject(Router);
+  productService = inject(ProductService);
+
+  ngOnInit() {
+    this.productService.getcategories().subscribe(cats => {
+      this.categories.set(cats);
+    });
+  }
+
+  toggleMobileMenu() {
+    this.isMobileMenuOpen.update(prev => !prev);
+  }
+
+  onCategorySearch(event: Event) {
+    const target = event.target as HTMLInputElement;
+    this.categorySearch.set(target.value);
+  }
+  onSearch(event: Event) {
+    const target = event.target as HTMLInputElement;
+    const value = target.value;
+    this.searchParams.set(value);
+    
+    // We only need to navigate. The ProductList component will listen to queryParams
+    // and call loadproducts() automatically due to the ngOnInit subscription there.
+    this.router.navigate(['/products'], { 
+      queryParams: { 
+        search: value || null, // remove search param if empty
+        page: 1 // reset to page 1 on new search
+      },
+      queryParamsHandling: 'merge'
+    });
+  }
 }

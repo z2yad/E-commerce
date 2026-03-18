@@ -1,0 +1,81 @@
+<div class="relative grid grid-cols-5 w-full max-w-[280px] h-96 mx-auto group/main [perspective:800px]">
+  @for (i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15]; track i) {
+    <div class="relative z-20 hover-area h-full w-full"></div>
+  }
+
+  <div class="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
+    <div class="relative transition-all duration-[2000ms] ease-[cubic-bezier(0.03,1,0.5,1)] 
+                rounded-[38px] group-hover/main:scale-105 [transform-style:preserve-3d] card-container">
+      
+      <div class="absolute inset-2 bg-black/40 blur-[5px] rounded-[50px] shadow-[0_60px_140px_30px_rgba(0,0,0,0.8),0_-60px_120px_rgba(102,106,135,0.4)]"></div>
+      
+      <div class="absolute inset-[-1px] opacity-50 overflow-hidden rounded-inherit blur-none glow-out1"></div>
+      <div class="absolute inset-[6px] opacity-100 overflow-hidden rounded-[30px] [transform:translateZ(10px)] glow-out2"></div>
+
+      <div class="relative p-[7px] rounded-[38px] [transform-style:preserve-3d]">
+        <div class="absolute inset-0 rounded-inherit bg-gradient-to-b from-[#1e212b] via-[#1e212b] to-[#0b0c11] 
+                    z-[2] shadow-[0_15px_20px_rgba(0,0,0,0.7),inset_0_0_3px_rgba(255,255,255,0.1)]"></div>
+
+        <div class="relative z-[3] px-7 pt-5 pb-2 rounded-[30px] bg-gradient-to-b from-[#201c29] to-[#37374b] 
+                    [transform-style:preserve-3d] [transform:translateZ(10px)] 
+                    shadow-[inset_0_0_70px_#2e303c,inset_40px_70px_30px_-20px_rgba(0,0,0,0.3)]">
+          
+          <header class="relative mb-1 leading-5 text-white/60 [transform:translateZ(30px)] [transform-style:preserve-3d]">
+            <p class="text-[12px]">Post views</p>
+            <div class="flex items-center text-xl font-bold hover:text-white transition-colors duration-300 cursor-default">
+              <div class="flex overflow-hidden w-16 numeric-container">
+                <div class="grid w-3 h-5 text-center animate-units" style="--num: 2"><span>2</span><span>0</span><span>1</span><span>2</span></div>
+                <div class="grid w-3 h-5 text-center animate-units ml-[7px]" style="--num: 6"><span>6</span><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
+                <div class="grid w-3 h-5 text-center animate-units" style="--num: 7"><span>7</span><span>0</span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span></div>
+                <div class="grid w-3 h-5 text-center">0</div>
+              </div>
+              <span class="ml-1 text-sm font-normal">views</span>
+            </div>
+
+            <div class="absolute -right-1.5 top-0 w-10 h-10 rounded-full flex items-center justify-center 
+                        bg-black/20 shadow-[0_0_1px_2px_rgba(250,187,15,0.7)] hover:bg-[#1e191e] transition-all
+                        [transform-style:preserve-3d] group/heart">
+               <svg class="w-6 h-6 animate-heart" viewBox="0 0 24 24">
+                 <path fill="url(#gradient)" d="M11.645 20.91l-.007-.003-.022-.012a15.247 15.247 0 01-.383-.218 25.18 25.18 0 01-4.244-3.17C4.688 15.36 2.25 12.174 2.25 8.25 2.25 5.322 4.714 3 7.688 3A5.5 5.5 0 0112 5.052 5.5 5.5 0 0116.313 3c2.973 0 5.437 2.322 5.437 5.25 0 3.925-2.438 7.111-4.739 9.256a25.175 25.175 0 01-4.244 3.17 15.247 15.247 0 01-.383.219l-.022.012-.007.004-.003.001a.752.752 0 01-.704 0l-.003-.001z"></path>
+                 <defs>
+                   <linearGradient id="gradient" x1="2.25" y1="3" x2="21.75" y2="20.91" gradientUnits="userSpaceOnUse">
+                     <stop stop-color="#f43f5e" />
+                     <stop offset="1" stop-color="#fbbf24" />
+                   </linearGradient>
+                 </defs>
+               </svg>
+            </div>
+          </header>
+
+          <div class="w-full mt-2">
+            <svg class="block w-full overflow-visible" viewBox="0 0 389 175" fill="none">
+               <path d="M0 174C32.1812 174 46.1362 108.828 78.3175 108.828C110.499 108.828 124.454 135.586 156.635 135.586C188.816 135.586 202.771 61.6897 234.952 61.6897C267.134 61.6897 281.089 119.414 313.27 119.414C345.451 119.414 366.113 42 389 42" stroke="url(#paint0_linear)" stroke-width="4" stroke-linecap="round"/>
+               <path d="M0 174C32.1812 174 46.1362 108.828 78.3175 108.828C110.499 108.828 124.454 135.586 156.635 135.586C188.816 135.586 202.771 61.6897 234.952 61.6897C267.134 61.6897 281.089 119.414 313.27 119.414C345.451 119.414 366.113 42 389 42" stroke="url(#paint1_linear)" stroke-width="8" stroke-linecap="round" filter="url(#blur)"/>
+               <defs>
+                 <linearGradient id="paint0_linear" x1="0" y1="174" x2="389" y2="42" gradientUnits="userSpaceOnUse">
+                   <stop stop-color="#fbbf24"/>
+                   <stop offset="1" stop-color="#f43f5e"/>
+                 </linearGradient>
+                 <linearGradient id="paint1_linear" x1="0" y1="174" x2="389" y2="42" gradientUnits="userSpaceOnUse">
+                   <stop stop-color="#fbbf24" stop-opacity="0.5"/>
+                   <stop offset="1" stop-color="#f43f5e" stop-opacity="0.5"/>
+                 </linearGradient>
+                 <filter id="blur" x="-10" y="32" width="409" height="152" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+                   <feGaussianBlur stdDeviation="4"/>
+                 </filter>
+               </defs>
+            </svg>
+          </div>
+
+          <footer class="flex text-[10px] font-semibold text-white/60 mt-[-10px] mx-[-10px] [transform:translateZ(30px)]">
+            <span class="w-full py-4 text-center hover:text-white hover:scale-110 transition-transform cursor-pointer">8am</span>
+            <span class="w-full py-4 text-center hover:text-white hover:scale-110 transition-transform cursor-pointer">10am</span>
+            <span class="w-full py-4 text-center hover:text-white hover:scale-110 transition-transform cursor-pointer">12pm</span>
+            <span class="w-full py-4 text-center hover:text-white hover:scale-110 transition-transform cursor-pointer">2pm</span>
+            <span class="w-full py-4 text-center hover:text-white hover:scale-110 transition-transform cursor-pointer">4pm</span>
+          </footer>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

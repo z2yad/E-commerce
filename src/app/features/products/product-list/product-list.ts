@@ -1,34 +1,101 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductService } from '@/services/product.service';
-import { Loading } from "@/shared/components/loading/loading";
-import { ProductResponse } from '@/interfaces/product.interface';
-import { RouterLink } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
+import { ProductQueryParams, ProductResponse } from '@/interfaces/product.interface';
+import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
+import { DecimalPipe } from '@angular/common';
 
 
 @Component({
   selector: 'app-product-list',
-  imports: [Loading, RouterLink, CurrencyPipe],
+  standalone: true,
+  imports: [RouterLink, DecimalPipe],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
 export class ProductList implements OnInit {
   protected readonly Math = Math;
   private productService = inject(ProductService);
+  private route = inject(ActivatedRoute);
+  private router = inject(Router);
+  searchParams = signal<string>('');
+  categorySelected = signal<string>('');
   products = this.productService.allProducts;
+  currentPage = signal<number>(1);
+  totalPages = signal<number>(0);
   loading = this.productService.loading;
+  error = signal<any>(null);
+
   ngOnInit() {
-    this.productService.getallproducts().subscribe({
+    this.route.queryParams.subscribe((params: Params) => {
+      // Set values from URL to keep component state in sync
+      if (params['page']) this.currentPage.set(Number(params['page']));
+      if (params['search']) this.searchParams.set(params['search']);
+      if (params['category']) this.categorySelected.set(params['category']);
+      
+      // Load products whenever query parameters change
+      this.loadproducts();
+    });
+  }
+  nextPage() {
+    if (this.currentPage() < this.totalPages()) {
+      this.currentPage.set(this.currentPage() + 1);
+      this.updateQueryParams();
+    }
+  }
+  previousPage() {
+    if (this.currentPage() > 1) {
+      this.currentPage.update((prev: number) => prev - 1);
+      this.updateQueryParams();
+    };
+  }
+
+  private updateQueryParams() {
+    const params: Partial<ProductQueryParams> & { page: string } = {
+      page: this.currentPage().toString()
+    };
+    if (this.searchParams()) params.search = this.searchParams();
+    if (this.categorySelected()) params.category = this.categorySelected();
+
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: params,
+      queryParamsHandling: 'merge'
+    });
+  }
+  loadproducts() {
+    this.loading.set(true);
+    this.error.set(null);
+
+    const limit = 30;
+    const skip = (this.currentPage() - 1) * limit;
+
+    const params: ProductQueryParams = {
+      limit: limit,
+      skip: skip
+    };
+
+    if (this.searchParams()) params.search = this.searchParams();
+    if (this.categorySelected()) params.category = this.categorySelected();
+
+    this.productService.getallproducts(params).subscribe({
       next: (data: ProductResponse) => {
+        // Correctly calculate total pages based on total records and limit
+        const pages = Math.ceil(data.total / limit);
+
+        // Simulating network delay as requested in previous logic
         setTimeout(() => {
           this.products.set(data.products);
+          this.totalPages.set(pages);
           this.loading.set(false);
-        }, 1000);
+        }, 800);
       },
       error: (err: any) => {
         console.error('Failed to load products', err);
+        this.error.set(err);
         this.loading.set(false);
       }
     });
   }
 }
+
+

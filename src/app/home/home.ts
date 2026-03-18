@@ -1,13 +1,12 @@
 import { ProductService } from '@/services/product.service';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { CurrencyPipe } from '@angular/common';
+import { DecimalPipe, CommonModule } from '@angular/common';
 import { ProductResponse } from '@/interfaces/product.interface';
-import { Loading } from "@/shared/components/loading/loading";
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, CurrencyPipe, Loading],
+  imports: [RouterLink, DecimalPipe, CommonModule],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -27,5 +26,8 @@ export class Home implements OnInit {
         this.loading.set(false);
       }
     })
+  }
+  totalProducts() {
+    return this.products().length;
   }
 }

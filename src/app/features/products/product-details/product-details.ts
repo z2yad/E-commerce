@@ -1,13 +1,15 @@
 import { Product } from '@/interfaces/product.interface';
 import { ProductService } from '@/services/product.service';
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Loading } from "@/shared/components/loading/loading";
 import { DecimalPipe, NgOptimizedImage } from "@angular/common";
+import { StatsCard } from "@/shared/components/stats-card/stats-card";
 
 @Component({
   selector: 'app-product-details',
-  imports: [Loading, NgOptimizedImage, DecimalPipe],
+  standalone: true,
+  imports: [Loading, NgOptimizedImage, DecimalPipe, RouterLink],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })

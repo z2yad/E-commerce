@@ -19,3 +19,16 @@ export interface ProductResponse {
     limit: number;
 }
 // we mae interface for products response and structure of products for display
+
+export interface Category {
+    slug: string;
+    name: string;
+    url: string;
+}
+
+export interface ProductQueryParams {
+    limit?: number;
+    skip?: number;
+    search?: string;
+    category?: string;
+}
