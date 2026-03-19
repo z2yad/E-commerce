@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { Category } from '@/interfaces/product.interface';
 
 import { CommonModule } from '@angular/common';
+import { CartService } from '@/services/cart.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ export class Header implements OnInit {
   categorySearch = signal<string>('');
   isMobileMenuOpen = signal<boolean>(false);
   categories = signal<Category[]>([]);
-  
+  cartService = inject(CartService);
+  countitems = computed(() => this.cartService.countItems());
   // Searchable categories logic
   filteredCategories = computed(() => {
     const search = this.categorySearch().toLowerCase();

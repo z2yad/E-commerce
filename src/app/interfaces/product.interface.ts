@@ -10,6 +10,7 @@ export interface Product {
     category: string;
     thumbnail: string;
     images: string[];
+    quantity: number;
 }
 
 export interface ProductResponse {
@@ -31,4 +32,9 @@ export interface ProductQueryParams {
     skip?: number;
     search?: string;
     category?: string;
+}
+
+export interface CartItem {
+    product: Product;
+    quantity: number;
 }

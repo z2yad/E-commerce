@@ -24,5 +24,9 @@ export const serverRoutes: ServerRoute[] = [
     //CRITICAL :FALLBACK TO SSR FOR PRODUCT OUTSIDE TOP 30
     //this is ensure products 31+ are stil server-rendered (not found 404)
     fallback: PrerenderFallback.Server //ssr
+  },
+  {
+    path: 'cart',
+    renderMode: RenderMode.Client //csr
   }
 ];

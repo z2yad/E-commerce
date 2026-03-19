@@ -1,8 +1,9 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductService } from '@/services/product.service';
-import { ProductQueryParams, ProductResponse } from '@/interfaces/product.interface';
+import { Product, ProductQueryParams, ProductResponse } from '@/interfaces/product.interface';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
+import { CartService } from '@/services/cart.service';
 
 
 @Component({
@@ -24,7 +25,13 @@ export class ProductList implements OnInit {
   totalPages = signal<number>(0);
   loading = this.productService.loading;
   error = signal<any>(null);
-
+  cartService = inject(CartService);
+  additem(product: Product){
+   if(!product){
+    return;
+   }
+   this.cartService.addItem(product);
+  }
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       // Set values from URL to keep component state in sync
