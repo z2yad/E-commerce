@@ -1,7 +1,10 @@
-import { Routes } from '@angular/router';
+import { Router, Routes } from '@angular/router';
 import { Home } from './home/home';
 import { ProductDetails } from './features/products/product-details/product-details';
 import { Cart } from './cart/cart';
+import { Checkout } from './checkout/checkout';
+import { CartService } from './services/cart.service';
+import { inject } from '@angular/core';
 //client routes
 export const routes: Routes = [
     {
@@ -25,5 +28,21 @@ export const routes: Routes = [
     {
         path: 'cart',
         component: Cart
+    },
+    {
+        path: 'checkout',
+        component: Checkout,
+        canActivate: [() => {
+            const cartService = inject(CartService);
+            const router = inject(Router);
+
+            const hasItems = cartService.cartItems().length > 0;
+
+            if (hasItems) {
+                return true;
+            }
+
+            return router.createUrlTree(['/cart']);
+        }]
     }
 ];

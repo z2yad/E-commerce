@@ -28,5 +28,9 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: 'cart',
     renderMode: RenderMode.Client //csr
+  },
+  {
+    path: 'checkout',
+    renderMode: RenderMode.Client //csr
   }
 ];

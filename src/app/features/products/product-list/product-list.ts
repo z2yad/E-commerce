@@ -4,6 +4,8 @@ import { Product, ProductQueryParams, ProductResponse } from '@/interfaces/produ
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
 import { DecimalPipe } from '@angular/common';
 import { CartService } from '@/services/cart.service';
+import { toast } from 'ngx-sonner';
+import { ToastService } from '@/services/toast.service';
 
 
 @Component({
@@ -26,11 +28,13 @@ export class ProductList implements OnInit {
   loading = this.productService.loading;
   error = signal<any>(null);
   cartService = inject(CartService);
+  toastService = inject(ToastService);
   additem(product: Product){
    if(!product){
     return;
    }
    this.cartService.addItem(product);
+   this.toastService.success('Product added to cart');
   }
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {

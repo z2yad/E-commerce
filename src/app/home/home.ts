@@ -4,6 +4,7 @@ import { RouterLink } from '@angular/router';
 import { DecimalPipe, CommonModule } from '@angular/common';
 import { Product, ProductResponse } from '@/interfaces/product.interface';
 import { CartService } from '@/services/cart.service';
+import { ToastService } from '@/services/toast.service';
 
 @Component({
   selector: 'app-home',
@@ -12,6 +13,7 @@ import { CartService } from '@/services/cart.service';
   styleUrl: './home.css',
 })
 export class Home implements OnInit {
+  private toastService = inject(ToastService);
   protected readonly Math = Math;
   private productservice = inject(ProductService);
   products = this.productservice.allProducts;
@@ -22,6 +24,7 @@ export class Home implements OnInit {
     return;
    }
    this.cartService.addItem(product);
+   this.toastService.success('Product added to cart');
   }
   ngOnInit(): void {
     this.productservice.getallproducts().subscribe({

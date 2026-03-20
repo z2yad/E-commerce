@@ -6,6 +6,7 @@ import { Loading } from "@/shared/components/loading/loading";
 import { DecimalPipe, NgOptimizedImage } from "@angular/common";
 import { StatsCard } from "@/shared/components/stats-card/stats-card";
 import { CartService } from '@/services/cart.service';
+import { ToastService } from '@/services/toast.service';
 
 @Component({
   selector: 'app-product-details',
@@ -27,10 +28,12 @@ export class ProductDetails implements OnInit {
   error = signal<string | null>(null);
   selectedImage = signal<string>('');
   cartService = inject(CartService);
+  tosatService = inject(ToastService);
   additem(){
     const product = this.product();
     if (product) {
       this.cartService.addItem(product);
+      this.tosatService.success('Product added to cart');
     }
   }
   ngOnInit(): void {
