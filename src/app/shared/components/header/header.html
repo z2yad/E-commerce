@@ -171,13 +171,9 @@
       <!-- Cart with improved badge and animation -->
       <a routerLink="/cart" class="relative p-2.5 sm:p-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-amber-400 
                 transition-all active:scale-90 group">
-        <svg class="h-5 w-5 sm:h-6 sm:w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-          <path
-            d="m397.78 316h-205.13a15 15 0 0 1 -14.65-11.67l-34.54-150.48a15 15 0 0 1 14.62-18.36h274.27a15 15 0 0 1 14.65 18.36l-34.6 150.48a15 15 0 0 1 -14.62 11.67zm-193.19-30h181.25l27.67-120.48h-236.6z" />
-          <circle cx="222" cy="392" r="28" />
-          <circle cx="368" cy="392" r="28" />
-          <path
-            d="m158.08 165.49a15 15 0 0 1 -14.23-10.26l-25.71-77.23h-47.44a15 15 0 1 1 0-30h58.3a15 15 0 0 1 14.23 10.26l29.13 87.49a15 15 0 0 1 -14.23 19.74z" />
+        <svg class="h-5 w-5 sm:h-6 sm:w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
         </svg>
 
         <!-- Animated badge -->
@@ -191,7 +187,7 @@
       </a>
 
       <!-- Profile with hover effect -->
-      <button class="hidden sm:flex p-2.5 sm:p-3 rounded-xl text-gray-400 hover:bg-white/5 
+      <button routerLink="/profile" class="hidden sm:flex p-2.5 sm:p-3 rounded-xl text-gray-400 hover:bg-white/5 
                      hover:text-amber-400 transition-all group">
         <svg class="h-5 w-5 sm:h-6 sm:w-6" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
           stroke="currentColor" stroke-width="2">
@@ -266,8 +262,7 @@
           <circle cx="11" cy="11" r="8" stroke-width="2" />
           <path d="m21 21-4.35-4.35" stroke-width="2" stroke-linecap="round" />
         </svg>
-        <input type="text" placeholder="Search products..." (input)="onSearch($event)" [ngModel]="searchParams()"
-          class="w-full rounded-xl border border-white/10 bg-white/5 py-3 pl-9 pr-4 text-sm 
+        <input type="text" placeholder="Search products..." (input)="onSearch($event)" [ngModel]="searchParams()" class="w-full rounded-xl border border-white/10 bg-white/5 py-3 pl-9 pr-4 text-sm 
                         text-white placeholder-gray-500 focus:outline-none focus:ring-1 
                         focus:ring-amber-500/50 transition-all" />
       </div>
@@ -317,9 +312,8 @@
                   hover:bg-white/5 transition-all text-sm font-semibold group/item">
         <div class="relative w-8 h-8 rounded-xl bg-white/5 flex items-center justify-center 
                       group-hover/item:bg-amber-500/20 transition-colors">
-          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
           </svg>
           <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center 
                          rounded-full bg-gradient-to-r from-amber-500 to-pink-500 
@@ -364,8 +358,7 @@
       <div class="grid grid-cols-1 gap-1 max-h-[40vh] overflow-y-auto scrollbar-thin 
                     scrollbar-thumb-white/10 pr-2">
         @for (category of filteredCategories(); track category.slug) {
-        <a [routerLink]="['/products']" [queryParams]="{ category: category.slug }" (click)="toggleMobileMenu()"
-          class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-400 
+        <a [routerLink]="['/products']" [queryParams]="{ category: category.slug }" (click)="toggleMobileMenu()" class="flex items-center justify-between px-4 py-3 rounded-xl text-gray-400 
                       hover:text-white hover:bg-white/5 transition-all capitalize group/item">
           <span class="text-sm font-medium">{{category.name}}</span>
         </a>
@@ -380,10 +373,10 @@
 
   <!-- Drawer Footer with Profile -->
   <div class="p-4 border-t border-white/5 bg-gradient-to-t from-black/40 to-transparent">
-    <button class="w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-gradient-to-r 
+    <button routerLink="/profile" class="w-full flex items-center gap-3 px-4 py-3.5 rounded-2xl bg-gradient-to-r 
                      from-amber-500/10 to-pink-500/10 text-gray-300 hover:text-white 
                      hover:from-amber-500/20 hover:to-pink-500/20 transition-all font-medium 
-                     text-sm border border-white/5 group">
+                     text-sm border border-white/5 group cursor-pointer">
       <div class="w-8 h-8 rounded-xl bg-gradient-to-br from-amber-500 to-pink-500 
                     flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
         <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">

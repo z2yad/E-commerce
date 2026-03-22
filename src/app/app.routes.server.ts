@@ -32,5 +32,9 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: 'checkout',
     renderMode: RenderMode.Client //csr
+  },
+  {
+    path: 'profile',
+    renderMode: RenderMode.Client //csr
   }
 ];

@@ -1,10 +1,11 @@
 import { Router, Routes } from '@angular/router';
 import { Home } from './home/home';
 import { ProductDetails } from './features/products/product-details/product-details';
-import { Cart } from './cart/cart';
-import { Checkout } from './checkout/checkout';
+import { Cart } from './features/cart/cart';
+import { Checkout } from './features/checkout/checkout';
 import { CartService } from './services/cart.service';
 import { inject } from '@angular/core';
+import { Profile } from './features/profile/profile';
 //client routes
 export const routes: Routes = [
     {
@@ -44,5 +45,9 @@ export const routes: Routes = [
 
             return router.createUrlTree(['/cart']);
         }]
+    },
+    {
+        path:'profile',
+        component:Profile
     }
 ];

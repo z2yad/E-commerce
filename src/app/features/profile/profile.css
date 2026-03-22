@@ -1,0 +1,68 @@
+/* Premium Animations for Profile Page */
+
+.animate-fade-in-up {
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Glassmorphism Refinements */
+.backdrop-blur-2xl {
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+}
+
+/* Custom Scrollbar for Wishlist Grid */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Smooth Transition for all interactive elements */
+button, a, div {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Shimmer Effect for Premium Cards */
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+.shimmer-effect {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+    background-size: 200% 100%;
+    animation: shimmer 3s infinite linear;
+}
+
+/* Profile Card Specific Styles */
+.profile-card-glow {
+    position: relative;
+}
+
+.profile-card-glow::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    background: linear-gradient(to bottom right, rgba(245, 158, 11, 0.2), rgba(236, 72, 153, 0.2));
+    border-radius: inherit;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.profile-card-glow:hover::after {
+    opacity: 1;
+}
