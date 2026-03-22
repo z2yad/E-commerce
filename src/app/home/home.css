@@ -1,9 +1,5 @@
-/* Hero Background */
+/* Hero Background optimized with NgOptimizedImage in HTML */
 .hero-bg {
-  background-image: url('../assets/background.png');
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   position: relative;
 }
 

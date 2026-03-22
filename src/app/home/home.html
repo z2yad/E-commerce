@@ -1,6 +1,12 @@
 <!-- ===== Hero Section ===== -->
 <section
-    class="hero-bg relative w-full min-h-[600px] h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden bg-[#0B1120]">
+    class="relative w-full min-h-[600px] h-[calc(100vh-64px)] flex items-center justify-center overflow-hidden bg-[#0B1120]">
+    <!-- Performance Optimized Background -->
+    <div class="absolute inset-0 z-0">
+        <img ngSrc="assets/background.png" priority fill
+            class="object-cover opacity-40 group-hover:scale-105 transition-transform duration-1000"
+            alt="Hero background">
+    </div>
     <!-- Animated gradient overlay -->
     <div
         class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width=%2260%22 height=%2260%22 viewBox=%220 0 60 60%22 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cg fill=%22none%22 fill-rule=%22evenodd%22%3E%3Cg fill=%22%23ffffff%22 fill-opacity=%220.05%22%3E%3Cpath d=%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')] opacity-20">
@@ -109,7 +115,7 @@
 
                     <!-- Product Image with Depth -->
                     <div class="relative w-full h-full flex items-center justify-center">
-                        
+
                         <img [src]="product.thumbnail" [alt]="product.title" class="w-full h-full object-contain drop-shadow-2xl group-hover:scale-110 
                                    transition-transform duration-700 ease-in-out z-10">
                     </div>
@@ -309,8 +315,8 @@
     <!-- Decorative background elements -->
     <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent">
     </div>
-    <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-pink-500/5 rounded-full blur-[120px]"></div>
-    <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/5 rounded-full blur-[120px]"></div>
+    <div class="absolute -bottom-24 -left-24 w-96 h-96 bg-pink-500/5 rounded-full blur-[60px]"></div>
+    <div class="absolute -top-24 -right-24 w-96 h-96 bg-amber-500/5 rounded-full blur-[60px]"></div>
 
     <div class="max-w-7xl mx-auto relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
@@ -339,7 +345,7 @@
                             </svg>
                         </div>
                         <h4 class="text-white font-bold mb-1">Email Us</h4>
-                        <p class="text-gray-500 text-sm italic">support&#64;ecommerce.com</p>
+                        <p class="text-gray-500 text-sm italic">{{Email_address}}</p>
                     </div>
 
                     <div
@@ -401,40 +407,44 @@
 
                 <h3 class="text-2xl font-black text-white mb-8">Send us a Message</h3>
 
-                <form class="space-y-6 relative z-10">
+                <form [formGroup]="ContactForm" class="space-y-6 relative z-10">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                         <div class="space-y-2">
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Full
                                 Name</label>
-                            <input type="text" placeholder="John Doe"
+                            <input name="name" formControlName="name" type="text" placeholder="John Doe"
+                                [ngClass]="{'border-rose-500/50': ContactForm.get('name')?.invalid && ContactForm.get('name')?.touched, 'border-green-500/50': ContactForm.get('name')?.valid && ContactForm.get('name')?.touched}"
                                 class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-amber-500/50 transition-all">
                         </div>
                         <div class="space-y-2">
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Email
                                 Address</label>
-                            <input type="email" placeholder="john&#64;example.com"
+                            <input name="email" formControlName="email" type="email" placeholder="john&#64;example.com"
+                                [ngClass]="{'border-rose-500/50': ContactForm.get('email')?.invalid && ContactForm.get('email')?.touched, 'border-green-500/50': ContactForm.get('email')?.valid && ContactForm.get('email')?.touched}"
                                 class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-pink-500/50 transition-all">
                         </div>
                     </div>
 
                     <div class="space-y-2">
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Subject</label>
-                        <select
+                        <select name="subject" formControlName="subject"
                             class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white focus:outline-none focus:border-amber-500/50 transition-all appearance-none cursor-pointer">
-                            <option class="bg-[#161B2E]">Technical Support</option>
-                            <option class="bg-[#161B2E]">Order Inquiry</option>
-                            <option class="bg-[#161B2E]">Feedback</option>
-                            <option class="bg-[#161B2E]">Other</option>
+                            <option value="Technical Support" class="bg-[#161B2E]">Technical Support</option>
+                            <option value="Order Inquiry" class="bg-[#161B2E]">Order Inquiry</option>
+                            <option value="Feedback" class="bg-[#161B2E]">Feedback</option>
+                            <option value="Other" class="bg-[#161B2E]">Other</option>
                         </select>
                     </div>
 
                     <div class="space-y-2">
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Message</label>
-                        <textarea placeholder="Tell us how we can help..." rows="4"
+                        <textarea name="message" formControlName="message" placeholder="Tell us how we can help..."
+                            rows="4"
+                            [ngClass]="{'border-rose-500/50': ContactForm.get('message')?.invalid && ContactForm.get('message')?.touched, 'border-green-500/50': ContactForm.get('message')?.valid && ContactForm.get('message')?.touched}"
                             class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-amber-500/50 transition-all resize-none"></textarea>
                     </div>
 
-                    <button
+                    <button (click)="submitForm()"
                         class="w-full py-5 bg-gradient-to-r from-amber-500 to-pink-500 text-white font-black rounded-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300 shadow-xl shadow-amber-500/20 uppercase tracking-widest cursor-pointer">
                         Submit Support Request
                     </button>

@@ -1,14 +1,15 @@
 import { ProductService } from '@/services/product.service';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DecimalPipe, CommonModule } from '@angular/common';
+import { DecimalPipe, CommonModule, NgOptimizedImage } from '@angular/common';
 import { Product, ProductResponse } from '@/interfaces/product.interface';
 import { CartService } from '@/services/cart.service';
 import { ToastService } from '@/services/toast.service';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, DecimalPipe, CommonModule],
+  imports: [RouterLink, DecimalPipe, CommonModule, ReactiveFormsModule, NgOptimizedImage],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
@@ -19,12 +20,12 @@ export class Home implements OnInit {
   products = this.productservice.allProducts;
   loading = this.productservice.loading;
   cartService = inject(CartService);
-  additem(product: Product){
-   if(!product){
-    return;
-   }
-   this.cartService.addItem(product);
-   this.toastService.success('Product added to cart');
+  additem(product: Product) {
+    if (!product) {
+      return;
+    }
+    this.cartService.addItem(product);
+    this.toastService.success('Product added to cart');
   }
   ngOnInit(): void {
     this.productservice.getallproducts().subscribe({
@@ -40,5 +41,21 @@ export class Home implements OnInit {
   }
   totalProducts() {
     return this.products().length;
+  }
+  Email_address = "ziadsalim121@gmail.com"
+  //make a validation for the form
+  ContactForm = new FormGroup({
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    subject: new FormControl('Technical Support', [Validators.required]), // Added missing control
+    message: new FormControl('', [Validators.required, Validators.minLength(10)]),
+  })
+  submitForm() {
+    if (this.ContactForm.valid) {
+      this.toastService.success('Thank you for your message. We will get back to you soon.');
+      this.ContactForm.reset();
+    } else {
+      this.toastService.error('Please fill in all the fields');
+    }
   }
 }
