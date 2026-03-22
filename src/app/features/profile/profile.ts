@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -9,6 +9,15 @@ import { CommonModule } from '@angular/common';
   styleUrl: './profile.css',
 })
 export class Profile {
+  loading = signal(true); // Toggle this to see the skeleton UI
+
+  constructor() {
+    // Simulate initial data loading
+    setTimeout(() => {
+      this.loading.set(false);
+    }, 500);
+  }
+
   // Mock data for UI rendering. User will handle actual logic later.
   user = {
     name: 'David Miller',
