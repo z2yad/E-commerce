@@ -58,4 +58,8 @@ export class Home implements OnInit {
       this.toastService.error('Please fill in all the fields');
     }
   }
+
+  scrollToTop() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
 }
