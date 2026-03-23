@@ -70,19 +70,6 @@ html {
   background: linear-gradient(to bottom, #d97706, #db2777);
 }
 
-/* Loading animation for images */
-img {
-  transition: opacity 0.3s ease-in-out;
-}
-
-img[loading] {
-  opacity: 0;
-}
-
-img[loading].loaded {
-  opacity: 1;
-}
-
 /* Focus styles for accessibility */
 *:focus-visible {
   outline: 2px solid #f59e0b;
