@@ -6,6 +6,8 @@ import { Checkout } from './features/checkout/checkout';
 import { CartService } from './services/cart.service';
 import { inject } from '@angular/core';
 import { Profile } from './features/profile/profile';
+import { Terms } from './features/terms/terms';
+import { Privacy } from './features/privacy/privacy';
 //client routes
 export const routes: Routes = [
     {
@@ -47,7 +49,15 @@ export const routes: Routes = [
         }]
     },
     {
-        path:'profile',
-        component:Profile
+        path: 'profile',
+        component: Profile
+    },
+    {
+        path: 'privacy',
+        component: Privacy
+    },
+    {
+        path: 'terms',
+        component: Terms
     }
 ];

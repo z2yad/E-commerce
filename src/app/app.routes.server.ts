@@ -36,5 +36,13 @@ export const serverRoutes: ServerRoute[] = [
   {
     path: 'profile',
     renderMode: RenderMode.Client //csr
+  },
+  {
+    path: 'privacy',
+    renderMode: RenderMode.Prerender //csr
+  },
+  {
+    path: 'terms',
+    renderMode: RenderMode.Prerender //csr
   }
 ];
