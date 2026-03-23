@@ -142,14 +142,14 @@
                                 <label
                                     class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Cardholder
                                     Name</label>
-                                <input type="text" placeholder="As shown on card"
+                                <input [(ngModel)]="name" name="name" type="text" placeholder="As shown on card"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all placeholder:text-gray-700 text-sm">
                             </div>
                             <div class="md:col-span-2 space-y-2 relative">
                                 <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Card
                                     Number</label>
                                 <div class="relative">
-                                    <input type="text" placeholder="0000 0000 0000 0000"
+                                    <input [(ngModel)]="cardnumber" name="cardnumber" type="text" placeholder="0000 0000 0000 0000"
                                         class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 pl-16 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all placeholder:text-gray-700 text-sm">
                                     <div class="absolute left-6 top-1/2 -translate-y-1/2">
                                         <svg class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24"
@@ -164,13 +164,13 @@
                                 <label
                                     class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Expiry
                                     Date</label>
-                                <input type="text" placeholder="MM/YY"
+                                <input type="text" [(ngModel)]="cardexpiry" name="cardexpiry" placeholder="MM/YY"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all placeholder:text-gray-700 text-sm">
                             </div>
                             <div class="space-y-2">
                                 <label
                                     class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">CVV</label>
-                                <input type="password" placeholder="***"
+                                <input [(ngModel)]="cardcvv" name="cardcvv" type="password" placeholder="***"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all placeholder:text-gray-700 text-sm">
                             </div>
                         </div>
@@ -313,7 +313,7 @@
                                 <div class="space-y-6">
                                     <div class="space-y-2">
                                         <p class="text-2xl font-black text-white tracking-[0.25em] drop-shadow-2xl">
-                                            4242 •••• •••• 1337</p>
+                                            {{formattedCardNumber}}</p>
                                     </div>
                                     <div class="flex justify-between items-end">
                                         <div class="space-y-1">
@@ -321,14 +321,14 @@
                                                 Card Holder</p>
                                             <p
                                                 class="text-xs font-black text-white uppercase tracking-widest bg-white/5 px-3 py-1 rounded-lg border border-white/5">
-                                                PAVLO MATVIIENKO</p>
+                                                {{name || 'CARD HOLDER'}}</p>
                                         </div>
                                         <div class="flex items-center gap-4">
                                             <div class="space-y-1 text-right">
                                                 <p
                                                     class="text-[8px] font-black text-gray-500 uppercase tracking-[0.2em]">
                                                     Expiry</p>
-                                                <p class="text-[10px] font-black text-white tracking-widest">12/28</p>
+                                                <p class="text-[10px] font-black text-white tracking-widest">{{formattedExpiry}}</p>
                                             </div>
                                             <div class="w-10 h-10 flex items-center justify-center">
                                                 <svg class="w-full h-full text-white/80" viewBox="0 0 24 24"
@@ -366,7 +366,7 @@
                                         <div
                                             class="w-20 h-12 bg-white rounded-xl flex items-center justify-center shadow-xl border-t-2 border-gray-200">
                                             <span
-                                                class="text-black font-black italic tracking-tighter text-lg">999</span>
+                                                class="text-black font-black italic tracking-tighter text-lg">{{cardcvv || '999'}}</span>
                                         </div>
                                     </div>
                                 </div>
