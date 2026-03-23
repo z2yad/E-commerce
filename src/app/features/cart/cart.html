@@ -144,7 +144,7 @@
                         </div>
                     </div>
 
-                    <a [routerLink]="['/checkout']"
+                    <a (click)="goToCheckout()"
                         class=" z-20 relative block w-full text-center mt-10 py-5 bg-gradient-to-r from-amber-500 to-pink-500 text-white font-black rounded-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300 shadow-xl shadow-amber-500/20 uppercase tracking-widest cursor-pointer">
                         Proceed to Checkout
                     </a>

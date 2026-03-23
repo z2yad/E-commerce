@@ -14,25 +14,25 @@ import { ToastService } from '@/services/toast.service';
 })
 export class Cart {
   private cartService = inject(CartService);
-  private tosatService = inject(ToastService);
+  private toastService = inject(ToastService);
   private router = inject(Router);
   cartItems = this.cartService.cart$;
 
   addItem(product: Product) {
     this.cartService.addItem(product);
-    this.tosatService.success('Product added to cart');
+    this.toastService.success('Product added to cart');
   }
   removeItem(id: number) {
     this.cartService.removeItem(id);
-    this.tosatService.success('Product removed from cart');
+    this.toastService.success('Product removed from cart');
   }
   updateQuantity(id: number, quantity: number) {
     this.cartService.updateQuantity(id, quantity);
-    this.tosatService.success('Product quantity updated');
+    this.toastService.success('Product quantity updated');
   }
   clearCart() {
     this.cartService.clearCart();
-    this.tosatService.error('Cart cleared');
+    this.toastService.error('Cart cleared');
   }
 
   getTotalPrice() {
@@ -43,7 +43,7 @@ export class Cart {
   }
   removeAll() {
     this.cartService.clearCart();
-    this.tosatService.error('Cart cleared');
+    this.toastService.error('Cart cleared');
   }
 
   goToCheckout() {
