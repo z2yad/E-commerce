@@ -62,4 +62,16 @@ export class Home implements OnInit {
   scrollToTop() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
+  scrollToContact() {
+    window.scrollTo({
+      top: document.getElementById('contact')?.offsetTop,
+      behavior: 'smooth'
+    });
+  }
+  scrollToProducts() {
+    window.scrollTo({
+      top: document.getElementById('products')?.offsetTop,
+      behavior: 'smooth'
+    });
+  }
 }
