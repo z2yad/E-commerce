@@ -1,59 +1,115 @@
-# Rendering
+# 🛍️ Rendering - Premium E-commerce Application
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 21.0.1.
+[![Angular](https://img.shields.io/badge/Angular-21.0.1-DD0031?style=for-the-badge&logo=angular)](https://angular.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.2.1-38B2AC?style=for-the-badge&logo=tailwinds-css)](https://tailwindcss.com/)
+[![Vitest](https://img.shields.io/badge/Vitest-4.1.0-6E9F18?style=for-the-badge&logo=vitest)](https://vitest.dev/)
+[![SSR](https://img.shields.io/badge/SSR-Enabled-blue?style=for-the-badge)](https://angular.dev/guide/ssr)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Vercel-black?style=for-the-badge&logo=vercel)](https://e-commerce-iota-sand.vercel.app/)
 
-## Development server
+A modern, high-performance E-commerce platform built with **Angular 21**, featuring Server-Side Rendering (SSR), a sleek glassmorphic UI, and a robust checkout system.
 
-To start a local development server, run:
+**🔗 Live Demo:** [e-commerce-iota-sand.vercel.app](https://e-commerce-iota-sand.vercel.app/)
 
-```bash
-ng serve
+---
+
+## ✨ Key Features
+
+- **🚀 Server-Side Rendering (SSR):** Optimized for SEO and lightning-fast initial page loads using `@angular/ssr`.
+- **📦 Product Management:** Dynamic product listing and detailed single-product views with smooth transitions.
+- **🛒 Shopping Cart:** Reactive cart management with real-time updates and persistent state.
+- **🛡️ Secure Checkout:** Logical multi-step checkout flow with route guards for data integrity.
+- **👤 User Profiles:** Dedicated profile section for managing user-specific data.
+- **🎨 Modern UI/UX:** Styled with **Tailwind CSS 4.0**, featuring glassmorphism, OKLCH color spaces, and custom micro-animations.
+- **🔔 Interactive Notifications:** Real-time feedback using `ngx-sonner` toast notifications.
+- **🔍 SEO Optimized:** Fully semantic HTML structure with meta-tag management.
+
+---
+
+## 🛠️ Tech Stack
+
+- **Core:** Angular 21 (Signals & Modern Control Flow)
+- **Styling:** Tailwind CSS 4.2.1 + PostCSS
+- **Icons:** Lucide Angular
+- **Notifications:** ngx-sonner
+- **Testing:** Vitest + Vitest UI
+- **Utilities:** `clsx`, `tailwind-merge`, `class-variance-authority`
+- **Server:** Express.js (for SSR hosting)
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+
+- **Node.js:** `^20.0.0` or higher
+- **npm:** `^11.0.0`
+
+### Installation
+
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/z2yad/E-commerce.git
+   ```
+
+2. **Install dependencies:**
+   ```bash
+   npm install
+   ```
+
+3. **Start the development server:**
+   ```bash
+   npm start
+   ```
+   Navigate to `http://localhost:4200/`. The app will automatically reload if you change any source files.
+
+---
+
+## 📖 Development Commands
+
+| Command | Description |
+| :--- | :--- |
+| `npm start` | Runs the app in development mode. |
+| `npm run build` | Builds the project for production in the `dist/` folder. |
+| `npm run test` | Executes unit tests via Vitest. |
+| `npm run watch` | Builds and watches for changes. |
+| `npm run serve:ssr:rendering` | Serves the SSR build locally. |
+
+---
+
+## 🏗️ Project Structure
+
+```text
+src/
+├── app/
+│   ├── features/     # Component modules (Cart, Checkout, Products, Profile)
+│   ├── services/     # Business logic and API interaction (CartService, ProductService)
+│   ├── shared/       # Reusable components and layout elements
+│   ├── interfaces/   # TypeScript type definitions
+│   └── home/         # Landing page component
+├── assets/           # Static assets (images, fonts)
+└── styles.css        # Global styles and Tailwind 4 configuration
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+---
 
-## Code scaffolding
+## 🧪 Testing
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+This project uses **Vitest** for unit testing, providing a significantly faster feedback loop than traditional Karma/Jasmine setups.
 
 ```bash
-ng generate --help
+# Run tests
+npm test
+
+# Run tests with UI
+npx vitest --ui
 ```
 
-## Building
+---
 
-To build the project run:
+## 📄 License
 
-```bash
-ng build
-```
+Distributed under the MIT License. See `LICENSE` for more information.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+---
 
-## Running unit tests
-
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+**Developed with ❤️ by Zeyad salim**
