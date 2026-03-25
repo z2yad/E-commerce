@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule, DecimalPipe } from '@angular/common';
+import { CommonModule, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { CartService } from '@/services/cart.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ToastService } from '@/services/toast.service';
@@ -7,7 +7,7 @@ import { ToastService } from '@/services/toast.service';
 @Component({
   selector: 'app-checkout',
   standalone: true,
-  imports: [CommonModule, DecimalPipe, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, DecimalPipe, FormsModule, ReactiveFormsModule, NgOptimizedImage],
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })

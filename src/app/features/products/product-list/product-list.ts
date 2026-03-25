@@ -2,7 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { ProductService } from '@/services/product.service';
 import { Product, ProductQueryParams, ProductResponse } from '@/interfaces/product.interface';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
-import { DecimalPipe } from '@angular/common';
+import { DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { CartService } from '@/services/cart.service';
 import { toast } from 'ngx-sonner';
 import { ToastService } from '@/services/toast.service';
@@ -11,7 +11,7 @@ import { ToastService } from '@/services/toast.service';
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [RouterLink, DecimalPipe],
+  imports: [RouterLink, DecimalPipe, NgOptimizedImage],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
