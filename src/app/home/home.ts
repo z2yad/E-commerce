@@ -6,6 +6,7 @@ import { Product, ProductResponse } from '@/interfaces/product.interface';
 import { CartService } from '@/services/cart.service';
 import { ToastService } from '@/services/toast.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { SeoService } from '@/services/seo.service';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class Home implements OnInit {
   products = this.productservice.allProducts;
   loading = this.productservice.loading;
   cartService = inject(CartService);
+  private seoService = inject(SeoService);
   additem(product: Product) {
     if (!product) {
       return;
@@ -28,6 +30,11 @@ export class Home implements OnInit {
     this.toastService.success('Product added to cart');
   }
   ngOnInit(): void {
+    this.seoService.updateSeo({
+      title: 'Premium E-Commerce Store | Fashion, Beauty & Tech',
+      description: 'Discover curated, premium products ranging from luxury beauty to modern electronics. Shop securely with free shipping on orders over $50.',
+      url: 'https://e-commerce-iota-sand.vercel.app/'
+    });
     this.productservice.getallproducts().subscribe({
       next: (data: ProductResponse) => {
         this.products.set(data.products);
