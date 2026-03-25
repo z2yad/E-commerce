@@ -31,8 +31,8 @@ export class Home implements OnInit {
   }
   ngOnInit(): void {
     this.seoService.updateSeo({
-      title: 'Premium E-Commerce Store | Fashion, Beauty & Tech',
-      description: 'Discover curated, premium products ranging from luxury beauty to modern electronics. Shop securely with free shipping on orders over $50.',
+      title: 'Elevate Your Everyday | Premium Fashion & Tech Shop',
+      description: 'Transform your style with our curated collection of luxury cosmetics, apparel, and modern electronics. ✨ Fast shipping, secure checkout.',
       url: 'https://e-commerce-iota-sand.vercel.app/'
     });
     this.productservice.getallproducts().subscribe({
