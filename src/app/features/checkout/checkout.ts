@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { CartService } from '@/services/cart.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -14,6 +15,7 @@ import { ToastService } from '@/services/toast.service';
 export class Checkout implements OnInit {
   private cartService = inject(CartService);
   private toastService = inject(ToastService);
+  private destroyRef = inject(DestroyRef);
 
   cartItems = this.cartService.cartItems;
   totalPrice = this.cartService.totalPrice;
@@ -36,7 +38,9 @@ export class Checkout implements OnInit {
   });
 
   ngOnInit() {
-    this.checkoutForm.get('cardnumber')?.valueChanges.subscribe(value => {
+    this.checkoutForm.get('cardnumber')?.valueChanges
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe(value => {
       if (value) {
         let cleaned = value.replace(/\D/g, '').substring(0, 16);
         let formatted = cleaned.match(/.{1,4}/g)?.join('-') || cleaned;

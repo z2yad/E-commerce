@@ -1,6 +1,7 @@
 import { Product } from '@/interfaces/product.interface';
 import { ProductService } from '@/services/product.service';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Loading } from "@/shared/components/loading/loading";
 import { DecimalPipe, NgOptimizedImage, DOCUMENT } from "@angular/common";
@@ -32,6 +33,7 @@ export class ProductDetails implements OnInit {
   tosatService = inject(ToastService);
   private seoService = inject(SeoService);
   private document = inject(DOCUMENT);
+  private destroyRef = inject(DestroyRef);
   additem(){
     const product = this.product();
     if (product) {
@@ -40,12 +42,12 @@ export class ProductDetails implements OnInit {
     }
   }
   ngOnInit(): void {
-    this.route.params.subscribe((params) => {
+    this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const id = params['id'];
       if (id) {
         this.productId.set(id);
         this.loading.set(true);
-        this.productService.getproductbyid(id).subscribe({
+        this.productService.getproductbyid(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
           next: (data) => {
             this.product.set(data);
             if (data.thumbnail) {

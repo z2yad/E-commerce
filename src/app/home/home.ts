@@ -1,12 +1,13 @@
 import { ProductService } from '@/services/product.service';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, DestroyRef, PLATFORM_ID } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { DecimalPipe, CommonModule, NgOptimizedImage, DOCUMENT } from '@angular/common';
+import { DecimalPipe, CommonModule, NgOptimizedImage, DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Product, ProductResponse } from '@/interfaces/product.interface';
 import { CartService } from '@/services/cart.service';
 import { ToastService } from '@/services/toast.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SeoService } from '@/services/seo.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-home',
@@ -23,6 +24,8 @@ export class Home implements OnInit {
   cartService = inject(CartService);
   private seoService = inject(SeoService);
   private document = inject(DOCUMENT);
+  private platformId = inject(PLATFORM_ID);
+  private destroyRef = inject(DestroyRef);
   
   additem(product: Product) {
     if (!product) {
@@ -74,7 +77,9 @@ export class Home implements OnInit {
     script.className = 'faq-schema-data';
     this.document.head.appendChild(script);
 
-    this.productservice.getallproducts().subscribe({
+    this.productservice.getallproducts()
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
       next: (data: ProductResponse) => {
         this.products.set(data.products);
         this.loading.set(false);
@@ -119,18 +124,24 @@ export class Home implements OnInit {
   }
 
   scrollToTop() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   }
   scrollToContact() {
-    window.scrollTo({
-      top: document.getElementById('contact')?.offsetTop,
-      behavior: 'smooth'
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({
+        top: document.getElementById('contact')?.offsetTop,
+        behavior: 'smooth'
+      });
+    }
   }
   scrollToProducts() {
-    window.scrollTo({
-      top: document.getElementById('products')?.offsetTop,
-      behavior: 'smooth'
-    });
+    if (isPlatformBrowser(this.platformId)) {
+      window.scrollTo({
+        top: document.getElementById('products')?.offsetTop,
+        behavior: 'smooth'
+      });
+    }
   }
 }

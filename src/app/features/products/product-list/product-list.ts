@@ -1,4 +1,5 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductService } from '@/services/product.service';
 import { Product, ProductQueryParams, ProductResponse } from '@/interfaces/product.interface';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
@@ -29,6 +30,7 @@ export class ProductList implements OnInit {
   error = signal<any>(null);
   cartService = inject(CartService);
   toastService = inject(ToastService);
+  private destroyRef = inject(DestroyRef);
   additem(product: Product){
    if(!product){
     return;
@@ -37,7 +39,7 @@ export class ProductList implements OnInit {
    this.toastService.success('Product added to cart');
   }
   ngOnInit() {
-    this.route.queryParams.subscribe((params: Params) => {
+    this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
       // Set values from URL to keep component state in sync
       if (params['page']) this.currentPage.set(Number(params['page']));
       if (params['search']) this.searchParams.set(params['search']);
@@ -88,7 +90,7 @@ export class ProductList implements OnInit {
     if (this.searchParams()) params.search = this.searchParams();
     if (this.categorySelected()) params.category = this.categorySelected();
 
-    this.productService.getallproducts(params).subscribe({
+    this.productService.getallproducts(params).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data: ProductResponse) => {
         // Correctly calculate total pages based on total records and limit
         const pages = Math.ceil(data.total / limit);
