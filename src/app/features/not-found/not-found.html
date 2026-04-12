@@ -1,91 +1,98 @@
-<div class="min-h-screen bg-[#0A0F1C] flex flex-col items-center justify-center p-4 relative overflow-hidden">
-    <!-- Background Accents -->
-    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-500/10 blur-[120px] rounded-full"></div>
-    <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-pink-500/10 blur-[120px] rounded-full"></div>
+<div class="min-h-screen bg-[#0A0F1C] flex flex-col items-center justify-center p-4 relative overflow-hidden font-sans">
+    
+    <!-- Immersive Background Accents (Matching Home Page) -->
+    <div class="absolute top-[-10%] left-[-10%] w-[50%] h-[50%] bg-amber-500/10 blur-[120px] rounded-full animate-pulse-slow"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[50%] h-[50%] bg-pink-500/10 blur-[120px] rounded-full animate-pulse-slow-reverse"></div>
+    
+    <!-- Hero Glassy Container -->
+    <div class="relative z-10 w-full max-w-2xl bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[48px] p-12 md:p-16 shadow-[0_32px_64px_-16px_rgba(0,0,0,0.5)] flex flex-col items-center text-center">
+        
+        <!-- Header Section -->
+        <div class="mb-12">
+            <h1 class="text-7xl md:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-b from-white to-white/10 mb-4 select-none tracking-tighter">
+                404
+            </h1>
+            <div class="h-1.5 w-24 bg-gradient-to-r from-amber-400 to-pink-500 rounded-full mx-auto mb-6"></div>
+            <p class="text-2xl md:text-3xl font-bold text-white tracking-tight leading-tight uppercase">
+                Lost in the <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-pink-300">Glass Universe</span>
+            </p>
+        </div>
 
-    <!-- 404 Header -->
-    <div class="relative z-20 text-center mb-12">
-        <h1 class="text-6xl md:text-8xl font-black text-white/10 mb-2 select-none">404</h1>
-        <p class="text-xl md:text-2xl font-bold text-white uppercase tracking-widest">Page Not Found</p>
-    </div>
-
-    <!-- AI Interactive Card (Uiverse) -->
-    <div class="relative z-10 w-full max-w-[400px] h-[300px] mb-20">
-        <div class="container-ai-input">
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <div class="area"></div>
-            <label class="container-wrap">
-                <input type="checkbox" />
-                <div class="card">
-                    <div class="background-blur-balls">
-                        <div class="balls">
-                            <span class="ball rosa"></span>
-                            <span class="ball violet"></span>
-                            <span class="ball green"></span>
-                            <span class="ball cyan"></span>
-                        </div>
-                    </div>
-                    <div class="content-card">
-                        <div class="background-blur-card">
-                            <div class="eyes">
-                                <span class="eye"></span>
-                                <span class="eye"></span>
-                            </div>
-                            <div class="eyes happy">
-                                <svg fill="none" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M8.28386 16.2843C8.9917 15.7665 9.8765 14.731 12 14.731C14.1235 14.731 15.0083 15.7665 15.7161 16.2843C17.8397 17.8376 18.7542 16.4845 18.9014 15.7665C19.4323 13.1777 17.6627 11.1066 17.3088 10.5888C16.3844 9.23666 14.1235 8 12 8C9.87648 8 7.61556 9.23666 6.69122 10.5888C6.33728 11.1066 4.56771 13.1777 5.09858 15.7665C5.24582 16.4845 6.16034 17.8376 8.28386 16.2843Z"></path>
-                                </svg>
-                                <svg fill="none" viewBox="0 0 24 24">
-                                    <path fill="currentColor" d="M8.28386 16.2843C8.9917 15.7665 9.8765 14.731 12 14.731C14.1235 14.731 15.0083 15.7665 15.7161 16.2843C17.8397 17.8376 18.7542 16.4845 18.9014 15.7665C19.4323 13.1777 17.6627 11.1066 17.3088 10.5888C16.3844 9.23666 14.1235 8 12 8C9.87648 8 7.61556 9.23666 6.69122 10.5888C6.33728 11.1066 4.56771 13.1777 5.09858 15.7665C5.24582 16.4845 6.16034 17.8376 8.28386 16.2843Z"></path>
-                                </svg>
+        <!-- AI Interactive Card (Robot) - Integrated into the glass layout -->
+        <div class="relative w-full h-[320px] mb-12 flex items-center justify-center">
+            <div class="container-ai-input scale-110">
+                <div class="area"></div> <div class="area"></div> <div class="area"></div> <div class="area"></div> <div class="area"></div>
+                <div class="area"></div> <div class="area"></div> <div class="area"></div> <div class="area"></div> <div class="area"></div>
+                <div class="area"></div> <div class="area"></div> <div class="area"></div> <div class="area"></div> <div class="area"></div>
+                <label class="container-wrap">
+                    <input type="checkbox" />
+                    <div class="card !bg-transparent">
+                        <div class="background-blur-balls !bg-white/5 !backdrop-blur-md !border-white/10 shadow-2xl">
+                            <div class="balls">
+                                <span class="ball rosa !opacity-60"></span>
+                                <span class="ball violet !opacity-60"></span>
+                                <span class="ball green !opacity-60"></span>
+                                <span class="ball cyan !opacity-60"></span>
                             </div>
                         </div>
-                    </div>
-                    <div class="container-ai-chat">
-                        <div class="chat">
-                            <div class="chat-bot">
-                                <textarea placeholder="Lost? Ask me anything...✦˚" name="chat_bot" id="chat_bot"></textarea>
+                        <div class="content-card">
+                            <div class="background-blur-card !bg-white/10 backdrop-blur-3xl">
+                                <div class="eyes">
+                                    <span class="eye !bg-white/90"></span>
+                                    <span class="eye !bg-white/90"></span>
+                                </div>
+                                <div class="eyes happy">
+                                    <svg fill="none" viewBox="0 0 24 24" class="!text-amber-300">
+                                        <path fill="currentColor" d="M8.28386 16.2843C8.9917 15.7665 9.8765 14.731 12 14.731C14.1235 14.731 15.0083 15.7665 15.7161 16.2843C17.8397 17.8376 18.7542 16.4845 18.9014 15.7665C19.4323 13.1777 17.6627 11.1066 17.3088 10.5888C16.3844 9.23666 14.1235 8 12 8C9.87648 8 7.61556 9.23666 6.69122 10.5888C6.33728 11.1066 4.56771 13.1777 5.09858 15.7665C5.24582 16.4845 6.16034 17.8376 8.28386 16.2843Z"></path>
+                                    </svg>
+                                    <svg fill="none" viewBox="0 0 24 24" class="!text-pink-300">
+                                        <path fill="currentColor" d="M8.28386 16.2843C8.9917 15.7665 9.8765 14.731 12 14.731C14.1235 14.731 15.0083 15.7665 15.7161 16.2843C17.8397 17.8376 18.7542 16.4845 18.9014 15.7665C19.4323 13.1777 17.6627 11.1066 17.3088 10.5888C16.3844 9.23666 14.1235 8 12 8C9.87648 8 7.61556 9.23666 6.69122 10.5888C6.33728 11.1066 4.56771 13.1777 5.09858 15.7665C5.24582 16.4845 6.16034 17.8376 8.28386 16.2843Z"></path>
+                                    </svg>
+                                </div>
                             </div>
-                            <div class="options">
-                                <div class="btns-add">
-                                    <button>
-                                        <svg viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none"></path>
-                                        </svg>
+                        </div>
+                        <div class="container-ai-chat">
+                            <div class="chat !bg-black/40 !backdrop-blur-xl !border-white/10 !shadow-inner">
+                                <div class="chat-bot">
+                                    <textarea placeholder="Don't worry, even AI gets lost... Ask me anything! ✨" class="!text-white !placeholder-white/40"></textarea>
+                                </div>
+                                <div class="options">
+                                    <div class="btns-add">
+                                        <button class="!text-white/60 hover:!text-amber-400">
+                                            <svg viewBox="0 0 24 24" height="20" width="20" fill="none" stroke="currentColor"><path d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8" stroke-width="2" stroke-linecap="round"></path></svg>
+                                        </button>
+                                    </div>
+                                    <button class="btn-submit !bg-gradient-to-tr !from-amber-500 !to-pink-500 !opacity-100 hover:!scale-110 active:!scale-95 transition-all">
+                                        <i class="!bg-transparent"><svg viewBox="0 0 512 512" class="!text-white"><path d="M473 39.05a24 24 0 0 0-25.5-5.46L47.47 185h-.08a24 24 0 0 0 1 45.16l.41.13l137.3 58.63a16 16 0 0 0 15.54-3.59L422 80a7.07 7.07 0 0 1 10 10L226.66 310.26a16 16 0 0 0-3.59 15.54l58.65 137.38c.06.2.12.38.19.57c3.2 9.27 11.3 15.81 21.09 16.25h1a24.63 24.63 0 0 0 23-15.46L478.39 64.62A24 24 0 0 0 473 39.05" fill="currentColor"></path></svg></i>
                                     </button>
                                 </div>
-                                <button class="btn-submit" routerLink="/">
-                                    <i>
-                                        <svg viewBox="0 0 512 512">
-                                            <path d="M473 39.05a24 24 0 0 0-25.5-5.46L47.47 185h-.08a24 24 0 0 0 1 45.16l.41.13l137.3 58.63a16 16 0 0 0 15.54-3.59L422 80a7.07 7.07 0 0 1 10 10L226.66 310.26a16 16 0 0 0-3.59 15.54l58.65 137.38c.06.2.12.38.19.57c3.2 9.27 11.3 15.81 21.09 16.25h1a24.63 24.63 0 0 0 23-15.46L478.39 64.62A24 24 0 0 0 473 39.05" fill="currentColor"></path>
-                                        </svg>
-                                    </i>
-                                </button>
                             </div>
                         </div>
                     </div>
-                </div>
-            </label>
+                </label>
+            </div>
+        </div>
+
+        <!-- Action Section -->
+        <p class="text-gray-400 text-lg mb-12 max-w-md mx-auto leading-relaxed font-light">
+            Oops! The page you're searching for has vanished into thin air. Let's get you back to the collection.
+        </p>
+        
+        <div class="flex flex-col sm:flex-row gap-6 justify-center w-full sm:w-auto">
+            <a routerLink="/" 
+                class="group relative inline-flex items-center justify-center px-10 py-5 bg-gradient-to-r from-amber-500 to-pink-500 text-white font-bold rounded-2xl overflow-hidden shadow-[0_20px_40px_-12px_rgba(245,158,11,0.4)] transition-all hover:scale-105 active:scale-95">
+                <span class="relative z-10 uppercase tracking-widest text-sm">Return Home</span>
+                <div class="absolute inset-0 bg-white/20 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></div>
+            </a>
+            <a routerLink="/products" 
+                class="inline-flex items-center justify-center px-10 py-5 bg-white/5 backdrop-blur-md border border-white/10 text-white font-bold rounded-2xl hover:bg-white/10 transition-all hover:scale-105 active:scale-95 uppercase tracking-widest text-sm">
+                Shop Now
+            </a>
         </div>
     </div>
 
-    <!-- Return Link -->
-    <div class="relative z-20 mt-10">
-        <a routerLink="/" class="px-8 py-4 bg-white/5 border border-white/10 text-white font-black rounded-2xl hover:bg-white/10 transition-all duration-300 uppercase tracking-widest text-sm backdrop-blur-md">
-            Return to Store
-        </a>
+    <!-- Decorative Bottom Text -->
+    <div class="mt-12 text-white/20 select-none uppercase tracking-[1rem] text-[10px] md:text-sm font-black">
+        Luxury Experience
     </div>
 </div>
