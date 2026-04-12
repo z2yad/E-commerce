@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CommonModule, DecimalPipe, NgOptimizedImage } from '@angular/common';
 import { CartService } from '@/services/cart.service';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
@@ -11,7 +11,7 @@ import { ToastService } from '@/services/toast.service';
   templateUrl: './checkout.html',
   styleUrl: './checkout.css',
 })
-export class Checkout {
+export class Checkout implements OnInit {
   private cartService = inject(CartService);
   private toastService = inject(ToastService);
 
@@ -30,10 +30,23 @@ export class Checkout {
     phone: new FormControl('', Validators.required),
     country: new FormControl('EG', Validators.required),
     cardholdername: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    cardnumber: new FormControl('', [Validators.required, Validators.pattern(/^[0-9\s]{13,19}$/)]),
+    cardnumber: new FormControl('', [Validators.required, Validators.pattern(/^[\d\s-]{13,19}$/)]),
     cardexpiry: new FormControl('', [Validators.required, Validators.pattern(/^(0[1-9]|1[0-2])\/\d{2}$/)]),
     cardcvv: new FormControl('', [Validators.required, Validators.pattern(/^\d{3,4}$/)]),
   });
+
+  ngOnInit() {
+    this.checkoutForm.get('cardnumber')?.valueChanges.subscribe(value => {
+      if (value) {
+        let cleaned = value.replace(/\D/g, '').substring(0, 16);
+        let formatted = cleaned.match(/.{1,4}/g)?.join('-') || cleaned;
+        if (value !== formatted) {
+          this.checkoutForm.get('cardnumber')?.setValue(formatted, { emitEvent: false });
+        }
+      }
+    });
+  }
+
 
   get nameOnCard() {
     return this.checkoutForm.get('cardholdername')?.value || 'CARD HOLDER';
@@ -41,10 +54,8 @@ export class Checkout {
 
   get formattedCardNumber() {
     const val = this.checkoutForm.get('cardnumber')?.value;
-    if (!val) return '4242 •••• •••• 1337';
-    const cleaned = val.replace(/\D/g, '');
-    const groups = cleaned.match(/.{1,4}/g);
-    return groups ? groups.join(' ') : cleaned;
+    if (!val) return '4242-••••-••••-1337';
+    return val;
   }
 
   get formattedExpiry() {

@@ -58,25 +58,36 @@
                                     Name</label>
                                 <input formControlName="name" type="text" placeholder="John Doe"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                <span *ngIf="checkoutForm.get('name')?.invalid && checkoutForm.get('name')?.touched"
+                                    class="text-red-500 text-sm">Please enter a valid name</span>
                             </div>
                             <div class="space-y-2">
                                 <label
                                     class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Email</label>
                                 <input formControlName="email" type="email" placeholder="john@example.com"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                <span *ngIf="checkoutForm.get('email')?.invalid && checkoutForm.get('email')?.touched"
+                                    class="text-red-500 text-sm">Please enter a valid email</span>
                             </div>
+                            
                             <div class="md:col-span-2 space-y-2">
                                 <label
                                     class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Street
                                     Address</label>
+                                    
                                 <input formControlName="address" type="text" placeholder="123 Luxury Ave"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                <span *ngIf="checkoutForm.get('address')?.invalid && checkoutForm.get('address')?.touched"
+                                    class="text-red-500 text-sm">Please enter a valid address</span>
                             </div>
+
                             <div class="space-y-2">
                                 <label
                                     class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">City</label>
                                 <input formControlName="city" type="text" placeholder="New York"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                <span *ngIf="checkoutForm.get('city')?.invalid && checkoutForm.get('city')?.touched"
+                                    class="text-red-500 text-sm">Please enter a valid city</span>
                             </div>
                             <div class="grid grid-cols-2 gap-4">
                                 <div class="space-y-2">
@@ -84,12 +95,16 @@
                                         class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">State</label>
                                     <input formControlName="state" type="text" placeholder="NY"
                                         class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                    <span *ngIf="checkoutForm.get('state')?.invalid && checkoutForm.get('state')?.touched"
+                                        class="text-red-500 text-sm">Please enter a valid state</span>
                                 </div>
                                 <div class="space-y-2">
                                     <label
                                         class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Zip</label>
                                     <input formControlName="zip" type="text" placeholder="10001"
                                         class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                    <span *ngIf="checkoutForm.get('zip')?.invalid && checkoutForm.get('zip')?.touched"
+                                        class="text-red-500 text-sm">Please enter a valid zip</span>
                                 </div>
                             </div>
                             <div class="space-y-2">
@@ -97,6 +112,8 @@
                                     class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Phone</label>
                                 <input formControlName="phone" type="tel" placeholder="+20 123 456"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-amber-500/50 focus:border-amber-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                <span *ngIf="checkoutForm.get('phone')?.invalid && checkoutForm.get('phone')?.touched"
+                                    class="text-red-500 text-sm">Please enter a valid phone</span>
                             </div>
                             <div class="space-y-2">
                                 <label
@@ -117,6 +134,8 @@
                                                 d="M19 9l-7 7-7-7" />
                                         </svg>
                                     </div>
+                                    <span *ngIf="checkoutForm.get('country')?.invalid && checkoutForm.get('country')?.touched"
+                                        class="text-red-500 text-sm">Please enter a valid country</span>
                                 </div>
                             </div>
                         </div>
@@ -144,15 +163,20 @@
                                     Name</label>
                                 <input formControlName="cardholdername" type="text" placeholder="As shown on card"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all placeholder:text-gray-700 text-sm">
-                            </div>
+                                <span *ngIf="checkoutForm.get('cardholdername')?.invalid && checkoutForm.get('cardholdername')?.touched"
+                                    class="text-red-500 text-sm">Please enter a valid cardholder name</span>
+                                </div>
+
                             <div class="md:col-span-2 space-y-2 relative">
                                 <label class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">Card
                                     Number</label>
                                 <div class="relative">
                                     <input formControlName="cardnumber" type="text" placeholder="0000 0000 0000 0000"
                                         class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 pl-16 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all placeholder:text-gray-700 text-sm">
-                                    <div class="absolute left-6 top-1/2 -translate-y-1/2">
-                                        <svg class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24"
+                                    <span *ngIf="checkoutForm.get('cardnumber')?.invalid && checkoutForm.get('cardnumber')?.touched"
+                                        class="text-red-500 text-sm">Please enter a valid card number</span>
+                                        <div class="absolute left-6 top-1/2 -translate-y-1/2">
+                                            <svg class="w-6 h-6 text-gray-500" fill="none" viewBox="0 0 24 24"
                                             stroke="currentColor">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                                 d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
@@ -166,12 +190,16 @@
                                     Date</label>
                                 <input formControlName="cardexpiry" type="text" placeholder="MM/YY"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                <span *ngIf="checkoutForm.get('cardexpiry')?.invalid && checkoutForm.get('cardexpiry')?.touched"
+                                    class="text-red-500 text-sm">Please enter a valid expiry date</span>
                             </div>
                             <div class="space-y-2">
                                 <label
                                     class="text-[10px] font-black text-gray-500 uppercase tracking-[0.2em] ml-2">CVV</label>
                                 <input formControlName="cardcvv" type="password" placeholder="***"
                                     class="w-full bg-black/30 border border-white/10 rounded-2xl px-6 py-4 text-white focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all placeholder:text-gray-700 text-sm">
+                                <span *ngIf="checkoutForm.get('cardcvv')?.invalid && checkoutForm.get('cardcvv')?.touched"
+                                    class="text-red-500 text-sm">Please enter a valid cvv</span>
                             </div>
                         </div>
 
@@ -182,7 +210,7 @@
                                 <svg class="w-4 h-4 text-blue-400" fill="none" viewBox="0 0 24 24"
                                     stroke="currentColor">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 00-2 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
                                 </svg>
                             </div>
                             <p class="text-[9px] font-bold text-blue-400/80 uppercase tracking-widest leading-relaxed">
@@ -191,8 +219,7 @@
                         </div>
 
                         <!-- Action Button moved from Sidebar -->
-                        <button
-                        (click)="onSubmit()"
+                        <button type="submit"
                             class="group relative w-full overflow-hidden rounded-2xl bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 p-[2px] transition-all hover:scale-[1.02] active:scale-95 mt-8">
                             <div
                                 class="relative bg-[#0B1120]/80 rounded-[14px] py-4 px-6 group-hover:bg-transparent transition-all duration-300">
@@ -367,7 +394,7 @@
                                         <div
                                             class="w-20 h-12 bg-white rounded-xl flex items-center justify-center shadow-xl border-t-2 border-gray-200">
                                             <span
-                                                class="text-black font-black italic tracking-tighter text-lg">{{cardcvv || '999'}}</span>
+                                                class="text-black font-black italic tracking-tighter text-lg">***</span>
                                         </div>
                                     </div>
                                 </div>
