@@ -8,6 +8,7 @@ import { inject } from '@angular/core';
 import { Profile } from './features/profile/profile';
 import { Terms } from './features/terms/terms';
 import { Privacy } from './features/privacy/privacy';
+import { NotFound } from './features/not-found/not-found';
 //client routes
 export const routes: Routes = [
     {
@@ -59,5 +60,9 @@ export const routes: Routes = [
     {
         path: 'terms',
         component: Terms
+    },
+    {
+        path: '**',
+        component: NotFound
     }
 ];

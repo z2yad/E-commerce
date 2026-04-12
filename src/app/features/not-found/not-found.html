@@ -1,0 +1,91 @@
+<div class="min-h-screen bg-[#0A0F1C] flex flex-col items-center justify-center p-4 relative overflow-hidden">
+    <!-- Background Accents -->
+    <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] bg-amber-500/10 blur-[120px] rounded-full"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] bg-pink-500/10 blur-[120px] rounded-full"></div>
+
+    <!-- 404 Header -->
+    <div class="relative z-20 text-center mb-12">
+        <h1 class="text-6xl md:text-8xl font-black text-white/10 mb-2 select-none">404</h1>
+        <p class="text-xl md:text-2xl font-bold text-white uppercase tracking-widest">Page Not Found</p>
+    </div>
+
+    <!-- AI Interactive Card (Uiverse) -->
+    <div class="relative z-10 w-full max-w-[400px] h-[300px] mb-20">
+        <div class="container-ai-input">
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <div class="area"></div>
+            <label class="container-wrap">
+                <input type="checkbox" />
+                <div class="card">
+                    <div class="background-blur-balls">
+                        <div class="balls">
+                            <span class="ball rosa"></span>
+                            <span class="ball violet"></span>
+                            <span class="ball green"></span>
+                            <span class="ball cyan"></span>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <div class="background-blur-card">
+                            <div class="eyes">
+                                <span class="eye"></span>
+                                <span class="eye"></span>
+                            </div>
+                            <div class="eyes happy">
+                                <svg fill="none" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.28386 16.2843C8.9917 15.7665 9.8765 14.731 12 14.731C14.1235 14.731 15.0083 15.7665 15.7161 16.2843C17.8397 17.8376 18.7542 16.4845 18.9014 15.7665C19.4323 13.1777 17.6627 11.1066 17.3088 10.5888C16.3844 9.23666 14.1235 8 12 8C9.87648 8 7.61556 9.23666 6.69122 10.5888C6.33728 11.1066 4.56771 13.1777 5.09858 15.7665C5.24582 16.4845 6.16034 17.8376 8.28386 16.2843Z"></path>
+                                </svg>
+                                <svg fill="none" viewBox="0 0 24 24">
+                                    <path fill="currentColor" d="M8.28386 16.2843C8.9917 15.7665 9.8765 14.731 12 14.731C14.1235 14.731 15.0083 15.7665 15.7161 16.2843C17.8397 17.8376 18.7542 16.4845 18.9014 15.7665C19.4323 13.1777 17.6627 11.1066 17.3088 10.5888C16.3844 9.23666 14.1235 8 12 8C9.87648 8 7.61556 9.23666 6.69122 10.5888C6.33728 11.1066 4.56771 13.1777 5.09858 15.7665C5.24582 16.4845 6.16034 17.8376 8.28386 16.2843Z"></path>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="container-ai-chat">
+                        <div class="chat">
+                            <div class="chat-bot">
+                                <textarea placeholder="Lost? Ask me anything...✦˚" name="chat_bot" id="chat_bot"></textarea>
+                            </div>
+                            <div class="options">
+                                <div class="btns-add">
+                                    <button>
+                                        <svg viewBox="0 0 24 24" height="20" width="20" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M7 8v8a5 5 0 1 0 10 0V6.5a3.5 3.5 0 1 0-7 0V15a2 2 0 0 0 4 0V8" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none"></path>
+                                        </svg>
+                                    </button>
+                                </div>
+                                <button class="btn-submit" routerLink="/">
+                                    <i>
+                                        <svg viewBox="0 0 512 512">
+                                            <path d="M473 39.05a24 24 0 0 0-25.5-5.46L47.47 185h-.08a24 24 0 0 0 1 45.16l.41.13l137.3 58.63a16 16 0 0 0 15.54-3.59L422 80a7.07 7.07 0 0 1 10 10L226.66 310.26a16 16 0 0 0-3.59 15.54l58.65 137.38c.06.2.12.38.19.57c3.2 9.27 11.3 15.81 21.09 16.25h1a24.63 24.63 0 0 0 23-15.46L478.39 64.62A24 24 0 0 0 473 39.05" fill="currentColor"></path>
+                                        </svg>
+                                    </i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </label>
+        </div>
+    </div>
+
+    <!-- Return Link -->
+    <div class="relative z-20 mt-10">
+        <a routerLink="/" class="px-8 py-4 bg-white/5 border border-white/10 text-white font-black rounded-2xl hover:bg-white/10 transition-all duration-300 uppercase tracking-widest text-sm backdrop-blur-md">
+            Return to Store
+        </a>
+    </div>
+</div>

@@ -7,19 +7,6 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [CommonModule, RouterLink],
   templateUrl: './not-found.html',
-  styles: [`
-    .glass-card {
-      background: rgba(255, 255, 255, 0.03);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .floating {
-      animation: floating 6s ease-in-out infinite;
-    }
-    @keyframes floating {
-      0%, 100% { transform: translateY(0) rotate(0); }
-      50% { transform: translateY(-20px) rotate(5deg); }
-    }
-  `]
+  styleUrl: './not-found.css'
 })
 export class NotFound {}
