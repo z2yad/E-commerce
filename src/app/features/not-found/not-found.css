@@ -1,31 +1,42 @@
-/* 404 Premium Glassy Robot Styles */
 
-@keyframes pulse-slow {
+:host {
+    --brand-amber: #f59e0b;
+    --brand-pink: #ec4899;
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* --- Shared Animations --- */
+@keyframes pulse-glow {
     0%, 100% { opacity: 0.1; transform: scale(1); }
-    50% { opacity: 0.15; transform: scale(1.1); }
+    50% { opacity: 0.18; transform: scale(1.1); }
 }
 
-@keyframes pulse-slow-reverse {
-    0%, 100% { opacity: 0.1; transform: scale(1.1); }
-    50% { opacity: 0.15; transform: scale(1); }
+@keyframes blob-float {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(10px, -5px) scale(1.1); }
+    66% { transform: translate(-5px, 10px) scale(0.9); }
 }
 
-.animate-pulse-slow {
-    animation: pulse-slow 8s ease-in-out infinite;
+@keyframes rotate-bg {
+    from { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
+    to { transform: translateX(-50%) translateY(-50%) rotate(0); }
 }
 
-.animate-pulse-slow-reverse {
-    animation: pulse-slow-reverse 8s ease-in-out infinite;
+@keyframes eye-blink {
+    0%, 46%, 50%, 96%, 100% { height: 52px; }
+    48%, 98% { height: 20px; }
 }
 
+.animate-pulse-slow { animation: pulse-glow 8s ease-in-out infinite; }
+.animate-pulse-reverse { animation: pulse-glow 8s ease-in-out infinite reverse; }
+
+/* --- Robot Logic --- */
 .container-ai-input {
     --perspective: 1200px;
     --translateY: 60px;
     position: absolute;
-    left: 0;
-    right: 0;
-    top: 0;
-    bottom: 0;
+    inset: 0;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
     transform-style: preserve-3d;
@@ -36,269 +47,177 @@
     align-items: center;
     justify-content: center;
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
     z-index: 9;
     transform-style: preserve-3d;
     cursor: pointer;
-    padding: 8px;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.container-wrap:hover {
-    padding: 0;
 }
 
 .container-wrap:after {
     content: "";
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-55%);
-    width: 13rem;
-    height: 12rem;
-    background-color: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    left: 50%; top: 50%;
+    transform: translate(-50%, -55%);
+    width: 13rem; height: 12rem;
+    background: var(--glass-bg);
+    border: 1px solid var(--glass-border);
     border-radius: 4rem;
-    transition: all 0.4s ease;
     backdrop-filter: blur(12px);
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    transition: all 0.4s ease;
 }
 
 .container-wrap:hover:after {
-    transform: translateX(-50%) translateY(-50%);
+    transform: translate(-50%, -50%);
     height: 13rem;
-    background-color: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.08);
 }
 
-.container-wrap input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-    position: absolute;
-}
+.container-wrap input { opacity: 0; width: 0; height: 0; position: absolute; }
 
-.container-wrap input:checked + .card .eyes {
-    opacity: 0;
-}
-
-.container-wrap input:checked + .card .content-card {
-    width: 280px;
-    height: 180px;
-}
-
-.container-wrap input:checked + .card .container-ai-chat {
-    opacity: 1;
-    visibility: visible;
-    z-index: 99999;
-    pointer-events: visible;
-}
+.container-wrap input:checked ~ .card .eyes { opacity: 0; }
+.container-wrap input:checked ~ .card .content-card { width: 280px; height: 180px; }
+.container-wrap input:checked ~ .card .container-ai-chat { opacity: 1; pointer-events: auto; }
 
 .card {
-    width: 100%;
-    height: 100%;
-    transform-style: preserve-3d;
     will-change: transform;
     transition: all 0.6s ease;
     border-radius: 4rem;
     display: flex;
     align-items: center;
-    transform: translateZ(60px);
     justify-content: center;
+    transform: translateZ(60px);
+    transform-style: preserve-3d;
 }
 
 .background-blur-balls {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    width: 100%;
-    height: 100%;
+    inset: 0;
     z-index: -10;
     border-radius: 4rem;
-    transition: all 0.4s ease;
     overflow: hidden;
 }
 
 .balls {
     position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    animation: rotate-background-balls 12s linear infinite;
+    left: 50%; top: 50%;
+    transform: translate(-50%, -50%);
+    animation: rotate-bg 12s linear infinite;
 }
 
-.background-blur-balls .ball {
-    width: 7rem;
-    height: 7rem;
+.ball {
+    width: 7rem; height: 7rem;
     position: absolute;
     border-radius: 50%;
     filter: blur(40px);
 }
-
-.background-blur-balls .ball.violet { top: 0; left: 50%; transform: translateX(-50%); background-color: #9147ff; }
-.background-blur-balls .ball.green { bottom: 0; left: 50%; transform: translateX(-50%); background-color: #34d399; }
-.background-blur-balls .ball.rosa { top: 50%; left: 0; transform: translateY(-50%); background-color: #ec4899; }
-.background-blur-balls .ball.cyan { top: 50%; right: 0; transform: translateY(-50%); background-color: #05e0f5; }
+.ball.violet { top: 0; left: 50%; transform: translateX(-50%); background: #9147ff; }
+.ball.green { bottom: 0; left: 50%; transform: translateX(-50%); background: #34d399; }
+.ball.rosa { top: 50%; left: 0; transform: translateY(-50%); background: var(--brand-pink); }
+.ball.cyan { top: 50%; right: 0; transform: translateY(-50%); background: #05e0f5; }
 
 .content-card {
-    width: 14rem;
-    height: 14rem;
+    width: 14rem; height: 14rem;
     display: flex;
     border-radius: 4rem;
-    transition: all 0.4s ease;
     overflow: hidden;
-}
-
-.background-blur-card {
-    width: 100%;
-    height: 100%;
+    transition: all 0.4s ease;
 }
 
 .eyes {
     position: absolute;
-    left: 50%;
-    bottom: 50%;
-    transform: translateX(-51%);
+    left: 50%; bottom: 50%;
+    transform: translateX(-50%);
     display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 52px;
     gap: 2.5rem;
     transition: all 0.4s ease;
-
-    & .eye {
-        width: 30px;
-        height: 52px;
-        background-color: white;
-        border-radius: 20px;
-        animation: animate-eyes 8s infinite linear;
-        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
-    }
 }
 
-.eyes.happy {
-    display: none;
-    color: white;
-    gap: 0;
-    & svg { width: 70px; }
+.eye {
+    width: 30px; height: 52px;
+    background: white;
+    border-radius: 20px;
+    animation: eye-blink 8s infinite linear;
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
 }
 
+.eyes.happy { display: none; color: white; & svg { width: 70px; } }
 .container-wrap:hover .eyes .eye { display: none; }
 .container-wrap:hover .eyes.happy { display: flex; }
 
 .container-ai-chat {
     position: absolute;
-    width: 100%;
-    height: 100%;
+    inset: 0;
     padding: 8px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.4s ease;
 }
 
-.container-wrap .card .chat {
+.chat {
     display: flex;
-    justify-content: space-between;
     flex-direction: column;
+    justify-content: space-between;
     border-radius: 24px;
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     padding: 12px;
     overflow: hidden;
 }
 
-.container-wrap .card .chat .chat-bot {
-    position: relative;
-    display: flex;
-    height: 100%;
-}
-
-.card .chat .chat-bot textarea {
-    background-color: transparent;
+.chat textarea {
+    background: transparent;
     border: none;
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     font-size: 14px;
     padding: 8px;
     resize: none;
     outline: none;
+    color: white;
     &::-webkit-scrollbar { width: 4px; }
     &::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
 }
 
-.card .chat .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    padding: 4px;
-}
-
-.card .chat .options .btn-submit {
+.btn-submit {
     display: flex;
     padding: 2px;
     border-radius: 14px;
     cursor: pointer;
     border: none;
-    outline: none;
     box-shadow: 0 8px 16px -4px rgba(236, 72, 153, 0.3);
 }
 
-/* 3D Hover Logic */
-.area:nth-child(15):hover ~ .container-wrap .card, .area:nth-child(15):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(15deg) translateZ(var(--translateY)); }
-.area:nth-child(14):hover ~ .container-wrap .card, .area:nth-child(14):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(7deg) translateZ(var(--translateY)); }
-.area:nth-child(13):hover ~ .container-wrap .card, .area:nth-child(13):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(0) translateZ(var(--translateY)); }
-.area:nth-child(12):hover ~ .container-wrap .card, .area:nth-child(12):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(-7deg) translateZ(var(--translateY)); }
-.area:nth-child(11):hover ~ .container-wrap .card, .area:nth-child(11):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(-15deg) translateZ(var(--translateY)); }
-.area:nth-child(10):hover ~ .container-wrap .card, .area:nth-child(10):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(15deg) translateZ(var(--translateY)); }
-.area:nth-child(9):hover ~ .container-wrap .card, .area:nth-child(9):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(7deg) translateZ(var(--translateY)); }
-.area:nth-child(8):hover ~ .container-wrap .card, .area:nth-child(8):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(0) translateZ(var(--translateY)); }
-.area:nth-child(7):hover ~ .container-wrap .card, .area:nth-child(7):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(-7deg) translateZ(var(--translateY)); }
-.area:nth-child(6):hover ~ .container-wrap .card, .area:nth-child(6):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(-15deg) translateZ(var(--translateY)); }
-.area:nth-child(5):hover ~ .container-wrap .card, .area:nth-child(5):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(15deg) translateZ(var(--translateY)); }
-.area:nth-child(4):hover ~ .container-wrap .card, .area:nth-child(4):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(7deg) translateZ(var(--translateY)); }
-.area:nth-child(3):hover ~ .container-wrap .card, .area:nth-child(3):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(0) translateZ(var(--translateY)); }
-.area:nth-child(2):hover ~ .container-wrap .card, .area:nth-child(2):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(-7deg) translateZ(var(--translateY)); }
-.area:nth-child(1):hover ~ .container-wrap .card, .area:nth-child(1):hover ~ .container-wrap .eyes .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(-15deg) translateZ(var(--translateY)); }
-
-@keyframes rotate-background-balls {
-    from { transform: translateX(-50%) translateY(-50%) rotate(360deg); }
-    to { transform: translateX(-50%) translateY(-50%) rotate(0); }
-}
-
-@keyframes animate-eyes {
-    46% { height: 52px; }
-    48% { height: 20px; }
-    50% { height: 52px; }
-    96% { height: 52px; }
-    98% { height: 20px; }
-    100% { height: 52px; }
-}
+/* --- 3D Hover Logic (Preserving interaction) --- */
+.area:nth-child(15):hover ~ .container-wrap .card, .area:nth-child(15):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(15deg) translateZ(var(--translateY)); }
+.area:nth-child(14):hover ~ .container-wrap .card, .area:nth-child(14):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(7deg) translateZ(var(--translateY)); }
+.area:nth-child(13):hover ~ .container-wrap .card, .area:nth-child(13):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(0) translateZ(var(--translateY)); }
+.area:nth-child(12):hover ~ .container-wrap .card, .area:nth-child(12):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(-7deg) translateZ(var(--translateY)); }
+.area:nth-child(11):hover ~ .container-wrap .card, .area:nth-child(11):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(-15deg) translateZ(var(--translateY)); }
+.area:nth-child(10):hover ~ .container-wrap .card, .area:nth-child(10):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(15deg) translateZ(var(--translateY)); }
+.area:nth-child(9):hover ~ .container-wrap .card, .area:nth-child(9):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(7deg) translateZ(var(--translateY)); }
+.area:nth-child(8):hover ~ .container-wrap .card, .area:nth-child(8):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(0) translateZ(var(--translateY)); }
+.area:nth-child(7):hover ~ .container-wrap .card, .area:nth-child(7):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(-7deg) translateZ(var(--translateY)); }
+.area:nth-child(6):hover ~ .container-wrap .card, .area:nth-child(6):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(0) rotateY(-15deg) translateZ(var(--translateY)); }
+.area:nth-child(5):hover ~ .container-wrap .card, .area:nth-child(5):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(15deg) translateZ(var(--translateY)); }
+.area:nth-child(4):hover ~ .container-wrap .card, .area:nth-child(4):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(7deg) translateZ(var(--translateY)); }
+.area:nth-child(3):hover ~ .container-wrap .card, .area:nth-child(3):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(0) translateZ(var(--translateY)); }
+.area:nth-child(2):hover ~ .container-wrap .card, .area:nth-child(2):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(-7deg) translateZ(var(--translateY)); }
+.area:nth-child(1):hover ~ .container-wrap .card, .area:nth-child(1):hover ~ .container-wrap .eye { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(-15deg) translateZ(var(--translateY)); }
 
 
 /* --- Premium Glass Bubble Buttons --- */
-
-@keyframes blob-float {
-    0%, 100% { transform: translate(0, 0) scale(1); }
-    33% { transform: translate(10px, -5px) scale(1.1); }
-    66% { transform: translate(-5px, 10px) scale(0.9); }
-}
-
 .glass-bubble-btn {
     position: relative;
     cursor: pointer;
-    width: 240px;
-    height: 64px;
+    width: 240px; height: 64px;
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.15);
-    background: rgba(255, 255, 255, 0.05);
+    background: var(--glass-bg);
     backdrop-filter: blur(12px);
     overflow: hidden;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex; align-items: center; justify-content: center;
     box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
 }
 
@@ -309,30 +228,15 @@
     box-shadow: 0 20px 40px -15px rgba(245, 158, 11, 0.4);
 }
 
-.glass-bubble-btn:active {
-    transform: scale(0.95);
-}
+.glass-bubble-btn:active { transform: scale(0.95); }
 
-.glass-bubble-btn .btn-content {
-    position: relative;
-    z-index: 10;
-    display: flex;
-    align-items: center;
-    color: white;
-    font-weight: 700;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    font-size: 0.85rem;
+.btn-content {
+    position: relative; z-index: 10;
+    display: flex; align-items: center;
+    color: white; font-weight: 700;
+    text-transform: uppercase; font-size: 0.85rem;
     pointer-events: none;
     text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-}
-
-.glass-bubble-btn .blobs {
-    position: absolute;
-    inset: 0;
-    z-index: 1;
-    overflow: hidden;
-    pointer-events: none;
 }
 
 .glass-bubble-btn .blob {
@@ -340,67 +244,16 @@
     border-radius: 50%;
     filter: blur(12px);
     opacity: 0.5;
-    transition: all 0.6s ease-out;
     animation: blob-float 6s ease-in-out infinite;
+    transition: all 0.6s ease-out;
 }
 
-.glass-bubble-btn .blob.pink {
-    background: #ec4899; /* Brand Pink-500 */
-    width: 70px;
-    height: 70px;
-    top: -25px;
-    left: -15px;
-    animation-delay: 0s;
-}
+.blob.pink { background: var(--brand-pink); width: 70px; height: 70px; top: -25px; left: -15px; }
+.blob.orange { background: var(--brand-amber); width: 60px; height: 60px; bottom: -20px; right: 5px; animation-delay: -2s; }
+.blob.white { background: rgba(255, 255, 255, 0.3); width: 90px; height: 15px; top: 8px; left: 25px; filter: blur(6px); animation: none; opacity: 0.4; }
+.blob.pink-large { background: var(--brand-pink); width: 140px; height: 100px; bottom: -40px; left: -30px; opacity: 0.2; animation-delay: -4s; }
+.blob.orange-large { background: var(--brand-amber); width: 150px; height: 110px; top: -30px; right: -40px; opacity: 0.2; animation-delay: -1s; }
 
-.glass-bubble-btn .blob.orange {
-    background: #f59e0b; /* Brand Amber-500 */
-    width: 60px;
-    height: 60px;
-    bottom: -20px;
-    right: 5px;
-    animation-delay: -2s;
-}
-
-.glass-bubble-btn .blob.white {
-    background: rgba(255, 255, 255, 0.3);
-    width: 90px;
-    height: 15px;
-    top: 8px;
-    left: 25px;
-    filter: blur(6px);
-    animation: none;
-    opacity: 0.4;
-}
-
-.glass-bubble-btn .blob.pink-large {
-    background: #ec4899;
-    width: 140px;
-    height: 100px;
-    bottom: -40px;
-    left: -30px;
-    opacity: 0.2;
-    animation-delay: -4s;
-}
-
-.glass-bubble-btn .blob.orange-large {
-    background: #f59e0b;
-    width: 150px;
-    height: 110px;
-    top: -30px;
-    right: -40px;
-    opacity: 0.2;
-    animation-delay: -1s;
-}
-
-.glass-bubble-btn:hover .blob {
-    transform: scale(1.3);
-    filter: blur(10px);
-    opacity: 0.7;
-}
-
-/* Secondary Variant */
-.glass-bubble-btn.secondary {
-    border-color: rgba(255, 255, 255, 0.1);
-}
+.glass-bubble-btn:hover .blob { transform: scale(1.3); filter: blur(10px); opacity: 0.7; }
+.glass-bubble-btn.secondary { border-color: rgba(255, 255, 255, 0.1); }
 
