@@ -9,6 +9,10 @@ import { Profile } from './features/profile/profile';
 import { Terms } from './features/terms/terms';
 import { Privacy } from './features/privacy/privacy';
 import { NotFound } from './features/not-found/not-found';
+import { Login } from './features/auth/login/login';
+import { Register } from './features/auth/register/register';
+import { authGuard } from './shared/guards/auth.guard';
+import { adminGuard } from './shared/guards/admin.guard';
 //client routes
 export const routes: Routes = [
     {
@@ -30,13 +34,26 @@ export const routes: Routes = [
         ]
     },
     {
+        path: 'login',
+        component: Login
+    },
+    {
+        path: 'register',
+        component: Register
+    },
+    {
+        path: 'admin',
+        loadComponent: () => import('./features/admin/dashboard/dashboard').then(m => m.AdminDashboard),
+        canActivate: [adminGuard]
+    },
+    {
         path: 'cart',
         component: Cart
     },
     {
         path: 'checkout',
         component: Checkout,
-        canActivate: [() => {
+        canActivate: [authGuard, () => {
             const cartService = inject(CartService);
             const router = inject(Router);
 
@@ -51,7 +68,8 @@ export const routes: Routes = [
     },
     {
         path: 'profile',
-        component: Profile
+        component: Profile,
+        canActivate: [authGuard]
     },
     {
         path: 'privacy',

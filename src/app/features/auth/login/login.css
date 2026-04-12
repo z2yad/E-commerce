@@ -1,0 +1,37 @@
+@keyframes pulse-slow {
+    0%, 100% { opacity: 0.1; transform: scale(1); }
+    50% { opacity: 0.2; transform: scale(1.1); }
+}
+
+@keyframes pulse-slow-reverse {
+    0%, 100% { opacity: 0.2; transform: scale(1.1); }
+    50% { opacity: 0.1; transform: scale(1); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+}
+
+.animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+}
+
+.animate-pulse-slow-reverse {
+    animation: pulse-slow-reverse 8s ease-in-out infinite;
+}
+
+.animate-shake {
+    animation: shake 0.4s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* Glass Morphism Input Helper */
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus {
+    -webkit-text-fill-color: white;
+    -webkit-box-shadow: 0 0 0px 1000px rgba(255, 255, 255, 0.05) inset;
+    transition: background-color 5000s ease-in-out 0s;
+}

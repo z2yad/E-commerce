@@ -6,6 +6,7 @@ import { Category } from '@/interfaces/product.interface';
 
 import { CommonModule } from '@angular/common';
 import { CartService } from '@/services/cart.service';
+import { AuthService } from '@/services/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -20,7 +21,12 @@ export class Header implements OnInit {
   isMobileMenuOpen = signal<boolean>(false);
   categories = signal<Category[]>([]);
   cartService = inject(CartService);
+  authService = inject(AuthService);
+  
   countitems = computed(() => this.cartService.countItems());
+  currentUser = computed(() => this.authService.currentUser());
+  isLoggedIn = computed(() => this.authService.isLoggedIn());
+  isAdmin = computed(() => this.authService.isAdmin());
   // Searchable categories logic
   filteredCategories = computed(() => {
     const search = this.categorySearch().toLowerCase();
@@ -61,5 +67,10 @@ export class Header implements OnInit {
       },
       queryParamsHandling: 'merge'
     });
+  }
+
+  logout() {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 }
