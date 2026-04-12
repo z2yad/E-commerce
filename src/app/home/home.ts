@@ -111,6 +111,7 @@ export class Home implements OnInit {
     if (this.newsletterEmail.valid) {
       this.toastService.success('Successfully subscribed to our newsletter!');
       this.newsletterEmail.reset();
+      this.newsletterEmail.markAsPristine();
     } else {
       this.toastService.error('Please enter a valid email address');
       this.newsletterEmail.markAsTouched();
