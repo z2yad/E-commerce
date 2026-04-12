@@ -41,10 +41,7 @@ export class Home implements OnInit {
       url: 'https://e-commerce-iota-sand.vercel.app/'
     });
 
-    // Inject FAQ Schema for Rich Snippets ("People Also Ask")
-    const script = this.document.createElement('script');
-    script.type = 'application/ld+json';
-    script.text = JSON.stringify({
+    this.seoService.setJsonLd({
       "@context": "https://schema.org",
       "@type": "FAQPage",
       "mainEntity": [
@@ -73,9 +70,12 @@ export class Home implements OnInit {
           }
         }
       ]
+    }, 'faq-schema-data');
+
+    // Clean up SEO script on destroy
+    this.destroyRef.onDestroy(() => {
+      this.seoService.removeJsonLd('faq-schema-data');
     });
-    script.className = 'faq-schema-data';
-    this.document.head.appendChild(script);
 
     this.productservice.getallproducts()
       .pipe(takeUntilDestroyed(this.destroyRef))

@@ -66,9 +66,7 @@ export class ProductDetails implements OnInit {
             });
 
             // 2. Inject JSON-LD Structured Data for Google Shopping
-            const script = this.document.createElement('script');
-            script.type = 'application/ld+json';
-            script.text = JSON.stringify({
+            this.seoService.setJsonLd({
               "@context": "https://schema.org/",
               "@type": "Product",
               "name": data.title,
@@ -87,9 +85,12 @@ export class ProductDetails implements OnInit {
                 "ratingValue": data.rating,
                 "reviewCount": 150
               }
+            }, 'structured-data-script');
+
+            // Clean up SEO script on destroy
+            this.destroyRef.onDestroy(() => {
+              this.seoService.removeJsonLd('structured-data-script');
             });
-            script.className = 'structured-data-script';
-            this.document.head.appendChild(script);
           },
           error: (err) => {
             console.error('Failed to load product', err);

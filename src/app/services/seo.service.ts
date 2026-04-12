@@ -48,6 +48,31 @@ export class SeoService {
   }
 
   /**
+   * Inject or update JSON-LD structured data in the head
+   * @param schema The schema object
+   * @param className Unique class name to identify the script tag for removal
+   */
+  setJsonLd(schema: any, className: string) {
+    this.removeJsonLd(className); // Remove old one if exists
+
+    const script = this.doc.createElement('script');
+    script.type = 'application/ld+json';
+    script.className = className;
+    script.text = JSON.stringify(schema);
+    this.doc.head.appendChild(script);
+  }
+
+  /**
+   * Remove a specific JSON-LD script by class name
+   */
+  removeJsonLd(className: string) {
+    const existingScript = this.doc.head.querySelector(`.${className}`);
+    if (existingScript) {
+      this.doc.head.removeChild(existingScript);
+    }
+  }
+
+  /**
    * Updates the canonical URL tag in the document head
    */
   private updateCanonicalUrl(url: string) {

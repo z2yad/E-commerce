@@ -10,7 +10,7 @@ export function mergeClasses(...inputs: ClassValue[]) {
 export const noopFn = () => void 0;
 
 export const isElementContentTruncated = (element: HTMLElement | undefined): boolean => {
-  if (!element) {
+  if (!element || typeof document === 'undefined') {
     return false;
   }
   const range = document.createRange();
