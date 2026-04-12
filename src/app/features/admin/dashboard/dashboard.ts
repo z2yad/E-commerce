@@ -53,4 +53,4 @@ import { CommonModule } from '@angular/common';
     </div>
   `
 })
-export class AdminDashboard {}
+export class AdminDashboard { }
