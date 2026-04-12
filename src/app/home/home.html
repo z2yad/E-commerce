@@ -29,7 +29,8 @@
         <h1 class="text-5xl md:text-7xl font-extrabold text-white tracking-tight drop-shadow-md">
             Shop Luxury <br class="hidden md:block" />
             <span
-                class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-pink-300 drop-shadow-lg">Fashion, Tech & Beauty</span>
+                class="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-pink-300 drop-shadow-lg">Fashion,
+                Tech & Beauty</span>
         </h1>
 
         <!-- Subtitle with better contrast -->
@@ -317,24 +318,66 @@
 
                 <h3 class="text-2xl font-black text-white mb-8">Send us a Message</h3>
 
-                <form [formGroup]="ContactForm" class="space-y-6 relative z-10">
+                <form (ngSubmit)="submitForm()" [formGroup]="ContactForm" class="space-y-6 relative z-10">
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <!-- Name Field -->
                         <div class="space-y-2">
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Full
                                 Name</label>
                             <input name="name" formControlName="name" type="text" placeholder="John Doe"
                                 [ngClass]="{'border-rose-500/50': ContactForm.get('name')?.invalid && ContactForm.get('name')?.touched, 'border-green-500/50': ContactForm.get('name')?.valid && ContactForm.get('name')?.touched}"
                                 class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-amber-500/50 transition-all">
+
+                            @if (ContactForm.get('name')?.invalid && ContactForm.get('name')?.touched) {
+                            <div class="flex flex-col gap-1 mt-1 animate-in fade-in slide-in-from-top-1">
+                                @if (ContactForm.get('name')?.errors?.['required']) {
+                                <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                    <span class="w-1 h-1 rounded-full bg-current"></span>Name is required
+                                </p>
+                                }
+                                @if (ContactForm.get('name')?.errors?.['minlength']) {
+                                <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                    <span class="w-1 h-1 rounded-full bg-current"></span>Name must be at least 3
+                                    characters
+                                </p>
+                                }
+                                @if (ContactForm.get('name')?.errors?.['maxlength']) {
+                                <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                    <span class="w-1 h-1 rounded-full bg-current"></span>Name cannot exceed 20
+                                    characters
+                                </p>
+                                }
+                            </div>
+                            }
                         </div>
+
+                        <!-- Email Field -->
                         <div class="space-y-2">
                             <label class="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Email
                                 Address</label>
-                            <input name="email" formControlName="email" type="email" placeholder="john&#64;example.com"
+                            <input name="email" formControlName="email" type="email" placeholder="john@example.com"
                                 [ngClass]="{'border-rose-500/50': ContactForm.get('email')?.invalid && ContactForm.get('email')?.touched, 'border-green-500/50': ContactForm.get('email')?.valid && ContactForm.get('email')?.touched}"
                                 class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-pink-500/50 transition-all">
+
+                            @if (ContactForm.get('email')?.invalid && ContactForm.get('email')?.touched) {
+                            <div class="flex flex-col gap-1 mt-1 animate-in fade-in slide-in-from-top-1">
+                                @if (ContactForm.get('email')?.errors?.['required']) {
+                                <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                    <span class="w-1 h-1 rounded-full bg-current"></span>Email is required
+                                </p>
+                                }
+                                @if (ContactForm.get('email')?.errors?.['email']) {
+                                <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                    <span class="w-1 h-1 rounded-full bg-current"></span>Please enter a valid email
+                                    address
+                                </p>
+                                }
+                            </div>
+                            }
                         </div>
                     </div>
 
+                    <!-- Subject Field -->
                     <div class="space-y-2">
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Subject</label>
                         <select name="subject" formControlName="subject"
@@ -344,17 +387,50 @@
                             <option value="Feedback" class="bg-[#161B2E]">Feedback</option>
                             <option value="Other" class="bg-[#161B2E]">Other</option>
                         </select>
+
+                        @if (ContactForm.get('subject')?.invalid && ContactForm.get('subject')?.touched) {
+                        <div class="flex flex-col gap-1 mt-1 animate-in fade-in slide-in-from-top-1">
+                            @if (ContactForm.get('subject')?.errors?.['required']) {
+                            <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                <span class="w-1 h-1 rounded-full bg-current"></span>Subject is required
+                            </p>
+                            }
+                        </div>
+                        }
                     </div>
 
+                    <!-- Message Field -->
                     <div class="space-y-2">
                         <label class="text-xs font-bold text-gray-400 uppercase tracking-widest pl-1">Message</label>
                         <textarea name="message" formControlName="message" placeholder="Tell us how we can help..."
                             rows="4"
                             [ngClass]="{'border-rose-500/50': ContactForm.get('message')?.invalid && ContactForm.get('message')?.touched, 'border-green-500/50': ContactForm.get('message')?.valid && ContactForm.get('message')?.touched}"
                             class="w-full px-6 py-4 rounded-2xl bg-white/5 border border-white/10 text-white placeholder-gray-600 focus:outline-none focus:border-amber-500/50 transition-all resize-none"></textarea>
+
+                        @if (ContactForm.get('message')?.invalid && ContactForm.get('message')?.touched) {
+                        <div class="flex flex-col gap-1 mt-1 animate-in fade-in slide-in-from-top-1">
+                            @if (ContactForm.get('message')?.errors?.['required']) {
+                            <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                <span class="w-1 h-1 rounded-full bg-current"></span>Message is required
+                            </p>
+                            }
+                            @if (ContactForm.get('message')?.errors?.['minlength']) {
+                            <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                <span class="w-1 h-1 rounded-full bg-current"></span>Message must be at least 10
+                                characters
+                            </p>
+                            }
+                            @if (ContactForm.get('message')?.errors?.['maxlength']) {
+                            <p class="text-[10px] font-bold text-rose-500 flex items-center gap-1">
+                                <span class="w-1 h-1 rounded-full bg-current"></span>Message cannot exceed 200
+                                characters
+                            </p>
+                            }
+                        </div>
+                        }
                     </div>
 
-                    <button (click)="submitForm()"
+                    <button type="submit"
                         class="w-full py-5 bg-gradient-to-r from-amber-500 to-pink-500 text-white font-black rounded-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300 shadow-xl shadow-amber-500/20 uppercase tracking-widest cursor-pointer">
                         Submit Support Request
                     </button>
@@ -376,31 +452,54 @@
                 </div>
 
                 <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
-                    
+
                     <!-- Simplified FAQ in Footer -->
                     <div class="mb-16 border-b border-white/10 pb-16">
-                        <h3 class="text-2xl font-black text-white mb-8 text-center uppercase tracking-widest"><span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-500">Quick</span> FAQ</h3>
+                        <h3 class="text-2xl font-black text-white mb-8 text-center uppercase tracking-widest"><span
+                                class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-500">Quick</span>
+                            FAQ</h3>
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-center md:text-left">
-                            <div class="p-6 bg-[#0B1120]/50 border border-white/5 rounded-2xl backdrop-blur-md hover:bg-white/5 transition-colors">
-                                <h4 class="text-white font-bold mb-2 flex items-center justify-center md:justify-start gap-2">
-                                    <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                            <div
+                                class="p-6 bg-[#0B1120]/50 border border-white/5 rounded-2xl backdrop-blur-md hover:bg-white/5 transition-colors">
+                                <h4
+                                    class="text-white font-bold mb-2 flex items-center justify-center md:justify-start gap-2">
+                                    <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
                                     100% Authentic
                                 </h4>
-                                <p class="text-gray-400 text-sm">All items are sustainably sourced from authorized global distributors.</p>
+                                <p class="text-gray-400 text-sm">All items are sustainably sourced from authorized
+                                    global distributors.</p>
                             </div>
-                            <div class="p-6 bg-[#0B1120]/50 border border-white/5 rounded-2xl backdrop-blur-md hover:bg-white/5 transition-colors">
-                                <h4 class="text-white font-bold mb-2 flex items-center justify-center md:justify-start gap-2">
-                                    <svg class="w-5 h-5 text-pink-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" /></svg>
+                            <div
+                                class="p-6 bg-[#0B1120]/50 border border-white/5 rounded-2xl backdrop-blur-md hover:bg-white/5 transition-colors">
+                                <h4
+                                    class="text-white font-bold mb-2 flex items-center justify-center md:justify-start gap-2">
+                                    <svg class="w-5 h-5 text-pink-400" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                                    </svg>
                                     30-Day Returns
                                 </h4>
-                                <p class="text-gray-400 text-sm">Full money-back guarantee. No questions asked on all unused items.</p>
+                                <p class="text-gray-400 text-sm">Full money-back guarantee. No questions asked on all
+                                    unused items.</p>
                             </div>
-                            <div class="p-6 bg-[#0B1120]/50 border border-white/5 rounded-2xl backdrop-blur-md hover:bg-white/5 transition-colors">
-                                <h4 class="text-white font-bold mb-2 flex items-center justify-center md:justify-start gap-2">
-                                    <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>
+                            <div
+                                class="p-6 bg-[#0B1120]/50 border border-white/5 rounded-2xl backdrop-blur-md hover:bg-white/5 transition-colors">
+                                <h4
+                                    class="text-white font-bold mb-2 flex items-center justify-center md:justify-start gap-2">
+                                    <svg class="w-5 h-5 text-amber-400" fill="none" viewBox="0 0 24 24"
+                                        stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                                    </svg>
                                     Free Shipping
                                 </h4>
-                                <p class="text-gray-400 text-sm">We offer free, fully-tracked express shipping on all orders over $50.</p>
+                                <p class="text-gray-400 text-sm">We offer free, fully-tracked express shipping on all
+                                    orders over $50.</p>
                             </div>
                         </div>
                     </div>
@@ -633,14 +732,29 @@
                                 Get exclusive deals, new arrivals, and insider updates directly in your inbox.
                             </p>
                             <div class="space-y-3">
-                                <div class="relative group">
-                                    <input type="email" placeholder="your@email.com"
-                                        class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/30 transition-all group-hover:bg-white/10">
-                                    <button
-                                        class="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-pink-500 text-white text-xs font-medium hover:shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer">
-                                        Subscribe
-                                    </button>
-                                </div>
+                                <form (ngSubmit)="subscribeNewsletter()">
+                                    <div class="relative group">
+                                        <input type="email" placeholder="your@email.com" [formControl]="newsletterEmail"
+                                            [ngClass]="{'border-rose-500/50': newsletterEmail.invalid && newsletterEmail.touched}"
+                                            class="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 text-sm focus:outline-none focus:border-amber-500/50 focus:ring-1 focus:ring-amber-500/30 transition-all group-hover:bg-white/10">
+                                        <button type="submit"
+                                            class="absolute right-1.5 top-1/2 -translate-y-1/2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-amber-500 to-pink-500 text-white text-xs font-medium hover:shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer">
+                                            Subscribe
+                                        </button>
+                                    </div>
+                                </form>
+                                @if (newsletterEmail.invalid && newsletterEmail.touched) {
+                                <p class="text-[10px] text-rose-500 font-bold flex items-center gap-1 pl-1">
+                                    <span class="w-1 h-1 rounded-full bg-current"></span>
+                                    @if (newsletterEmail.errors?.['required']) {
+                                    <span>Please enter your email.</span>
+                                    }
+                                    @if (newsletterEmail.errors?.['email']) {
+                                    <span>Please enter a valid email
+                                        address.</span>
+                                    }
+                                </p>
+                                }
                                 <p class="text-[10px] text-gray-500">
                                     By subscribing you agree to our
                                     <a routerLink="/privacy"

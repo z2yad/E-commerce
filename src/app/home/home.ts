@@ -91,10 +91,10 @@ export class Home implements OnInit {
   Email_address = "ziadsalim121@gmail.com"
   //make a validation for the form
   ContactForm = new FormGroup({
-    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(20)]),
     email: new FormControl('', [Validators.required, Validators.email]),
     subject: new FormControl('Technical Support', [Validators.required]), // Added missing control
-    message: new FormControl('', [Validators.required, Validators.minLength(10)]),
+    message: new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(200)]),
   })
   submitForm() {
     if (this.ContactForm.valid) {
@@ -102,6 +102,18 @@ export class Home implements OnInit {
       this.ContactForm.reset();
     } else {
       this.toastService.error('Please fill in all the fields');
+    }
+  }
+
+  newsletterEmail = new FormControl('', [Validators.required, Validators.email]);
+
+  subscribeNewsletter() {
+    if (this.newsletterEmail.valid) {
+      this.toastService.success('Successfully subscribed to our newsletter!');
+      this.newsletterEmail.reset();
+    } else {
+      this.toastService.error('Please enter a valid email address');
+      this.newsletterEmail.markAsTouched();
     }
   }
 
