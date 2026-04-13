@@ -1,6 +1,7 @@
 import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { User } from '../interfaces/user.interface';
+import { ToastService } from './toast.service';
 
 
 
@@ -9,7 +10,7 @@ import { User } from '../interfaces/user.interface';
 })
 export class AuthService {
   private platformId = inject(PLATFORM_ID);
-  
+  toastService = inject(ToastService);
   // High-performance state using Signals
   private _currentUser = signal<User | null>(null);
   
