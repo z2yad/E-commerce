@@ -1,6 +1,9 @@
 User-agent: *
 Allow: /
-Disallow: /checkout
-Disallow: /profile
 
-Sitemap: https://e-commerce-iota-sand.vercel.app/sitemap.xml
+# Disallow indexing of private or administrative areas
+Disallow: /admin/
+Disallow: /profile/
+Disallow: /checkout/
+
+Sitemap: https://ecommerce.store/sitemap.xml
