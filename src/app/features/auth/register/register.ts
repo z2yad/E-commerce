@@ -18,8 +18,13 @@ export class Register {
   name = signal('');
   email = signal('');
   password = signal('');
+  showPassword = signal(false);
   error = signal('');
   isLoading = signal(false);
+
+  togglePassword() {
+    this.showPassword.update(v => !v);
+  }
 
   onSubmit() {
     if (!this.name() || !this.email() || !this.password()) {
