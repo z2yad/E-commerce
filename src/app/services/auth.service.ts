@@ -44,13 +44,15 @@ export class AuthService {
     }
 
     // 2. Check for regular users in mock storage
-    const users: User[] = JSON.parse(localStorage.getItem('mock_users') || '[]');
-    const user = users.find(u => u.email === email);
-    
-    // In mock world, any valid email for a registered user works
-    if (user) {
-      this.setUser(user);
-      return true;
+    if (isPlatformBrowser(this.platformId)) {
+      const users: User[] = JSON.parse(localStorage.getItem('mock_users') || '[]');
+      const user = users.find(u => u.email === email);
+      
+      // In mock world, any valid email for a registered user works
+      if (user) {
+        this.setUser(user);
+        return true;
+      }
     }
 
     return false;
@@ -65,11 +67,13 @@ export class AuthService {
     };
 
     // Save to mock database
-    const users: User[] = JSON.parse(localStorage.getItem('mock_users') || '[]');
-    if (users.find(u => u.email === email)) return false; // Already exists
+    if (isPlatformBrowser(this.platformId)) {
+      const users: User[] = JSON.parse(localStorage.getItem('mock_users') || '[]');
+      if (users.find(u => u.email === email)) return false; // Already exists
 
-    users.push(newUser);
-    localStorage.setItem('mock_users', JSON.stringify(users));
+      users.push(newUser);
+      localStorage.setItem('mock_users', JSON.stringify(users));
+    }
     
     // Auto login after register
     this.setUser(newUser);

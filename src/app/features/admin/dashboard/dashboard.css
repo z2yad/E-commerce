@@ -1,8 +1,8 @@
 /* Custom Dashboard Animations */
 @keyframes float {
-  0% { transform: translate(-50%, 0px); }
-  50% { transform: translate(-50%, -10px); }
-  100% { transform: translate(-50%, 0px); }
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
 }
 
 .floating-nav {

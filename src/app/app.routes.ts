@@ -1,23 +1,14 @@
 import { Router, Routes } from '@angular/router';
-import { Home } from './home/home';
-import { ProductDetails } from './features/products/product-details/product-details';
-import { Cart } from './features/cart/cart';
-import { Checkout } from './features/checkout/checkout';
 import { CartService } from './services/cart.service';
 import { inject } from '@angular/core';
-import { Profile } from './features/profile/profile';
-import { Terms } from './features/terms/terms';
-import { Privacy } from './features/privacy/privacy';
-import { NotFound } from './features/not-found/not-found';
-import { Login } from './features/auth/login/login';
-import { Register } from './features/auth/register/register';
 import { authGuard } from './shared/guards/auth.guard';
 import { adminGuard } from './shared/guards/admin.guard';
-//client routes
+
+// client routes with lazy loading for optimal performance
 export const routes: Routes = [
     {
         path: '',
-        component: Home,
+        loadComponent: () => import('./home/home').then(m => m.Home),
     },
     {
         path: 'products',
@@ -29,17 +20,17 @@ export const routes: Routes = [
             },
             {
                 path: ':id',
-                component: ProductDetails,
+                loadComponent: () => import('./features/products/product-details/product-details').then(m => m.ProductDetails),
             }
         ]
     },
     {
         path: 'login',
-        component: Login
+        loadComponent: () => import('./features/auth/login/login').then(m => m.Login)
     },
     {
         path: 'register',
-        component: Register
+        loadComponent: () => import('./features/auth/register/register').then(m => m.Register)
     },
     {
         path: 'admin',
@@ -48,11 +39,11 @@ export const routes: Routes = [
     },
     {
         path: 'cart',
-        component: Cart
+        loadComponent: () => import('./features/cart/cart').then(m => m.Cart)
     },
     {
         path: 'checkout',
-        component: Checkout,
+        loadComponent: () => import('./features/checkout/checkout').then(m => m.Checkout),
         canActivate: [authGuard, () => {
             const cartService = inject(CartService);
             const router = inject(Router);
@@ -68,19 +59,19 @@ export const routes: Routes = [
     },
     {
         path: 'profile',
-        component: Profile,
+        loadComponent: () => import('./features/profile/profile').then(m => m.Profile),
         canActivate: [authGuard]
     },
     {
         path: 'privacy',
-        component: Privacy
+        loadComponent: () => import('./features/privacy/privacy').then(m => m.Privacy)
     },
     {
         path: 'terms',
-        component: Terms
+        loadComponent: () => import('./features/terms/terms').then(m => m.Terms)
     },
     {
         path: '**',
-        component: NotFound
+        loadComponent: () => import('./features/not-found/not-found').then(m => m.NotFound)
     },
 ];
