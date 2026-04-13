@@ -1,8 +1,16 @@
 /* Custom Dashboard Animations */
 @keyframes float {
-  0% { transform: translateY(0px); }
-  50% { transform: translateY(-10px); }
-  100% { transform: translateY(0px); }
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
 }
 
 .floating-nav {
@@ -40,6 +48,7 @@
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+
 /* --- Scoped 3D Hero Stat Card --- */
 .hero-stat-card-container {
   --radius: 38px;
@@ -95,33 +104,27 @@
 
 .hero-stat-card-container .glow::before {
   z-index: -2;
-  background: conic-gradient(
-    #f59e0b 0%,
-    transparent 20%,
-    #ec4899 50%,
-    black 60%,
-    transparent 80%,
-    #f59e0b 100%
-  );
+  background: conic-gradient(#f59e0b 0%,
+      transparent 20%,
+      #ec4899 50%,
+      black 60%,
+      transparent 80%,
+      #f59e0b 100%);
 }
 
 .hero-stat-card-container .glow-in1::before {
-  background: conic-gradient(
-    from 0turn at 50% 30%,
-    #f59e0b 12%,
-    transparent 17%,
-    transparent 90%,
-    #f59e0b 100%
-  );
+  background: conic-gradient(from 0turn at 50% 30%,
+      #f59e0b 12%,
+      transparent 17%,
+      transparent 90%,
+      #f59e0b 100%);
 }
 
 .hero-stat-card-container .glow-in2::before {
-  background: conic-gradient(
-    from 0turn at 45% 60%,
-    transparent 30%,
-    #ec4899 55%,
-    transparent 60%
-  );
+  background: conic-gradient(from 0turn at 45% 60%,
+      transparent 30%,
+      #ec4899 55%,
+      transparent 60%);
 }
 
 .hero-stat-card-container .glow {
@@ -157,15 +160,13 @@
 
 .hero-stat-card-container .glow-out1::before,
 .hero-stat-card-container .glow-out2::before {
-  background: conic-gradient(
-    #f59e0b 0%,
-    transparent 10%,
-    transparent 35%,
-    #ec4899 50%,
-    transparent 60%,
-    transparent 90%,
-    #f59e0b 100%
-  );
+  background: conic-gradient(#f59e0b 0%,
+      transparent 10%,
+      transparent 35%,
+      #ec4899 50%,
+      transparent 60%,
+      transparent 90%,
+      #f59e0b 100%);
 }
 
 .hero-stat-card-container .wrap:hover .glow::before,
@@ -277,7 +278,7 @@
   display: flex;
 }
 
-.hero-stat-card-container .number > div {
+.hero-stat-card-container .number>div {
   display: grid;
   height: 40px;
   line-height: 40px;
@@ -286,7 +287,9 @@
 }
 
 @keyframes hero-units {
-  to { transform: translateY(calc(-100% * calc(var(--num) + 1))); }
+  to {
+    transform: translateY(calc(-100% * calc(var(--num) + 1)));
+  }
 }
 
 .hero-stat-card-container .chart {
@@ -301,10 +304,25 @@
 }
 
 @keyframes hero-lines {
-  0% { transform: translateY(0); opacity: 0; }
-  25% { transform: translateY(0); opacity: 1; }
-  80% { transform: translateY(0); opacity: 1; }
-  90% { transform: translateY(20px); opacity: 0; }
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+
+  25% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  80% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  90% {
+    transform: translateY(20px);
+    opacity: 0;
+  }
 }
 
 .hero-stat-card-container .glare {
@@ -333,21 +351,45 @@
 }
 
 /* Mouse Hover Logic - Scoped Classes */
-.hero-stat-card-container .area:nth-child(1):hover ~ .wrap .card { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(15deg) scale3d(1, 1, 1); }
-.hero-stat-card-container .area:nth-child(3):hover ~ .wrap .card { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(0) scale3d(1, 1, 1); }
-.hero-stat-card-container .area:nth-child(5):hover ~ .wrap .card { transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(-15deg) scale3d(1, 1, 1); }
-.hero-stat-card-container .area:nth-child(8):hover ~ .wrap .card { transform: perspective(var(--perspective)) rotateX(0) rotateY(0) scale3d(1, 1, 1); }
-.hero-stat-card-container .area:nth-child(13):hover ~ .wrap .card { transform: perspective(var(--perspective)) rotateX(15deg) rotateY(0) scale3d(1, 1, 1); }
+.hero-stat-card-container .area:nth-child(1):hover~.wrap .card {
+  transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(15deg) scale3d(1, 1, 1);
+}
+
+.hero-stat-card-container .area:nth-child(3):hover~.wrap .card {
+  transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(0) scale3d(1, 1, 1);
+}
+
+.hero-stat-card-container .area:nth-child(5):hover~.wrap .card {
+  transform: perspective(var(--perspective)) rotateX(-15deg) rotateY(-15deg) scale3d(1, 1, 1);
+}
+
+.hero-stat-card-container .area:nth-child(8):hover~.wrap .card {
+  transform: perspective(var(--perspective)) rotateX(0) rotateY(0) scale3d(1, 1, 1);
+}
+
+.hero-stat-card-container .area:nth-child(13):hover~.wrap .card {
+  transform: perspective(var(--perspective)) rotateX(15deg) rotateY(0) scale3d(1, 1, 1);
+}
 
 /* SVG Path Animation */
 .hero-stat-card-container .path1 {
   stroke-dasharray: 0 510;
   stroke-dashoffset: 1;
-  animation: hero-path 5s ease infinite 1s;
+  filter: drop-shadow(0px 0px 8px rgba(236,72,153,0.8));
+  animation: hero-path 4s ease-in-out infinite;
 }
 
 @keyframes hero-path {
-  30% { stroke-dasharray: 510 510; }
-  80% { stroke-dashoffset: 1; stroke-dasharray: 510; }
-  100% { stroke-dashoffset: -510; }
+  30% {
+    stroke-dasharray: 510 510;
+  }
+
+  80% {
+    stroke-dashoffset: 1;
+    stroke-dasharray: 510;
+  }
+
+  100% {
+    stroke-dashoffset: -510;
+  }
 }
