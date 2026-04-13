@@ -1,13 +1,13 @@
-<div class="min-h-[80vh] flex items-center justify-center p-4 relative overflow-hidden">
+<div class="min-h-screen flex items-center justify-center p-4 relative overflow-hidden bg-gradient-to-br from-[#0B1120] via-[#0F172A] to-[#0B1120]">
     <!-- Animated Background Accents -->
-    <div class="absolute top-[20%] left-[10%] w-72 h-72 bg-amber-500/20 blur-[100px] rounded-full animate-pulse-slow"></div>
-    <div class="absolute bottom-[20%] right-[10%] w-72 h-72 bg-pink-500/20 blur-[100px] rounded-full animate-pulse-slow-reverse"></div>
+    <div class="absolute top-[20%] left-[10%] w-72 h-72 bg-amber-500/10 blur-[120px] rounded-full animate-pulse-slow"></div>
+    <div class="absolute bottom-[20%] right-[10%] w-96 h-96 bg-pink-500/10 blur-[120px] rounded-full animate-pulse-slow-reverse"></div>
 
     <div class="relative z-10 w-full max-w-md bg-white/5 backdrop-blur-2xl border border-white/10 rounded-[32px] p-8 md:p-10 shadow-2xl">
         <div class="text-center mb-8">
             <h2 class="text-3xl font-black text-white mb-2 tracking-tight uppercase">Join the Elite</h2>
-            <div class="h-1 w-12 bg-gradient-to-r from-amber-400 to-pink-500 rounded-full mx-auto mb-4"></div>
-            <p class="text-gray-400 text-sm">Create your luxury account today</p>
+            <div class="h-1.5 w-16 bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 rounded-full mx-auto mb-4"></div>
+            <p class="text-gray-400 text-sm font-medium tracking-wide">Create your luxury account today</p>
         </div>
 
         <form (ngSubmit)="onSubmit()" class="space-y-5">
@@ -54,10 +54,10 @@
 
             <!-- Submit Button -->
             <button type="submit" [disabled]="isLoading()"
-                class="w-full relative group overflow-hidden bg-gradient-to-r from-amber-500 to-pink-500 text-white font-bold py-4 rounded-2xl shadow-lg hover:scale-[1.02] active:scale-[0.98] transition-all disabled:opacity-70">
+                class="w-full relative group overflow-hidden bg-gradient-to-r from-amber-500 via-orange-500 to-pink-500 text-white font-black py-4 rounded-2xl shadow-xl shadow-amber-500/10 hover:shadow-amber-500/30 hover:scale-[1.02] active:scale-[0.98] transition-all duration-300 disabled:opacity-70 uppercase tracking-widest text-sm">
                 <div class="relative z-10 flex items-center justify-center gap-2">
-                    <span *ngIf="!isLoading()" class="uppercase tracking-widest text-sm">Create Account</span>
-                    <span *ngIf="isLoading()" class="flex items-center gap-2">
+                    <span *ngIf="!isLoading()">Create Account</span>
+                    <span *ngIf="isLoading()" class="flex items-center gap-2 font-medium">
                         <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
@@ -70,9 +70,9 @@
         </form>
 
         <div class="mt-8 text-center">
-            <p class="text-gray-400 text-sm">
+            <p class="text-gray-500 text-sm font-medium">
                 Already member of the club? 
-                <a routerLink="/login" class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-pink-400 font-bold hover:brightness-125 transition-all">Sign In</a>
+                <a routerLink="/login" class="text-amber-400 hover:text-amber-300 font-black transition-all uppercase tracking-tighter decoration-1 underline-offset-4 hover:underline">Sign In</a>
             </p>
         </div>
     </div>
