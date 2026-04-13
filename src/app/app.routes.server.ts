@@ -38,6 +38,18 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client //csr
   },
   {
+    path: 'login',
+    renderMode: RenderMode.Client
+  },
+  {
+    path: 'register',
+    renderMode: RenderMode.Client
+  },
+  {
+    path: 'admin',
+    renderMode: RenderMode.Client
+  },
+  {
     path: 'privacy',
     renderMode: RenderMode.Prerender //ssg
   },

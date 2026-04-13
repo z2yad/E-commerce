@@ -1,12 +1,8 @@
 import { Injectable, signal, computed, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { User } from '../interfaces/user.interface';
 
-export interface User {
-  id: string;
-  email: string;
-  name: string;
-  role: 'admin' | 'user';
-}
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +17,7 @@ export class AuthService {
   currentUser = this._currentUser.asReadonly();
   isLoggedIn = computed(() => !!this._currentUser());
   isAdmin = computed(() => this._currentUser()?.role === 'admin');
+
 
   constructor() {
     // Basic Mock Persistence via LocalStorage
