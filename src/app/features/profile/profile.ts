@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { WishlistService } from '../../services/wishlist.service';
 
 @Component({
   selector: 'app-profile',
@@ -10,6 +11,12 @@ import { CommonModule } from '@angular/common';
 })
 export class Profile {
   loading = signal(true); // Toggle this to see the skeleton UI
+
+  // Inject standard services safely
+  wishlistService = inject(WishlistService);
+  
+  // Expose the signal so the template can read it
+  wishlistItems = this.wishlistService.wishlistItems;
 
   constructor() {
     // Simulate initial data loading
@@ -29,40 +36,16 @@ export class Profile {
 
   activeTab = 'wishlist'; // 'profile', 'orders', 'wishlist'
 
-  wishlistItems = [
-    {
-      id: 1,
-      title: 'Essence Mascara Lash Princess',
-      price: 9.99,
-      image: 'https://cdn.dummyjson.com/products/images/beauty/Essence%20Mascara%20Lash%20Princess/thumbnail.png',
-      category: 'Beauty'
-    },
-    {
-      id: 2,
-      title: 'Eyeshadow Palette with Mirror',
-      price: 19.99,
-      image: 'https://cdn.dummyjson.com/products/images/beauty/Eyeshadow%20Palette%20with%20Mirror/thumbnail.png',
-      category: 'Beauty'
-    },
-    {
-      id: 3,
-      title: 'Powder Canister',
-      price: 14.99,
-      image: 'https://cdn.dummyjson.com/products/images/beauty/Powder%20Canister/thumbnail.png',
-      category: 'Beauty'
-    }
-  ];
-
   // Placeholder functions for UI binding. User will implement logic.
   setTab(tab: string) {
     this.activeTab = tab;
   }
 
-  removeFromWishlist(id: number) {
-    // User logic here
+  removeFromWishlist(id: number | string) {
+    this.wishlistService.removeFromWishlist(id);
   }
 
   addToCart(product: any) {
-    // User logic here
+    // Handle cart logic
   }
 }

@@ -7,6 +7,7 @@ import { CartService } from '@/services/cart.service';
 import { ToastService } from '@/services/toast.service';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { SeoService } from '@/services/seo.service';
+import { WishlistService } from '@/services/wishlist.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
@@ -26,6 +27,22 @@ export class Home implements OnInit {
   private document = inject(DOCUMENT);
   private platformId = inject(PLATFORM_ID);
   private destroyRef = inject(DestroyRef);
+  private wishlistService = inject(WishlistService);
+  
+  toggleWishlist(product: Product) {
+    if (this.isInWishlist(product.id)) {
+      this.wishlistService.removeFromWishlist(product.id);
+      this.toastService.success('Removed from wishlist');
+    } else {
+      this.wishlistService.addToWishlist(product);
+      this.toastService.success('Added to wishlist');
+    }
+  }
+
+  isInWishlist(productId: number): boolean {
+    return this.wishlistService.isInWishlist(productId);
+  }
+
   
   additem(product: Product) {
     if (!product) {

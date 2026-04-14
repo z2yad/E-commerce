@@ -133,7 +133,7 @@
                 <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest">Orders</p>
               </div>
               <div class="space-y-1 text-center border-l border-white/5">
-                <p class="text-2xl font-black text-white">{{wishlistItems.length}}</p>
+                <p class="text-2xl font-black text-white">{{wishlistItems().length}}</p>
                 <p class="text-[10px] font-black text-gray-500 uppercase tracking-widest">Wishlist</p>
               </div>
             </div>
@@ -160,8 +160,8 @@
                 d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
             </svg>
             <span class="text-[10px] font-black uppercase tracking-widest">Wishlist</span>
-            <span *ngIf="wishlistItems.length"
-              class="ml-auto bg-white/20 px-2.5 py-1 rounded-lg text-[10px] font-black">{{wishlistItems.length}}</span>
+            <span *ngIf="wishlistItems().length"
+              class="ml-auto bg-white/20 px-2.5 py-1 rounded-lg text-[10px] font-black">{{wishlistItems().length}}</span>
           </button>
           <button (click)="setTab('orders')"
             [class]="activeTab === 'orders' ? 'bg-gradient-to-r from-amber-500 to-pink-500 text-white shadow-lg' : 'text-gray-400 hover:bg-white/5'"
@@ -197,14 +197,14 @@
               <h3 class="text-3xl font-black text-white tracking-tighter">My Wishlist</h3>
             </div>
             <div class="bg-amber-500/10 border border-amber-500/20 px-5 py-3 rounded-2xl">
-              <p class="text-sm font-black text-white">{{wishlistItems.length}} ITEMS</p>
+              <p class="text-sm font-black text-white">{{wishlistItems().length}} ITEMS</p>
             </div>
           </div>
 
           <!-- Products Grid -->
-          <div *ngIf="wishlistItems.length > 0; else emptyState"
+          <div *ngIf="wishlistItems().length > 0; else emptyState"
             class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-            <div *ngFor="let item of wishlistItems"
+            <div *ngFor="let item of wishlistItems()"
               class="p-6 rounded-[40px] bg-white/5 border border-white/10 backdrop-blur-2xl group hover:border-amber-500/40 transition-all duration-500 relative flex flex-col hover:-translate-y-2 shadow-lg">
 
               <!-- Product Image Display -->
