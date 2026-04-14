@@ -7,6 +7,7 @@ import { Category } from '@/interfaces/product.interface';
 import { CommonModule } from '@angular/common';
 import { CartService } from '@/services/cart.service';
 import { AuthService } from '@/services/auth.service';
+import { WishlistService } from '@/services/wishlist.service';
 
 @Component({
   selector: 'app-header',
@@ -22,8 +23,10 @@ export class Header implements OnInit {
   categories = signal<Category[]>([]);
   cartService = inject(CartService);
   authService = inject(AuthService);
+  wishlistService = inject(WishlistService);
   
   countitems = computed(() => this.cartService.countItems());
+  wishlistCount = computed(() => this.wishlistService.wishlistItems().length);
   currentUser = computed(() => this.authService.currentUser());
   isLoggedIn = computed(() => this.authService.isLoggedIn());
   isAdmin = computed(() => this.authService.isAdmin());

@@ -183,6 +183,23 @@
         </div>
       </nav>
 
+      <!-- Wishlist with badge -->
+      <a routerLink="/profile" class="relative p-2.5 sm:p-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-pink-500 
+                transition-all active:scale-90 group">
+        <svg class="h-5 w-5 sm:h-6 sm:w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+          stroke="currentColor" stroke-width="2.2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+        </svg>
+
+        @if(wishlistCount() > 0) {
+        <span class="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center 
+                     rounded-full bg-pink-500 text-[9px] font-black text-white shadow-lg shadow-pink-500/30
+                     group-hover:scale-110 transition-transform duration-300">
+          {{wishlistCount()}}
+        </span>
+        }
+      </a>
+
       <!-- Cart with improved badge and animation -->
       <a routerLink="/cart" class="relative p-2.5 sm:p-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-amber-400 
                 transition-all active:scale-90 group">

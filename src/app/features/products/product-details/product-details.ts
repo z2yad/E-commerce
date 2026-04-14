@@ -4,16 +4,17 @@ import { Component, inject, OnInit, signal, DestroyRef } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Loading } from "@/shared/components/loading/loading";
-import { DecimalPipe, NgOptimizedImage, DOCUMENT } from "@angular/common";
+import { DecimalPipe, NgOptimizedImage, DOCUMENT, CommonModule } from "@angular/common";
 import { StatsCard } from "@/shared/components/stats-card/stats-card";
 import { CartService } from '@/services/cart.service';
 import { ToastService } from '@/services/toast.service';
 import { SeoService } from '@/services/seo.service';
+import { WishlistService } from '@/services/wishlist.service';
 
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [Loading, NgOptimizedImage, DecimalPipe, RouterLink],
+  imports: [Loading, NgOptimizedImage, DecimalPipe, RouterLink, CommonModule],
   templateUrl: './product-details.html',
   styleUrl: './product-details.css',
 })
@@ -30,17 +31,38 @@ export class ProductDetails implements OnInit {
   error = signal<string | null>(null);
   selectedImage = signal<string>('');
   cartService = inject(CartService);
-  tosatService = inject(ToastService);
+  toastService = inject(ToastService);
   private seoService = inject(SeoService);
   private document = inject(DOCUMENT);
   private destroyRef = inject(DestroyRef);
+  private wishlistService = inject(WishlistService);
+
   additem(){
     const product = this.product();
     if (product) {
       this.cartService.addItem(product);
-      this.tosatService.success('Product added to cart');
+      this.toastService.success('Product added to cart');
     }
   }
+
+  toggleWishlist() {
+    const p = this.product();
+    if (p) {
+      if (this.isInWishlist()) {
+        this.wishlistService.removeFromWishlist(p.id);
+        this.toastService.success('Removed from wishlist');
+      } else {
+        this.wishlistService.addToWishlist(p);
+        this.toastService.success('Added to wishlist');
+      }
+    }
+  }
+
+  isInWishlist(): boolean {
+    const p = this.product();
+    return p ? this.wishlistService.isInWishlist(p.id) : false;
+  }
+
   ngOnInit(): void {
     this.route.params.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params) => {
       const id = params['id'];

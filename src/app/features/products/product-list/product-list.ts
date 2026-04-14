@@ -3,16 +3,17 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { ProductService } from '@/services/product.service';
 import { Product, ProductQueryParams, ProductResponse } from '@/interfaces/product.interface';
 import { ActivatedRoute, Params, Router, RouterLink } from '@angular/router';
-import { DecimalPipe, NgOptimizedImage } from '@angular/common';
+import { DecimalPipe, NgOptimizedImage, CommonModule } from '@angular/common';
 import { CartService } from '@/services/cart.service';
 import { toast } from 'ngx-sonner';
 import { ToastService } from '@/services/toast.service';
+import { WishlistService } from '@/services/wishlist.service';
 
 
 @Component({
   selector: 'app-product-list',
   standalone: true,
-  imports: [RouterLink, DecimalPipe, NgOptimizedImage],
+  imports: [RouterLink, DecimalPipe, NgOptimizedImage, CommonModule],
   templateUrl: './product-list.html',
   styleUrl: './product-list.css',
 })
@@ -31,6 +32,8 @@ export class ProductList implements OnInit {
   cartService = inject(CartService);
   toastService = inject(ToastService);
   private destroyRef = inject(DestroyRef);
+  private wishlistService = inject(WishlistService);
+  
   additem(product: Product){
    if(!product){
     return;
@@ -38,6 +41,21 @@ export class ProductList implements OnInit {
    this.cartService.addItem(product);
    this.toastService.success('Product added to cart');
   }
+
+  toggleWishlist(product: Product) {
+    if (this.isInWishlist(product.id)) {
+      this.wishlistService.removeFromWishlist(product.id);
+      this.toastService.success('Removed from wishlist');
+    } else {
+      this.wishlistService.addToWishlist(product);
+      this.toastService.success('Added to wishlist');
+    }
+  }
+
+  isInWishlist(productId: number): boolean {
+    return this.wishlistService.isInWishlist(productId);
+  }
+
   ngOnInit() {
     this.route.queryParams.pipe(takeUntilDestroyed(this.destroyRef)).subscribe((params: Params) => {
       // Set values from URL to keep component state in sync
