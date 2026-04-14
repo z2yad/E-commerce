@@ -48,13 +48,8 @@ export class ProductDetails implements OnInit {
   toggleWishlist() {
     const p = this.product();
     if (p) {
-      if (this.isInWishlist()) {
-        this.wishlistService.removeFromWishlist(p.id);
-        this.toastService.success('Removed from wishlist');
-      } else {
-        this.wishlistService.addToWishlist(p);
-        this.toastService.success('Added to wishlist');
-      }
+      const wasAdded = this.wishlistService.toggleWishlist(p);
+      this.toastService.success(wasAdded ? 'Added to wishlist ❤️' : 'Removed from wishlist');
     }
   }
 

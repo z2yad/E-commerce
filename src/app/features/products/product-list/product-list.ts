@@ -43,13 +43,8 @@ export class ProductList implements OnInit {
   }
 
   toggleWishlist(product: Product) {
-    if (this.isInWishlist(product.id)) {
-      this.wishlistService.removeFromWishlist(product.id);
-      this.toastService.success('Removed from wishlist');
-    } else {
-      this.wishlistService.addToWishlist(product);
-      this.toastService.success('Added to wishlist');
-    }
+    const wasAdded = this.wishlistService.toggleWishlist(product);
+    this.toastService.success(wasAdded ? 'Added to wishlist ❤️' : 'Removed from wishlist');
   }
 
   isInWishlist(productId: number): boolean {
@@ -128,5 +123,3 @@ export class ProductList implements OnInit {
     });
   }
 }
-
-

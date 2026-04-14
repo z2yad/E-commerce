@@ -26,7 +26,7 @@ export class Header implements OnInit {
   wishlistService = inject(WishlistService);
   
   countitems = computed(() => this.cartService.countItems());
-  wishlistCount = computed(() => this.wishlistService.wishlistItems().length);
+  wishlistCount = this.wishlistService.itemCount;
   currentUser = computed(() => this.authService.currentUser());
   isLoggedIn = computed(() => this.authService.isLoggedIn());
   isAdmin = computed(() => this.authService.isAdmin());
