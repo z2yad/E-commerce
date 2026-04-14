@@ -200,8 +200,13 @@
                     <!--wishlist-->
                     <button (click)="toggleWishlist()"
                         class="flex-1 h-16 rounded-2xl border flex items-center justify-center gap-3 transition-all duration-300 group active:scale-95"
-                        [ngClass]="isInWishlist() ? 'bg-rose-500 border-rose-500 text-white' : 'bg-white/5 border-white/10 text-pink-500 hover:bg-white/10'">
-                        <svg class="w-6 h-6 transition-colors" [ngClass]="isInWishlist() ? 'fill-current' : 'group-hover:fill-current'" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        [class.bg-rose-500]="isInWishlist()"
+                        [class.border-rose-500]="isInWishlist()"
+                        [class.text-white]="isInWishlist()"
+                        [class.bg-white/5]="!isInWishlist()"
+                        [class.border-white/10]="!isInWishlist()"
+                        [class.text-pink-500]="!isInWishlist()">
+                        <svg class="w-6 h-6 transition-colors" [class.fill-current]="isInWishlist()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
                     </button>

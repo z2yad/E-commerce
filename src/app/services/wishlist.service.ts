@@ -13,9 +13,13 @@ export class WishlistService {
   constructor() {
     // Initialize from LocalStorage safely (SSR Check)
     if (isPlatformBrowser(this.platformId)) {
-      const saved = localStorage.getItem('luxury_wishlist');
-      if (saved) {
-        this.wishlistItems.set(JSON.parse(saved));
+      try {
+        const saved = localStorage.getItem('luxury_wishlist');
+        if (saved) {
+          this.wishlistItems.set(JSON.parse(saved));
+        }
+      } catch (e) {
+        console.error('Failed to parse wishlist', e);
       }
     }
 
@@ -29,17 +33,17 @@ export class WishlistService {
 
   addToWishlist(product: any) {
     // Check if it already exists
-    const exists = this.wishlistItems().some(p => p.id === product.id);
+    const exists = this.wishlistItems().some(p => Number(p.id) === Number(product.id));
     if (!exists) {
       this.wishlistItems.update(items => [...items, product]);
     }
   }
 
   removeFromWishlist(productId: string | number) {
-    this.wishlistItems.update(items => items.filter((item) => item.id !== productId));
+    this.wishlistItems.update(items => items.filter((item) => Number(item.id) !== Number(productId)));
   }
 
   isInWishlist(productId: string | number): boolean {
-    return this.wishlistItems().some(p => p.id === productId);
+    return this.wishlistItems().some(p => Number(p.id) === Number(productId));
   }
 }
