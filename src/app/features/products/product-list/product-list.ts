@@ -32,7 +32,7 @@ export class ProductList implements OnInit {
   cartService = inject(CartService);
   toastService = inject(ToastService);
   private destroyRef = inject(DestroyRef);
-  private wishlistService = inject(WishlistService);
+  public wishlistService = inject(WishlistService);
   
   additem(product: Product){
    if(!product){

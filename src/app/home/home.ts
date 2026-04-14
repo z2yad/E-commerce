@@ -27,7 +27,7 @@ export class Home implements OnInit {
   private document = inject(DOCUMENT);
   private platformId = inject(PLATFORM_ID);
   private destroyRef = inject(DestroyRef);
-  private wishlistService = inject(WishlistService);
+  public wishlistService = inject(WishlistService);
   
   toggleWishlist(product: Product) {
     const wasAdded = this.wishlistService.toggleWishlist(product);
