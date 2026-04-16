@@ -41,20 +41,18 @@
         </p>
 
         <!-- CTA Buttons with enhanced hover effects -->
-        <div class="flex flex-col sm:flex-row gap-4 mt-6 w-full sm:w-auto">
-            <a [routerLink]="['/products']"
-                class="group inline-flex items-center justify-center px-8 py-4 bg-gradient-to-r from-amber-500 to-pink-500 text-white font-semibold rounded-xl hover:from-amber-600 hover:to-pink-600 transition-all duration-300 shadow-[0_10px_30px_-5px_rgba(245,158,11,0.5)] hover:shadow-[0_20px_40px_-5px_rgba(236,72,153,0.6)] transform hover:-translate-y-1 hover:scale-105">
+        <div class="flex flex-col sm:flex-row gap-5 mt-8 w-full sm:w-auto">
+            <a [routerLink]="['/products']" class="btn-primary group">
                 Start Shopping
                 <svg xmlns="http://www.w3.org/2000/svg"
                     class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" viewBox="0 0 24 24" fill="none"
-                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
             </a>
 
-            <a [routerLink]="['/products']"
-                class="inline-flex items-center justify-center px-8 py-4 bg-white/20 backdrop-blur-md text-white border border-white/30 font-semibold rounded-xl hover:bg-white/30 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 shadow-lg">
+            <a [routerLink]="['/products']" class="btn-secondary">
                 Explore Categories
             </a>
         </div>
@@ -69,9 +67,9 @@
 </section>
 
 <!-- ===== Most Rated Products Section ===== -->
-<section id="products" class="bg-[#0B1120] pb-24">
-    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 pt-16">
-        <div class="flex items-center justify-between mb-12">
+<section id="products" class="bg-[#0B1120] section-padding">
+    <div>
+        <div class="flex items-center justify-between mb-16">
             <h2 class="text-4xl font-black text-white">Most <span
                     class="bg-gradient-to-r from-amber-400 to-pink-500 bg-clip-text text-transparent">Rated</span></h2>
             <div class="h-px flex-1 bg-white/10 mx-8 hidden md:block"></div>
@@ -248,12 +246,11 @@
         }
 
         <!-- View All Button -->
-        <div class="text-center mt-12 relative z-10">
-            <a [routerLink]="['/products']"
-                class="group inline-flex items-center gap-3 px-10 py-4 bg-white/5 border border-white/10 text-white font-bold rounded-2xl hover:bg-gradient-to-r hover:from-amber-500 hover:to-pink-500 transition-all duration-300 shadow-xl hover:shadow-amber-500/20 active:scale-95">
+        <div class="text-center mt-16 relative z-10">
+            <a [routerLink]="['/products']" class="btn-outline group">
                 View All Products
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 group-hover:translate-x-1 transition-transform"
-                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform"
+                    viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
@@ -265,7 +262,7 @@
 
 
 <!-- ===== Contact & Support Section ===== -->
-<section id="contact" class="py-24 px-4 md:px-8 bg-gradient-to-b from-[#0B1120] to-[#070B14] relative overflow-hidden">
+<section id="contact" class="section-padding bg-gradient-to-b from-[#0B1120] to-[#070B14] relative overflow-hidden">
     <!-- Decorative background elements -->
     <div class="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-amber-500/20 to-transparent">
     </div>
@@ -440,8 +437,7 @@
                         }
                     </div>
 
-                    <button type="submit"
-                        class="w-full py-5 bg-gradient-to-r from-amber-500 to-pink-500 text-white font-black rounded-2xl hover:scale-[1.02] active:scale-95 transition-all duration-300 shadow-xl shadow-amber-500/20 uppercase tracking-widest cursor-pointer">
+                    <button type="submit" class="btn-primary w-full py-5 text-sm uppercase tracking-[0.2em]">
                         Submit Support Request
                     </button>
                 </form>
@@ -449,8 +445,8 @@
         </div>
 
         <!-- Professional Footer -->
-        <section class="mt-32">
-            <footer class="relative overflow-hidden">
+        <section class="mt-32 border-t border-white/10">
+            <footer class="relative overflow-hidden bg-[#070B14]">
                 <!-- Decorative Background Pattern -->
                 <div
                     class="absolute inset-0 bg-[url('data:image/svg+xml,%3Csvg width%3D%2260%22 height%3D%2260%22 viewBox%3D%220 0 60 60%22 xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cg fill%3D%22none%22 fill-rule%3D%22evenodd%22%3E%3Cg fill%3D%22%23ffffff%22 fill-opacity%3D%220.02%22%3E%3Cpath d%3D%22M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z%22%2F%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E')] opacity-20">
@@ -646,12 +642,7 @@
                             </h4>
                             <ul class="space-y-3">
                                 <li><a routerLink="/products"
-                                        class="text-sm text-gray-400 hover:text-amber-400 transition-colors duration-200 flex items-center gap-2 group">
-                                        <svg class="w-3 h-3 opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all"
-                                            fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 5l7 7-7 7" />
-                                        </svg>
+                                        class="text-sm text-gray-500 hover:text-amber-400 transition-colors duration-200 flex items-center gap-2 group">
                                         All Products
                                     </a></li>
                                 <li><a routerLink="/cart"

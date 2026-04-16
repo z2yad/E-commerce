@@ -27,7 +27,7 @@
     </div>
 
     <!-- Main Product Section -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 relative z-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-16 lg:py-24 relative z-10">
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
             <!-- Product Image / Gallery -->
@@ -157,57 +157,57 @@
                     </div>
                 </div>
 
-                <!-- Description -->
-                <div class="space-y-4">
-                    <h3 class="text-xs font-black text-gray-400 uppercase tracking-[0.2em]">Product Overview</h3>
-                    <p class="text-gray-400 leading-relaxed text-sm lg:text-base font-medium">
+                <!-- Professional Overview Section -->
+                <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                        <h3 class="text-xs font-black text-white uppercase tracking-[0.3em] whitespace-nowrap">Product Overview</h3>
+                        <div class="h-px w-full bg-gradient-to-r from-white/10 to-transparent"></div>
+                    </div>
+                    <p class="text-gray-400 leading-relaxed text-sm md:text-base font-medium italic border-l-2 border-amber-500/30 pl-4">
                         {{product()?.description}}
                     </p>
                 </div>
 
-                <!-- Features Grid -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div class="flex items-center gap-4 p-5 rounded-3xl bg-white/5 border border-white/5 hover:border-white/10 transition-all group">
-                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-amber-500 group-hover:text-white transition-all duration-300">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <!-- Refined Features Grid (Responsive) -->
+                <div class="grid grid-cols-2 gap-3 md:gap-4">
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group text-center md:text-left">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-amber-500/10 flex items-center justify-center border border-amber-500/20 group-hover:bg-amber-500 transition-all duration-500">
+                            <svg class="w-5 h-5 text-amber-500 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
                             </svg>
                         </div>
-                        <span class="text-sm font-bold text-gray-300">Premium Materials</span>
+                        <span class="text-[10px] md:text-xs font-black text-gray-300 uppercase tracking-tighter md:tracking-normal">Premium <br class="hidden md:block"> Materials</span>
                     </div>
-                    <div class="flex items-center gap-4 p-5 rounded-3xl bg-white/5 border border-white/5 hover:border-white/10 transition-all group">
-                        <div class="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center group-hover:bg-pink-500 group-hover:text-white transition-all duration-300">
-                            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    
+                    <div class="flex flex-col md:flex-row items-center md:items-start gap-3 p-4 rounded-2xl bg-white/5 border border-white/10 hover:bg-white/10 transition-all group text-center md:text-left">
+                        <div class="w-10 h-10 shrink-0 rounded-xl bg-pink-500/10 flex items-center justify-center border border-pink-500/20 group-hover:bg-pink-500 transition-all duration-500">
+                            <svg class="w-5 h-5 text-pink-500 group-hover:text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V6a2 2 0 112 2h-2zm0 0V5.5A2.5 2.5 0 109.5 8H12zm-7 4h14M5 12a2 2 0 110-4h14a2 2 0 110 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7" />
                             </svg>
                         </div>
-                        <span class="text-sm font-bold text-gray-300">Eco-Friendly Pack</span>
+                        <span class="text-[10px] md:text-xs font-black text-gray-300 uppercase tracking-tighter md:tracking-normal">Eco-Friendly <br class="hidden md:block"> Pack</span>
                     </div>
                 </div>
 
                 <!-- Action Buttons -->
-                <div class="flex flex-col sm:flex-row gap-5 pt-6">
-                    <button [disabled]="product()?.stock === 0" (click)="additem()"
-                        class="flex-[2] relative h-16 rounded-2xl bg-gradient-to-r from-amber-500 to-pink-500 p-px group overflow-hidden active:scale-95 transition-all duration-300 disabled:opacity-50 disabled:active:scale-100">
-                        <div class="absolute inset-0 bg-white/20 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                        <div class="w-full h-full bg-[#0B1120]/10 rounded-2xl flex items-center justify-center gap-3">
-                            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
-                            </svg>
-                            <span class="text-lg font-black text-white uppercase tracking-widest">Add to Bag</span>
-                        </div>
+                <div class="flex flex-row gap-4 pt-10">
+                    <button [disabled]="product()?.stock === 0" (click)="additem()" class="btn-primary flex-1 h-16 md:h-18 text-sm md:text-xl tracking-widest gap-2 md:gap-3 px-4">
+                        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                        </svg>
+                        <span class="whitespace-nowrap">Add to Bag</span>
                     </button>
                     <!--wishlist-->
                     <button (click)="toggleWishlist()"
-                        class="flex-1 h-16 rounded-2xl border flex items-center justify-center gap-3 transition-all duration-300 group active:scale-95"
+                        class="btn-base h-16 w-16 md:h-18 md:w-24 border flex items-center justify-center transition-all duration-300 active:scale-95 shadow-lg shadow-black/20 px-0 shrink-0"
                         [class.bg-rose-500]="isInWishlist()"
                         [class.border-rose-500]="isInWishlist()"
                         [class.text-white]="isInWishlist()"
                         [class.bg-white/5]="!isInWishlist()"
                         [class.border-white/10]="!isInWishlist()"
                         [class.text-pink-500]="!isInWishlist()">
-                        <svg class="w-6 h-6 transition-colors" [class.fill-current]="isInWishlist()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                        <svg class="w-7 h-7 transition-colors" [class.fill-current]="isInWishlist()" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
                         </svg>
                     </button>
                 </div>
