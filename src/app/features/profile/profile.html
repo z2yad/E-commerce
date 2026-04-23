@@ -173,7 +173,7 @@
             <span class="text-[10px] font-black uppercase tracking-widest">My Orders</span>
           </button>
           <div class="h-px bg-white/5 my-2"></div>
-          <button
+          <button (click)="logout()"
             class="flex items-center gap-4 px-6 py-4 rounded-2xl text-rose-500 hover:bg-rose-500/10 transition-all duration-300 group">
             <svg class="w-5 h-5 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
               <path stroke-linecap="round" stroke-linejoin="round"
@@ -183,7 +183,6 @@
           </button>
         </div>
       </div>
-
       <!-- Main Content Area -->
       <div class="flex-1 animate-fade-in-up" style="animation-delay: 200ms">
 

@@ -1,10 +1,11 @@
-import { Component, signal, inject, computed } from '@angular/core';
+import { Component, signal, inject} from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { WishlistService } from '../../services/wishlist.service';
 import { CartService } from '../../services/cart.service';
 import { ToastService } from '../../services/toast.service';
 import { Product } from '../../interfaces/product.interface';
+import { AuthService } from '@/services/auth.service';
 
 @Component({
   selector: 'app-profile',
@@ -20,6 +21,8 @@ export class Profile {
   private wishlistService = inject(WishlistService);
   private cartService = inject(CartService);
   private toastService = inject(ToastService);
+  private authService = inject(AuthService);
+  private router = inject(Router);
 
   // Expose wishlist signals
   wishlistItems = this.wishlistService.wishlistItems;
@@ -68,5 +71,11 @@ export class Profile {
     items.forEach(item => this.cartService.addItem(item));
     this.wishlistService.clearWishlist();
     this.toastService.success(`${items.length} items moved to cart`);
+  }
+  //logout function
+  logout(){
+    this.authService.logout();
+    this.toastService.success('Logged out successfully');
+    this.router.navigate(['/login']);
   }
 }

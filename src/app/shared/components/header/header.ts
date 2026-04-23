@@ -71,9 +71,4 @@ export class Header implements OnInit {
       queryParamsHandling: 'merge'
     });
   }
-
-  logout() {
-    this.authService.logout();
-    this.router.navigate(['/login']);
-  }
 }
