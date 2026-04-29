@@ -1,0 +1,10 @@
+node_modules/
+.env
+dist/
+uploads/products/*.jpg
+uploads/products/*.png
+uploads/products/*.webp
+uploads/avatars/*.jpg
+uploads/avatars/*.png
+*.log
+.DS_Store
