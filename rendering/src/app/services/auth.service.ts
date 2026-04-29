@@ -135,6 +135,21 @@ export class AuthService {
     return this.http.get<{ success: boolean; data: UserProfile }>(`${this.apiUrl}/users/profile`);
   }
 
+  updateProfile(data: Partial<UserProfile>): Observable<{ success: boolean; data: UserProfile }> {
+    return this.http.patch<{ success: boolean; data: UserProfile }>(`${this.apiUrl}/users/profile`, data).pipe(
+      tap((res) => {
+        const current = this._currentUser();
+        if (current) {
+          const updated = { ...current, name: res.data.name, avatar: res.data.avatar };
+          this._currentUser.set(updated);
+          if (isPlatformBrowser(this.platformId)) {
+            localStorage.setItem(this.USER_KEY, JSON.stringify(updated));
+          }
+        }
+      })
+    );
+  }
+
   // ── Forgot / Reset password ────────────────────────────────────
   forgotPassword(email: string): Observable<{ success: boolean; message: string }> {
     return this.http.post<{ success: boolean; message: string }>(

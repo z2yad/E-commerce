@@ -1,6 +1,7 @@
 import { Component, signal, inject, OnInit, DestroyRef } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { WishlistService } from '../../services/wishlist.service';
 import { CartService } from '../../services/cart.service';
 import { ToastService } from '../../services/toast.service';
@@ -14,14 +15,15 @@ import { forkJoin } from 'rxjs';
 @Component({
   selector: 'app-profile',
   standalone: true,
-  imports: [CommonModule, RouterLink, DecimalPipe],
+  imports: [CommonModule, RouterLink, DecimalPipe, FormsModule],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
-export class Profile {
+export class Profile implements OnInit {
   loading = signal(true);
+  saving = signal(false);
+  editMode = signal(false);
 
-  // Services
   private wishlistService = inject(WishlistService);
   private cartService = inject(CartService);
   private toastService = inject(ToastService);
@@ -30,7 +32,6 @@ export class Profile {
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
 
-  // Expose wishlist signals
   wishlistItems = this.wishlistService.wishlistItems;
   wishlistCount = this.wishlistService.itemCount;
   wishlistTotal = this.wishlistService.totalValue;
@@ -49,9 +50,21 @@ export class Profile {
     joinedDate: '',
     orders: 0,
   });
-  orders = signal<Order[]>([]);
 
+  profileData = signal<UserProfile | null>(null);
+  orders = signal<Order[]>([]);
   activeTab = 'wishlist';
+
+  // Mutable form object for ngModel two-way binding
+  editFormData = {
+    name: '',
+    phone: '',
+    street: '',
+    city: '',
+    state: '',
+    zip: '',
+    country: '',
+  };
 
   ngOnInit() {
     const currentUser = this.authService.currentUser();
@@ -63,11 +76,15 @@ export class Profile {
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({
         next: ({ profile, orders }) => {
+          this.profileData.set(profile.data);
           this.user.set(this.mapProfile(profile.data));
           this.orders.set(orders.data);
           this.loading.set(false);
         },
         error: () => {
+          if (currentUser) {
+            this.profileData.set(currentUser as UserProfile);
+          }
           this.user.set({
             name: currentUser?.name ?? 'My Account',
             email: currentUser?.email ?? '',
@@ -83,6 +100,7 @@ export class Profile {
 
   setTab(tab: string) {
     this.activeTab = tab;
+    this.editMode.set(false);
   }
 
   removeFromWishlist(id: number | string) {
@@ -106,11 +124,64 @@ export class Profile {
     this.wishlistService.clearWishlist();
     this.toastService.success(`${items.length} items moved to cart`);
   }
-  //logout function
-  logout(){
+
+  logout() {
     this.authService.logout();
     this.toastService.success('Logged out successfully');
     this.router.navigate(['/login']);
+  }
+
+  startEdit() {
+    const p = this.profileData();
+    this.editFormData = {
+      name: p?.name ?? this.user().name,
+      phone: p?.phone ?? '',
+      street: p?.address?.street ?? '',
+      city: p?.address?.city ?? '',
+      state: p?.address?.state ?? '',
+      zip: p?.address?.zip ?? '',
+      country: p?.address?.country ?? '',
+    };
+    this.editMode.set(true);
+  }
+
+  cancelEdit() {
+    this.editMode.set(false);
+  }
+
+  saveProfile() {
+    if (!this.editFormData.name.trim()) {
+      this.toastService.error('Name is required');
+      return;
+    }
+    this.saving.set(true);
+    const payload: Partial<UserProfile> = {
+      name: this.editFormData.name.trim(),
+      phone: this.editFormData.phone.trim() || undefined,
+      address: {
+        street: this.editFormData.street.trim() || undefined,
+        city: this.editFormData.city.trim() || undefined,
+        state: this.editFormData.state.trim() || undefined,
+        zip: this.editFormData.zip.trim() || undefined,
+        country: this.editFormData.country.trim() || undefined,
+      },
+    };
+
+    this.authService.updateProfile(payload)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (res) => {
+          this.profileData.set(res.data);
+          this.user.update(u => ({ ...u, name: res.data.name }));
+          this.saving.set(false);
+          this.editMode.set(false);
+          this.toastService.success('Profile updated successfully');
+        },
+        error: () => {
+          this.saving.set(false);
+          this.toastService.error('Failed to update profile');
+        },
+      });
   }
 
   private mapProfile(profile: UserProfile) {
