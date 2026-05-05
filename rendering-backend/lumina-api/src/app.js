@@ -34,6 +34,7 @@ app.use(
 const allowedOrigins = [
   'http://localhost:4200',
   'http://localhost:4000',
+  'http://localhost:5000',
   process.env.FRONTEND_URL,
 ].filter(Boolean);
 

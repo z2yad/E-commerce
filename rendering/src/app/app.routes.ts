@@ -34,7 +34,62 @@ export const routes: Routes = [
     },
     {
         path: 'admin',
-        loadComponent: () => import('./features/admin/dashboard/dashboard').then(m => m.AdminDashboard),
+        children: [
+            {
+                path: 'dashboard',
+                loadComponent: () => import('./features/admin/dashboard/dashboard').then(m => m.AdminDashboard)
+            },
+            {
+                path: 'products',
+                loadComponent: () => import('./features/admin/product-management/product-management').then(m => m.ProductManagement)
+            },
+            {
+                path: 'orders',
+                loadComponent: () => import('./features/admin/orders-management/orders-management').then(m => m.OrdersManagement)
+            },
+            {
+                path: 'users',
+                loadComponent: () => import('./features/admin/users-mangement/users-mangement').then(m => m.UsersManagement)
+            },
+            {
+                path: 'settings',
+                loadComponent: () => import('./features/admin/settings/settings').then(m => m.Settings)
+            },
+            {
+                path: '**',
+                redirectTo: 'dashboard'
+            }
+        ],
+        canActivate: [adminGuard]
+    },
+    {
+        path: 'admin',
+        children: [
+            {
+                path: 'dashboard',
+                loadComponent: () => import('./features/admin/dashboard/dashboard').then(m => m.AdminDashboard)
+            },
+            {
+                 path: 'products',
+                 loadComponent: () => import('./features/admin/product-management/product-management').then(m => m.ProductManagement)
+            },
+            {
+                 path: 'orders',
+                 loadComponent: () => import('./features/admin/orders-management/orders-management').then(m => m.OrdersManagement)
+            },
+            {
+                path: 'users',
+                loadComponent: () => import('./features/admin/users-mangement/users-mangement').then(m => m.UsersManagement)
+            },
+            {
+                 path: 'settings',
+                 loadComponent: () => import('./features/admin/settings/settings').then(m => m.Settings)
+            },
+            {
+                path: '**',
+                redirectTo: 'dashboard'
+            }
+        ],
         canActivate: [adminGuard]
     },
     {

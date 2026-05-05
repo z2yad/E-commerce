@@ -69,7 +69,23 @@ export const serverRoutes: ServerRoute[] = [
     renderMode: RenderMode.Client,
   },
   {
-    path: 'admin',
+    path: 'admin/dashboard',
+    renderMode: RenderMode.Client,
+  },
+  {
+    path: 'admin/products',
+    renderMode: RenderMode.Client,
+  },
+  {
+    path: 'admin/orders',
+    renderMode: RenderMode.Client,
+  },
+  {
+    path: 'admin/users',
+    renderMode: RenderMode.Client,
+  },
+  {
+    path: 'admin/settings',
     renderMode: RenderMode.Client,
   },
   {
