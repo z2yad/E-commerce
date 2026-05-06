@@ -4,10 +4,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { filter, map, startWith } from 'rxjs';
 import { Header } from "./shared/components/header/header";
 import { ZardToastComponent } from './shared/components/toast';
+import { AdminSidebar } from './features/admin/admin-sidebar/admin-sidebar';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, Header, ZardToastComponent],
+  imports: [RouterOutlet, Header, ZardToastComponent, AdminSidebar],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
