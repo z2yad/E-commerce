@@ -1,5 +1,8 @@
 @if (!isAdminRoute()) {
 <app-header />
 }
+@if (isAdminRoute()) {
+<app-admin-sidebar />
+}
 <router-outlet></router-outlet>
 <z-toaster />
