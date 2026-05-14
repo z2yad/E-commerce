@@ -13,6 +13,42 @@ export class ProductService {
   loading = signal<boolean>(true);
 
   private readonly apiUrl = environment.apiUrl;
+  private readonly apiAssetUrl = this.apiUrl.replace(/\/api\/v\d+\/?$/, '');
+
+  private normalizeImageUrl(url?: string): string {
+    if (!url) return '/assets/background.png';
+    if (/^(https?:)?\/\//.test(url) || url.startsWith('data:') || url.startsWith('blob:')) {
+      return url;
+    }
+    if (url.startsWith('/uploads/')) {
+      return `${this.apiAssetUrl}${url}`;
+    }
+    if (url.startsWith('uploads/')) {
+      return `${this.apiAssetUrl}/${url}`;
+    }
+    return url;
+  }
+
+  private normalizeProduct(product: Product): Product {
+    const rawImages = product.images?.length ? product.images : [product.thumbnail];
+    const images = rawImages
+      .map((image) => this.normalizeImageUrl(image))
+      .filter((image): image is string => Boolean(image));
+    const thumbnail = this.normalizeImageUrl(product.thumbnail || rawImages[0]);
+
+    return {
+      ...product,
+      thumbnail,
+      images: images.length ? images : [thumbnail],
+    };
+  }
+
+  private normalizeProductResponse(response: ProductResponse): ProductResponse {
+    return {
+      ...response,
+      products: response.products.map((product) => this.normalizeProduct(product)),
+    };
+  }
 
   /**
    * Returns ProductResponse: { products, total, skip, limit }
@@ -34,7 +70,9 @@ export class ProductService {
 
     // Backend response shape: { success, products, total, skip, limit }
     // ProductResponse interface expects exactly: { products, total, skip, limit } ✅
-    return this.http.get<ProductResponse>(url, { params: queryParams });
+    return this.http
+      .get<ProductResponse>(url, { params: queryParams })
+      .pipe(map((res) => this.normalizeProductResponse(res)));
   }
 
   /**
@@ -54,6 +92,6 @@ export class ProductService {
   getproductbyid(id: string) {
     return this.http
       .get<{ success: boolean; data: Product }>(`${this.apiUrl}/products/${id}`)
-      .pipe(map((res) => res.data));
+      .pipe(map((res) => this.normalizeProduct(res.data)));
   }
 }

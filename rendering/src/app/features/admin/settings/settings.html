@@ -1,1 +1,158 @@
-<p>settings works!</p>
+<div class="settings-page min-h-screen overflow-hidden bg-[#0B1120] px-4 py-6 md:px-8 md:py-8">
+  <div class="settings-page__glow settings-page__glow--amber"></div>
+  <div class="settings-page__glow settings-page__glow--pink"></div>
+
+  <div class="mx-auto flex max-w-7xl flex-col gap-6">
+    <header class="settings-shell rounded-[32px] p-6 md:p-8">
+      <div class="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
+        <div class="flex items-start gap-4">
+          <div class="settings-icon flex h-16 w-16 items-center justify-center rounded-[24px]">
+            <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065Z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+            </svg>
+          </div>
+
+          <div class="space-y-3">
+            <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-300">
+              <span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(74,222,128,0.8)]"></span>
+              Control center
+            </div>
+            <div>
+              <h1 class="text-3xl font-black tracking-tight text-white md:text-4xl">Settings</h1>
+              <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-300/80">
+                Centralize store behavior, payment rules, alerts, and security choices in one glassy admin workspace.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button class="settings-button settings-button--muted">Reset draft</button>
+          <button class="settings-button settings-button--primary">Save changes</button>
+        </div>
+      </div>
+    </header>
+
+    <section class="settings-shell rounded-[32px] p-6 md:p-8">
+      <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-amber-200/70">Configuration overview</p>
+          <h2 class="mt-3 text-2xl font-black tracking-tight text-white md:text-3xl">Keep the store stable, secure, and easy to operate</h2>
+        </div>
+
+        <div class="grid w-full gap-3 sm:grid-cols-2 lg:w-auto lg:min-w-[320px]">
+          <div class="settings-field">
+            <label class="settings-field__label">Workspace</label>
+            <div class="settings-field__value">Production defaults</div>
+          </div>
+          <div class="settings-field">
+            <label class="settings-field__label">Mode</label>
+            <div class="settings-field__value">Manual review + automation</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 flex flex-wrap gap-3">
+        @for (section of sections; track section) {
+          <button class="settings-chip" [class.settings-chip--active]="section === 'General'">{{ section }}</button>
+        }
+      </div>
+
+      <div class="mt-8 grid gap-4 md:grid-cols-2 2xl:grid-cols-4">
+        @for (stat of overviewStats; track stat.label) {
+          <article class="settings-card">
+            <div class="flex items-start justify-between gap-4">
+              <div>
+                <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-400">{{ stat.label }}</p>
+                <p class="mt-4 text-3xl font-black tracking-tight text-white">{{ stat.value }}</p>
+              </div>
+              <span class="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-slate-300">Ready</span>
+            </div>
+            <p class="mt-4 text-sm text-slate-300/75">{{ stat.note }}</p>
+            <div class="mt-5 h-2 overflow-hidden rounded-full bg-white/8">
+              <div class="h-full rounded-full {{ stat.progressClass }}" [style.width.%]="stat.progress"></div>
+            </div>
+          </article>
+        }
+      </div>
+    </section>
+
+    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.85fr)]">
+      <div class="settings-shell rounded-[32px] p-6 md:p-8">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-pink-200/70">Setting groups</p>
+            <h2 class="mt-2 text-2xl font-black tracking-tight text-white">Primary store controls</h2>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button class="settings-button settings-button--ghost">Duplicate profile</button>
+            <button class="settings-button settings-button--ghost">Publish config</button>
+          </div>
+        </div>
+
+        <div class="mt-8 grid gap-4">
+          @for (group of groups; track group.title) {
+            <article class="group-card">
+              <div class="group-card__wash {{ group.accentClass }}"></div>
+              <div class="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                <div class="max-w-xl">
+                  <h3 class="text-xl font-black tracking-tight text-white">{{ group.title }}</h3>
+                  <p class="mt-3 text-sm leading-6 text-slate-300/75">{{ group.description }}</p>
+                </div>
+
+                <div class="grid w-full gap-3 sm:grid-cols-3 lg:max-w-[420px]">
+                  @for (field of group.fields; track field) {
+                    <div class="settings-field">
+                      <label class="settings-field__label">{{ field }}</label>
+                      <div class="settings-field__value">Ready to connect</div>
+                    </div>
+                  }
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+
+      <aside class="settings-shell rounded-[32px] p-6 md:p-8">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-emerald-200/70">Security panel</p>
+          <h2 class="mt-2 text-2xl font-black tracking-tight text-white">Protection checklist</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-300/75">
+            A side panel prepared for your real toggles, secrets, environment values, or permission-sensitive actions.
+          </p>
+        </div>
+
+        <div class="mt-8 space-y-4">
+          @for (item of securityItems; track item.title) {
+            <div class="security-card">
+              <div class="security-card__dot"></div>
+              <div>
+                <h4 class="text-sm font-bold text-white">{{ item.title }}</h4>
+                <p class="mt-1 text-sm leading-6 text-slate-300/70">{{ item.description }}</p>
+              </div>
+            </div>
+          }
+        </div>
+
+        <div class="mt-8 rounded-[28px] border border-white/10 bg-slate-950/35 p-5">
+          <div class="space-y-4">
+            <div class="settings-field">
+              <label class="settings-field__label">Default currency</label>
+              <div class="settings-field__value">USD</div>
+            </div>
+            <div class="settings-field">
+              <label class="settings-field__label">Support sender</label>
+              <div class="settings-field__value">support@store.demo</div>
+            </div>
+            <div class="settings-field">
+              <label class="settings-field__label">Webhook mode</label>
+              <div class="settings-field__value">Signed + retried</div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+  </div>
+</div>

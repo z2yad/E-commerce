@@ -14,6 +14,8 @@ const connectDB = require('../config/database');
 const User = require('../models/user.model');
 const Category = require('../models/category.model');
 const Product = require('../models/product.model');
+const { productImages } = require('./product-images');
+const { SUPERMARKET_CATEGORY, getSupermarketProducts } = require('./supermarket-products');
 
 // ── Seed data ─────────────────────────────────────────────────────
 
@@ -23,6 +25,7 @@ const categories = [
   { name: 'Accessories', slug: 'accessories', description: 'Fashion accessories' },
   { name: 'Electronics', slug: 'electronics', description: 'Premium tech products' },
   { name: 'Clothing', slug: 'clothing', description: 'Luxury fashion clothing' },
+  SUPERMARKET_CATEGORY,
 ];
 
 const buildProducts = () => [
@@ -35,8 +38,7 @@ const buildProducts = () => [
     stock: 25,
     brand: 'Lumina Essence',
     category: 'fragrances',
-    thumbnail: 'https://i.imgur.com/fPR5ggN.jpg',
-    images: ['https://i.imgur.com/fPR5ggN.jpg'],
+    ...productImages.midnightBloom,
     isFeatured: true,
     tags: ['perfume', 'luxury', 'jasmine'],
   },
@@ -49,8 +51,7 @@ const buildProducts = () => [
     stock: 15,
     brand: 'Lumina Essence',
     category: 'fragrances',
-    thumbnail: 'https://i.imgur.com/VQFPUhK.jpg',
-    images: ['https://i.imgur.com/VQFPUhK.jpg'],
+    ...productImages.goldenOud,
     isFeatured: true,
     tags: ['oud', 'luxury', 'arabic'],
   },
@@ -63,8 +64,7 @@ const buildProducts = () => [
     stock: 40,
     brand: 'Lumina Glow',
     category: 'skincare',
-    thumbnail: 'https://i.imgur.com/KVqYPPV.jpg',
-    images: ['https://i.imgur.com/KVqYPPV.jpg'],
+    ...productImages.crystalSerum,
     isFeatured: true,
     tags: ['serum', 'vitamin-c', 'brightening'],
   },
@@ -77,8 +77,7 @@ const buildProducts = () => [
     stock: 30,
     brand: 'Lumina Glow',
     category: 'skincare',
-    thumbnail: 'https://i.imgur.com/C3sxRKL.jpg',
-    images: ['https://i.imgur.com/C3sxRKL.jpg'],
+    ...productImages.hydraCream,
     isFeatured: false,
     tags: ['moisturizer', 'hydration'],
   },
@@ -91,8 +90,7 @@ const buildProducts = () => [
     stock: 50,
     brand: 'Lumina Craft',
     category: 'accessories',
-    thumbnail: 'https://i.imgur.com/Orl3YKL.jpg',
-    images: ['https://i.imgur.com/Orl3YKL.jpg'],
+    ...productImages.leatherWallet,
     isFeatured: true,
     tags: ['wallet', 'leather', 'rfid'],
   },
@@ -105,8 +103,7 @@ const buildProducts = () => [
     stock: 20,
     brand: 'Lumina Craft',
     category: 'accessories',
-    thumbnail: 'https://i.imgur.com/9KcQmSA.jpg',
-    images: ['https://i.imgur.com/9KcQmSA.jpg'],
+    ...productImages.silkScarf,
     isFeatured: false,
     tags: ['silk', 'scarf', 'gift'],
   },
@@ -119,8 +116,7 @@ const buildProducts = () => [
     stock: 12,
     brand: 'Lumina Vision',
     category: 'accessories',
-    thumbnail: 'https://i.imgur.com/3IHa4yZ.jpg',
-    images: ['https://i.imgur.com/3IHa4yZ.jpg'],
+    ...productImages.sunglasses,
     isFeatured: true,
     tags: ['sunglasses', 'polarized', 'titanium'],
   },
@@ -133,8 +129,7 @@ const buildProducts = () => [
     stock: 35,
     brand: 'Lumina Audio',
     category: 'electronics',
-    thumbnail: 'https://i.imgur.com/NFWX6yT.jpg',
-    images: ['https://i.imgur.com/NFWX6yT.jpg'],
+    ...productImages.headphones,
     isFeatured: true,
     tags: ['headphones', 'anc', 'bluetooth'],
   },
@@ -147,8 +142,7 @@ const buildProducts = () => [
     stock: 18,
     brand: 'Lumina Time',
     category: 'electronics',
-    thumbnail: 'https://i.imgur.com/hbkjMmX.jpg',
-    images: ['https://i.imgur.com/hbkjMmX.jpg'],
+    ...productImages.smartWatch,
     isFeatured: true,
     tags: ['smartwatch', 'health', 'gps'],
   },
@@ -161,8 +155,7 @@ const buildProducts = () => [
     stock: 10,
     brand: 'Lumina Vision',
     category: 'electronics',
-    thumbnail: 'https://i.imgur.com/2Yg4gMz.jpg',
-    images: ['https://i.imgur.com/2Yg4gMz.jpg'],
+    ...productImages.projector,
     isFeatured: false,
     tags: ['projector', '4k', 'portable'],
   },
@@ -175,8 +168,7 @@ const buildProducts = () => [
     stock: 22,
     brand: 'Lumina Fashion',
     category: 'clothing',
-    thumbnail: 'https://i.imgur.com/YiJQnJr.jpg',
-    images: ['https://i.imgur.com/YiJQnJr.jpg'],
+    ...productImages.cashmereTurtleneck,
     isFeatured: false,
     tags: ['cashmere', 'turtleneck', 'luxury'],
   },
@@ -189,36 +181,34 @@ const buildProducts = () => [
     stock: 8,
     brand: 'Lumina Fashion',
     category: 'clothing',
-    thumbnail: 'https://i.imgur.com/r2K6K7r.jpg',
-    images: ['https://i.imgur.com/r2K6K7r.jpg'],
+    ...productImages.woolBlazer,
     isFeatured: true,
     tags: ['blazer', 'wool', 'tailored'],
   },
   // More products to reach 30 ...
   ...[
-    { title: 'Rose Absolute Parfum', category: 'fragrances', price: 189, brand: 'Lumina Essence', discountPercentage: 0, stock: 20, rating: 4.7 },
-    { title: 'White Tea Body Mist', category: 'fragrances', price: 59.99, brand: 'Lumina Essence', discountPercentage: 10, stock: 60, rating: 4.5 },
-    { title: 'Retinol Night Complex', category: 'skincare', price: 99.99, brand: 'Lumina Glow', discountPercentage: 0, stock: 35, rating: 4.6 },
-    { title: 'Eye Revival Eye Cream', category: 'skincare', price: 74.99, brand: 'Lumina Glow', discountPercentage: 15, stock: 28, rating: 4.5 },
-    { title: 'SPF 50+ Invisible Shield', category: 'skincare', price: 45.99, brand: 'Lumina Glow', discountPercentage: 0, stock: 80, rating: 4.8 },
-    { title: 'Linen Pocket Square', category: 'accessories', price: 39.99, brand: 'Lumina Craft', discountPercentage: 0, stock: 100, rating: 4.4 },
-    { title: 'Calfskin Belt', category: 'accessories', price: 149.99, brand: 'Lumina Craft', discountPercentage: 5, stock: 40, rating: 4.6 },
-    { title: 'Gold Plated Cufflinks', category: 'accessories', price: 89.99, brand: 'Lumina Craft', discountPercentage: 0, stock: 55, rating: 4.7 },
-    { title: 'Wireless Charging Pad', category: 'electronics', price: 79.99, brand: 'Lumina Audio', discountPercentage: 10, stock: 45, rating: 4.5 },
-    { title: 'Noise-Isolating Earbuds', category: 'electronics', price: 199.99, brand: 'Lumina Audio', discountPercentage: 20, stock: 32, rating: 4.7 },
-    { title: 'Slim Leather Card Case', category: 'accessories', price: 59.99, brand: 'Lumina Craft', discountPercentage: 0, stock: 70, rating: 4.6 },
-    { title: 'Merino Wool Beanie', category: 'clothing', price: 79.99, brand: 'Lumina Fashion', discountPercentage: 0, stock: 45, rating: 4.5 },
-    { title: 'Silk Dress Shirt', category: 'clothing', price: 179.99, brand: 'Lumina Fashion', discountPercentage: 10, stock: 15, rating: 4.7 },
-    { title: 'Amber Oud Candle', category: 'fragrances', price: 49.99, brand: 'Lumina Home', discountPercentage: 0, stock: 50, rating: 4.6 },
-    { title: 'Vitamin C Eye Patches', category: 'skincare', price: 34.99, brand: 'Lumina Glow', discountPercentage: 20, stock: 120, rating: 4.4 },
-    { title: 'Titanium Money Clip', category: 'accessories', price: 49.99, brand: 'Lumina Craft', discountPercentage: 0, stock: 90, rating: 4.5 },
-    { title: 'Bluetooth Speaker Orb', category: 'electronics', price: 249.99, brand: 'Lumina Audio', discountPercentage: 8, stock: 25, rating: 4.8 },
-    { title: 'Slim-Fit Chinos', category: 'clothing', price: 139.99, brand: 'Lumina Fashion', discountPercentage: 0, stock: 30, rating: 4.6 },
-  ].map((p) => ({
+    { title: 'Rose Absolute Parfum', category: 'fragrances', price: 189, brand: 'Lumina Essence', discountPercentage: 0, stock: 20, rating: 4.7, image: productImages.roseParfum },
+    { title: 'White Tea Body Mist', category: 'fragrances', price: 59.99, brand: 'Lumina Essence', discountPercentage: 10, stock: 60, rating: 4.5, image: productImages.whiteTeaMist },
+    { title: 'Retinol Night Complex', category: 'skincare', price: 99.99, brand: 'Lumina Glow', discountPercentage: 0, stock: 35, rating: 4.6, image: productImages.retinolComplex },
+    { title: 'Eye Revival Eye Cream', category: 'skincare', price: 74.99, brand: 'Lumina Glow', discountPercentage: 15, stock: 28, rating: 4.5, image: productImages.eyeCream },
+    { title: 'SPF 50+ Invisible Shield', category: 'skincare', price: 45.99, brand: 'Lumina Glow', discountPercentage: 0, stock: 80, rating: 4.8, image: productImages.spfShield },
+    { title: 'Linen Pocket Square', category: 'accessories', price: 39.99, brand: 'Lumina Craft', discountPercentage: 0, stock: 100, rating: 4.4, image: productImages.pocketSquare },
+    { title: 'Calfskin Belt', category: 'accessories', price: 149.99, brand: 'Lumina Craft', discountPercentage: 5, stock: 40, rating: 4.6, image: productImages.calfskinBelt },
+    { title: 'Gold Plated Cufflinks', category: 'accessories', price: 89.99, brand: 'Lumina Craft', discountPercentage: 0, stock: 55, rating: 4.7, image: productImages.cufflinks },
+    { title: 'Wireless Charging Pad', category: 'electronics', price: 79.99, brand: 'Lumina Audio', discountPercentage: 10, stock: 45, rating: 4.5, image: productImages.chargingPad },
+    { title: 'Noise-Isolating Earbuds', category: 'electronics', price: 199.99, brand: 'Lumina Audio', discountPercentage: 20, stock: 32, rating: 4.7, image: productImages.earbuds },
+    { title: 'Slim Leather Card Case', category: 'accessories', price: 59.99, brand: 'Lumina Craft', discountPercentage: 0, stock: 70, rating: 4.6, image: productImages.cardCase },
+    { title: 'Merino Wool Beanie', category: 'clothing', price: 79.99, brand: 'Lumina Fashion', discountPercentage: 0, stock: 45, rating: 4.5, image: productImages.woolBeanie },
+    { title: 'Silk Dress Shirt', category: 'clothing', price: 179.99, brand: 'Lumina Fashion', discountPercentage: 10, stock: 15, rating: 4.7, image: productImages.silkShirt },
+    { title: 'Amber Oud Candle', category: 'fragrances', price: 49.99, brand: 'Lumina Home', discountPercentage: 0, stock: 50, rating: 4.6, image: productImages.oudCandle },
+    { title: 'Vitamin C Eye Patches', category: 'skincare', price: 34.99, brand: 'Lumina Glow', discountPercentage: 20, stock: 120, rating: 4.4, image: productImages.eyePatches },
+    { title: 'Titanium Money Clip', category: 'accessories', price: 49.99, brand: 'Lumina Craft', discountPercentage: 0, stock: 90, rating: 4.5, image: productImages.moneyClip },
+    { title: 'Bluetooth Speaker Orb', category: 'electronics', price: 249.99, brand: 'Lumina Audio', discountPercentage: 8, stock: 25, rating: 4.8, image: productImages.speakerOrb },
+    { title: 'Slim-Fit Chinos', category: 'clothing', price: 139.99, brand: 'Lumina Fashion', discountPercentage: 0, stock: 30, rating: 4.6, image: productImages.chinos },
+  ].map(({ image, ...p }) => ({
     ...p,
     description: `Premium ${p.title.toLowerCase()} crafted with exceptional materials and attention to detail.`,
-    thumbnail: 'https://placehold.co/400x400/1a1a2e/d97706?text=Lumina',
-    images: ['https://placehold.co/400x400/1a1a2e/d97706?text=Lumina'],
+    ...image,
     isFeatured: false,
     tags: [p.category, 'luxury', 'lumina'],
   })),
@@ -264,7 +254,16 @@ const seed = async () => {
   console.log(`✅ ${cats.length} categories created`);
 
   // Products
-  const products = buildProducts();
+  const baseProducts = buildProducts();
+  let supermarketProducts = [];
+
+  try {
+    supermarketProducts = await getSupermarketProducts();
+  } catch (err) {
+    console.warn(`Could not fetch DummyJSON supermarket products: ${err.message}`);
+  }
+
+  const products = [...baseProducts, ...supermarketProducts];
   const created = await Product.insertMany(products);
   console.log(`✅ ${created.length} products created`);
 

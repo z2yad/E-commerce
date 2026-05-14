@@ -1,1 +1,272 @@
-<p>product-management works!</p>
+<div class="product-page min-h-screen overflow-hidden bg-[#0B1120] px-4 py-6 md:px-8 md:py-8">
+  <div class="product-page__glow product-page__glow--pink"></div>
+  <div class="product-page__glow product-page__glow--amber"></div>
+
+  <div class="mx-auto flex max-w-7xl flex-col gap-6">
+    <header class="product-shell rounded-[32px] p-6 md:p-8">
+      <div class="flex flex-col gap-6 xl:flex-row xl:items-center xl:justify-between">
+        <div class="flex items-start gap-4">
+          <div class="product-icon flex h-16 w-16 items-center justify-center rounded-[24px]">
+            <svg class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.7"
+                d="M20 7 12 3 4 7m16 0-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"
+              />
+            </svg>
+          </div>
+
+          <div class="space-y-3">
+            <div class="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-300">
+              <span class="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_14px_rgba(74,222,128,0.8)]"></span>
+              Catalog studio
+            </div>
+            <div>
+              <h1 class="text-3xl font-black tracking-tight text-white md:text-4xl">Product Management</h1>
+              <p class="mt-2 max-w-2xl text-sm leading-6 text-slate-300/80">
+                A visual workspace for your catalog, pricing, stock, and launch checklist. The layout is ready for your real
+                actions, APIs, and product logic.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button class="product-button product-button--muted">
+            Import CSV
+          </button>
+          <button class="product-button product-button--primary">
+            Add New Product
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.6fr)_minmax(320px,0.9fr)]">
+      <div class="product-shell rounded-[32px] p-6 md:p-8">
+        <div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-amber-200/70">Inventory overview</p>
+            <h2 class="mt-3 text-2xl font-black tracking-tight text-white md:text-3xl">Build a store that feels curated</h2>
+          </div>
+
+          <div class="grid w-full gap-3 sm:grid-cols-2 lg:w-auto lg:min-w-[320px]">
+            <div class="field-shell">
+              <label class="field-label">Search</label>
+              <div class="field-value">Search by product, SKU, or category</div>
+            </div>
+            <div class="field-shell">
+              <label class="field-label">Sort</label>
+              <div class="field-value">Newest updates first</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 flex flex-wrap gap-3">
+          @for (filter of statusFilters; track filter) {
+            <button class="filter-chip" [class.filter-chip--active]="filter === 'All products'">
+              {{ filter }}
+            </button>
+          }
+        </div>
+
+        <div class="mt-8 grid gap-4 md:grid-cols-2 2xl:grid-cols-4">
+          @for (stat of overviewStats; track stat.label) {
+            <article class="metric-card">
+              <div>
+                <div class="flex items-center gap-2">
+                  <span class="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-slate-300">
+                    Live
+                  </span>
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-400">{{ stat.label }}</p>
+                </div>
+                <p class="mt-4 text-3xl font-black tracking-tight text-white">{{ stat.value }}</p>
+              </div>
+              <p class="mt-4 text-sm text-slate-300/75">{{ stat.note }}</p>
+              <div class="mt-5 h-2 overflow-hidden rounded-full bg-white/8">
+                <div class="h-full rounded-full {{ stat.progressClass }}" [style.width.%]="stat.progress"></div>
+              </div>
+            </article>
+          }
+        </div>
+      </div>
+
+      <aside class="feature-card rounded-[32px] p-6 md:p-8">
+        <div class="flex items-center justify-between gap-3">
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-amber-200/70">Featured slot</p>
+            <h2 class="mt-3 text-2xl font-black tracking-tight text-white">Campaign Ready</h2>
+          </div>
+          <span class="rounded-full border border-emerald-400/20 bg-emerald-400/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-emerald-200">
+            Ready to publish
+          </span>
+        </div>
+
+        <div class="mt-8 rounded-[28px] border border-white/10 bg-slate-950/40 p-5">
+          <div class="product-preview">
+            <div class="product-preview__image"></div>
+            <div class="space-y-3">
+              <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-400">Spotlight product</p>
+              <h3 class="text-2xl font-black tracking-tight text-white">Aurora Street Jacket</h3>
+              <p class="text-sm leading-6 text-slate-300/75">
+                Hero product block with room for title, copy, pricing rules, and a publish CTA when you add your logic.
+              </p>
+              <div class="flex flex-wrap gap-2 pt-2">
+                <span class="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs font-semibold text-slate-200">$148.00</span>
+                <span class="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs font-semibold text-slate-200">Outerwear</span>
+                <span class="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-xs font-semibold text-slate-200">28 units left</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </aside>
+    </section>
+
+    <section class="grid gap-6 xl:grid-cols-[minmax(0,1.55fr)_minmax(320px,0.85fr)]">
+      <div class="product-shell rounded-[32px] p-6 md:p-8">
+        <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+          <div>
+            <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-pink-200/70">Catalog table</p>
+            <h2 class="mt-2 text-2xl font-black tracking-tight text-white">Products in your current workspace</h2>
+          </div>
+          <div class="flex flex-wrap gap-3">
+            <button class="product-button product-button--ghost">Bulk Edit</button>
+            <button class="product-button product-button--ghost">Export</button>
+          </div>
+        </div>
+
+        <div class="mt-8 hidden grid-cols-[1.6fr_0.8fr_0.7fr_0.7fr_0.6fr] gap-4 border-b border-white/10 px-4 pb-4 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-400 lg:grid">
+          <span>Product</span>
+          <span>Category</span>
+          <span>Price</span>
+          <span>Stock</span>
+          <span>Status</span>
+        </div>
+
+        <div class="mt-4 space-y-4">
+          @for (product of products; track product.sku) {
+            <article class="product-row">
+              <div class="grid gap-5 lg:grid-cols-[1.6fr_0.8fr_0.7fr_0.7fr_0.6fr] lg:items-center">
+                <div class="flex items-center gap-4">
+                  <div class="product-thumb {{ product.imageClass }}"></div>
+                  <div>
+                    <div class="flex flex-wrap items-center gap-2">
+                      <h3 class="text-lg font-black tracking-tight text-white">{{ product.name }}</h3>
+                      <span class="rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-slate-200 {{ product.accentClass }}">
+                        {{ product.sku }}
+                      </span>
+                    </div>
+                    <p class="mt-2 text-sm text-slate-300/75">Clean product layout with room for your edit, preview, delete, and sync actions.</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500 lg:hidden">Category</p>
+                  <p class="text-sm font-semibold text-slate-200">{{ product.category }}</p>
+                </div>
+
+                <div>
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500 lg:hidden">Price</p>
+                  <p class="text-sm font-semibold text-white">{{ product.price }}</p>
+                </div>
+
+                <div>
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500 lg:hidden">Stock</p>
+                  <div class="space-y-2">
+                    <p class="text-sm font-semibold text-slate-200">{{ product.stockLabel }}</p>
+                    <div class="h-2 overflow-hidden rounded-full bg-white/8">
+                      <div class="h-full rounded-full {{ product.stockBarClass }}" [style.width.%]="product.stock"></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p class="text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500 lg:hidden">Status</p>
+                  <span class="inline-flex rounded-full px-3 py-1 text-[11px] font-bold uppercase tracking-[0.22em] {{ product.statusClass }}">
+                    {{ product.status }}
+                  </span>
+                </div>
+              </div>
+            </article>
+          }
+        </div>
+
+        <div class="mt-8 grid gap-4 md:grid-cols-3">
+          @for (group of categoryInsights; track group.title) {
+            <article class="insight-card">
+              <div class="insight-card__wash {{ group.accentClass }}"></div>
+              <p class="text-[11px] font-semibold uppercase tracking-[0.26em] text-slate-400">{{ group.title }}</p>
+              <h3 class="mt-4 text-xl font-black tracking-tight text-white">{{ group.items }}</h3>
+              <p class="mt-3 text-sm text-slate-300/75">{{ group.revenue }}</p>
+            </article>
+          }
+        </div>
+      </div>
+
+      <aside class="product-shell rounded-[32px] p-6 md:p-8">
+        <div>
+          <p class="text-[11px] font-semibold uppercase tracking-[0.28em] text-pink-200/70">Editor panel</p>
+          <h2 class="mt-2 text-2xl font-black tracking-tight text-white">Product composer</h2>
+          <p class="mt-3 text-sm leading-6 text-slate-300/75">
+            This side panel is styled as a future form. You can attach your controls, validators, and save actions here.
+          </p>
+        </div>
+
+        <div class="mt-8 space-y-4">
+          <div class="field-shell">
+            <label class="field-label">Product title</label>
+            <div class="field-value">Aurora Street Jacket</div>
+          </div>
+          <div class="field-shell">
+            <label class="field-label">Description</label>
+            <div class="field-value field-value--multiline">
+              Premium outerwear with a clean silhouette, seasonal colorways, and a strong hero presence for campaigns.
+            </div>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="field-shell">
+              <label class="field-label">Price</label>
+              <div class="field-value">$148.00</div>
+            </div>
+            <div class="field-shell">
+              <label class="field-label">Inventory</label>
+              <div class="field-value">28 units</div>
+            </div>
+          </div>
+          <div class="grid gap-4 sm:grid-cols-2">
+            <div class="field-shell">
+              <label class="field-label">Category</label>
+              <div class="field-value">Outerwear</div>
+            </div>
+            <div class="field-shell">
+              <label class="field-label">Visibility</label>
+              <div class="field-value">Published</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-8 rounded-[28px] border border-white/10 bg-slate-950/35 p-5">
+          <div class="flex items-center justify-between gap-3">
+            <h3 class="text-lg font-black tracking-tight text-white">Launch checklist</h3>
+            <span class="rounded-full border border-white/10 bg-white/6 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.24em] text-slate-300">
+              3 steps
+            </span>
+          </div>
+
+          <div class="mt-5 space-y-4">
+            @for (item of checklist; track item.title) {
+              <div class="check-item">
+                <div class="check-item__dot"></div>
+                <div>
+                  <h4 class="text-sm font-bold text-white">{{ item.title }}</h4>
+                  <p class="mt-1 text-sm leading-6 text-slate-300/70">{{ item.description }}</p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+      </aside>
+    </section>
+  </div>
+</div>
