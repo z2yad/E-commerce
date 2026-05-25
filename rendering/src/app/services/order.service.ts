@@ -3,42 +3,12 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { CartItem } from '../interfaces/product.interface';
-
-export interface ShippingAddress {
-  name: string;
-  email: string;
-  address: string;
-  city: string;
-  state: string;
-  zip: string;
-  phone: string;
-  country: string;
-}
-
-export interface OrderItem {
-  product: string;
-  quantity: number;
-}
-
-export interface CreateOrderDto {
-  items: OrderItem[];
-  shippingAddress: ShippingAddress;
-  paymentMethod?: 'card' | 'cash_on_delivery' | 'paypal';
-  notes?: string;
-}
-
-export interface Order {
-  id: string;
-  orderNumber: string;
-  status: 'pending' | 'processing' | 'shipped' | 'delivered' | 'cancelled';
-  items: any[];
-  shippingAddress: ShippingAddress;
-  subtotal: number;
-  shippingFee: number;
-  tax: number;
-  totalAmount: number;
-  createdAt: string;
-}
+import {
+  CreateOrderDto,
+  Order,
+  OrderItem,
+  ShippingAddress,
+} from '../interfaces/order';
 
 @Injectable({
   providedIn: 'root',
